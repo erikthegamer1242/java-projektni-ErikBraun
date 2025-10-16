@@ -1,15 +1,15 @@
 package entity;
 
 public class Stop {
-    private int id;
+    private Integer id;
     private String location;
 
-    public Stop(int id, String location) {
+    public Stop(Integer id, String location) {
         this.id = id;
         this.location = location;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -17,10 +17,14 @@ public class Stop {
         return location;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public void printStop() {
+        System.out.println("Stop Location: " + this.location);
     }
 }

@@ -5,9 +5,9 @@ public class Vehicle {
     private String model;
     private String licensePlate;
     private String vin;
-    private int year;
+    private Integer year;
 
-    public Vehicle(String name, String model, String licensePlate, String vin, int year) {
+    public Vehicle(String name, String model, String licensePlate, String vin, Integer year) {
         this.name = name;
         this.model = model;
         this.licensePlate = licensePlate;
@@ -31,7 +31,7 @@ public class Vehicle {
         return vin;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
@@ -51,8 +51,18 @@ public class Vehicle {
         this.vin = vin;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public void printVehicle() {
+        System.out.print("Vehicle Name: " + this.name);
+        System.out.print("\tVehicle Model: " + this.model);
+        System.out.print("\tVehicle LicensePlate: " + this.licensePlate);
+        System.out.print("\tVehicle Vin: " + this.vin);
+        System.out.println("\tVehicle Year: " + this.year);
+
+
     }
 
 }
