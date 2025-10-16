@@ -4,14 +4,16 @@ import entity.Driver;
 import entity.Route;
 import entity.Stop;
 import entity.Vehicle;
+import utilty.DataSearch;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class MainApp {
     public static void main(String[] args) {
-        System.out.println("Welcome to the best Driving Managment System.\nPlease enter new data below to proceed");
+        System.out.println("Welcome to the best Driving Management System.\nPlease enter new data below to proceed");
         System.out.println("How many stops do you want to add?");
         Scanner scanner = new Scanner(System.in);
         Integer stopsQuantity = scanner.nextInt();
@@ -72,23 +74,47 @@ public class MainApp {
             scanner.nextLine();
             System.out.println("Please enter route's name for " + (i + 1) + ". route: ");
             String routeName = scanner.nextLine();
-            System.out.println("Please enter route's vehicle from the list below for " + (i + 1) + ". route: ");
-            for (int j = 0; j < vehicleQuantity; j++) {
-                System.out.print((j + 1) + ") ");
-                vehicles[j].printVehicle();
+            Integer vehicleIndex = 0;
+            while (true) {
+                System.out.println("Please enter route's vehicle from the list below for " + (i + 1) + ". route: ");
+                for (int j = 0; j < vehicleQuantity; j++) {
+                    System.out.print((j + 1) + ") ");
+                    vehicles[j].printVehicle();
+                }
+                vehicleIndex = scanner.nextInt() - 1;
+                scanner.nextLine();
+                if (vehicleIndex >= vehicleQuantity || vehicleIndex < 0) {
+                    System.out.println("Invalid index!");
+                } else {
+                    break;
+                }
             }
-            Integer vehicleIndex  = scanner.nextInt() - 1;
-            scanner.nextLine();
-            System.out.println("Please enter route's driver from the list below for " + (i + 1) + ". route: ");
-            for (int j = 0; j < driverQuantity; j++) {
-                System.out.print((j + 1) + ") ");
-                drivers[j].printDriver();
+            Integer driverIndex = 0;
+            while (true) {
+                System.out.println("Please enter route's driver from the list below for " + (i + 1) + ". route: ");
+                for (int j = 0; j < driverQuantity; j++) {
+                    System.out.print((j + 1) + ") ");
+                    drivers[j].printDriver();
+                }
+                driverIndex = scanner.nextInt() - 1;
+                scanner.nextLine();
+                if (driverIndex >= driverQuantity || driverIndex < 0) {
+                    System.out.println("Invalid index!");
+                } else {
+                    break;
+                }
             }
-            Integer driverIndex  = scanner.nextInt() - 1;
-            scanner.nextLine();
-            System.out.println("Enter how many stops to be added to the " + (i + 1) + ". route");
-            Integer stopLenght = scanner.nextInt();
-            scanner.nextLine();
+            Integer stopLenght = 0;
+            while (true) {
+                System.out.println("Enter how many stops to be added to the " + (i + 1) + ". route");
+                stopLenght = scanner.nextInt();
+                scanner.nextLine();
+                if (stopLenght > stopsQuantity || stopLenght < 0) {
+                    System.out.println("Not enough stops available!");
+                } else {
+                    break;
+                }
+            }
             Integer stopCounter = 0;
             Stop[] stopsForRoute = new Stop[stopLenght];
             System.out.println("Please enter stops to be added to the " + (i + 1) + ". route");
@@ -99,12 +125,48 @@ public class MainApp {
                 }
                 Integer stopIndex = scanner.nextInt() - 1;
                 scanner.nextLine();
-                stopsForRoute[stopCounter++] = stops[stopIndex];
+                if (stopIndex >= stopsQuantity || stopIndex < 0) {
+                    System.out.println("Invalid index!");
+                }
+                else {
+                    stopsForRoute[stopCounter++] = stops[stopIndex];
+                }
             }
             System.out.println("Please enter how much a stop costs for the " + (i + 1) + ". route");
-            Integer stopCost = scanner.nextInt();
+            BigDecimal stopCost = scanner.nextBigDecimal();
             scanner.nextLine();
             routes[i] = new Route(routeID, routeName, vehicles[vehicleIndex], drivers[driverIndex], stopsForRoute, stopLenght, stopCost);
+        }
+        System.out.println("These are all the routes: ");
+        for (int i = 0; i < routes.length; i++) {
+            System.out.print((i + 1) + ") ");
+            routes[i].printRoute();
+        }
+        while (true) {
+            System.out.println("Here are available actions, please select one: ");
+            System.out.println("1) Print statistics");
+            System.out.println("2) Find a driver in route by name");
+            System.out.println("3) Quit");
+
+            Integer action = scanner.nextInt();
+            scanner.nextLine();
+            if (action == 1) {
+                DataSearch.showRouteStatistics(routes);
+            }
+            if (action == 2) {
+                System.out.print("Enter driver's name: ");
+                String driverName = scanner.nextLine();
+                Route foundRoute = DataSearch.findRouteWithDriverName(routes, driverName);
+                if (foundRoute != null) {
+                    System.out.println("Found route that has driver: " + driverName);
+                    foundRoute.printRoute();
+                } else {
+                    System.out.println("Driver not found");
+                }
+            }
+            if (action == 3) {
+                break;
+            }
         }
     }
 

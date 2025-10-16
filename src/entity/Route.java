@@ -1,6 +1,8 @@
 package entity;
 
 
+import java.math.BigDecimal;
+
 public class Route {
     private Integer id;
     private String routeName;
@@ -8,9 +10,9 @@ public class Route {
     private Driver driver;
     private Stop[] stops;
     private Integer stopLenght;
-    private Integer stopCost;
+    private BigDecimal stopCost;
 
-    public Route(Integer id, String routeName, Vehicle vehicle, Driver driver, Stop[] stops, Integer stopLenght, Integer stopCost) {
+    public Route(Integer id, String routeName, Vehicle vehicle, Driver driver, Stop[] stops, Integer stopLenght, BigDecimal stopCost) {
         this.id = id;
         this.vehicle = vehicle;
         this.routeName = routeName;
@@ -39,8 +41,8 @@ public class Route {
         return stops;
     }
 
-    public Integer getStopLenght() {
-        return stopCost;
+    public Integer getStopLength() {
+        return stopLenght;
     }
 
     public String getRouteName() {
@@ -58,11 +60,11 @@ public class Route {
         this.driver = driver;
     }
 
-    public void setStops(Stop[] stops,  Integer stopLenght) {
-        for (int i = 0; i < stopLenght; i++) {
+    public void setStops(Stop[] stops,  Integer stopLength) {
+        for (int i = 0; i < stopLength; i++) {
             this.stops[i] = stops[i];
         }
-        this.stopLenght = stopLenght;
+        this.stopLenght = stopLength;
     }
 
     public void addStop(Stop stop) {
@@ -70,7 +72,7 @@ public class Route {
         this.stops[this.stopLenght] = stop;
     }
 
-    public void setStopCost(Integer stopCost) {
+    public void setStopCost(BigDecimal stopCost) {
         this.stopCost = stopCost;
     }
 
@@ -78,8 +80,17 @@ public class Route {
         this.routeName = routeName;
     }
 
-    public Integer getStopCost() {
-        return this.stopCost * this.stopLenght;
+    public BigDecimal getStopCost() {
+        return this.stopCost.multiply(BigDecimal.valueOf(this.stopLenght));
+    }
+
+    public void printRoute() {
+        System.out.print("Route ID: " + this.id);
+        System.out.print("\tRoute Name: " + this.routeName);
+        System.out.print("\tDriver Name: " + this.driver.getName());
+        System.out.print("\tVehicle Name: " + this.vehicle.getName());
+        System.out.print("\tStop Count: " + this.stopLenght);
+        System.out.println("\tRoute Cost: " + this.getStopCost());
     }
 
 }
