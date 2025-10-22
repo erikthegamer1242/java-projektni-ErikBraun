@@ -1,9 +1,9 @@
 package app;
 
-import entity.Driver;
 import entity.Route;
 import entity.Stop;
 import entity.Vehicle;
+import entity.subclasses.Driver;
 import utilty.DataSearch;
 
 import java.math.BigDecimal;
@@ -32,6 +32,8 @@ public class MainApp {
         scanner.nextLine();
         Driver[] drivers = new Driver[driverQuantity];
         for (int i = 0; i < driverQuantity; i++) {
+            System.out.println("Please enter driver's OIB for " + (i + 1) + ". driver : ");
+            String OIB = scanner.nextLine();
             System.out.println("Please enter driver's first name for " + (i + 1) + ". driver : ");
             String driverName = scanner.nextLine();
             System.out.println("Please enter driver's last name for " + (i + 1) + ". driver : ");
@@ -44,7 +46,11 @@ public class MainApp {
             String driverPhoneNumber = scanner.nextLine();
             System.out.println("Please enter driver's date of birth (DD-MM-YYYY) for " + (i + 1) + ". driver : ");
             String driverDateOfBirth = scanner.nextLine();
-            drivers[i] = new Driver(driverName, driverLastName, driverLicenseNumber, driverEmail, driverPhoneNumber, LocalDate.parse(driverDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            drivers[i] = new Driver.DriverBuilder(OIB, driverName, driverLastName, driverLicenseNumber).
+                    email(driverEmail).
+                    phoneNumber(driverPhoneNumber).
+                    dateOfBirth(LocalDate.parse(driverDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy"))).
+                    build();
         }
         System.out.println("How many vehicles do you want to add?");
         Integer vehicleQuantity = scanner.nextInt();
@@ -94,7 +100,7 @@ public class MainApp {
                 System.out.println("Please enter route's driver from the list below for " + (i + 1) + ". route: ");
                 for (int j = 0; j < driverQuantity; j++) {
                     System.out.print((j + 1) + ") ");
-                    drivers[j].printDriver();
+                    drivers[j].toString();
                 }
                 driverIndex = scanner.nextInt() - 1;
                 scanner.nextLine();
@@ -127,8 +133,7 @@ public class MainApp {
                 scanner.nextLine();
                 if (stopIndex >= stopsQuantity || stopIndex < 0) {
                     System.out.println("Invalid index!");
-                }
-                else {
+                } else {
                     stopsForRoute[stopCounter++] = stops[stopIndex];
                 }
             }
