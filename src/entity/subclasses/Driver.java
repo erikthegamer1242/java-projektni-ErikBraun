@@ -2,10 +2,12 @@ package entity.subclasses;
 
 import entity.superclasses.Person;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Driver extends Person {
+public final class Driver extends Person implements Employee {
     private final String licenseNumber;
+    private final BigDecimal salary;
 
     private Driver(DriverBuilder builder) {
         this.oib = builder.oib;
@@ -15,6 +17,7 @@ public class Driver extends Person {
         this.phoneNumber = builder.phoneNumber;
         this.dateOfBirth = builder.dateOfBirth;
         this.licenseNumber = builder.licenseNumber;
+        this.salary = builder.salary;
     }
 
     public String getLicenseNumber() {
@@ -27,7 +30,8 @@ public class Driver extends Person {
                 "\tDriver Surname: " + this.surname +
                 "\tDriver LicenseNumber: " + this.licenseNumber +
                 "\tDriver Email: " + this.email +
-                "\tDriver DateOfBirth: " + this.dateOfBirth;
+                "\tDriver DateOfBirth: " + this.dateOfBirth +
+                "\tDriver Salary: " + calculatePay(salary, BigDecimal.valueOf(160));
     }
 
     public static class DriverBuilder {
@@ -35,16 +39,18 @@ public class Driver extends Person {
         private final String name;
         private final String surname;
         private final String licenseNumber;
+        private final BigDecimal salary;
 
         private String email = "";
         private String phoneNumber = "";
         private LocalDate dateOfBirth = LocalDate.EPOCH;
 
-        public DriverBuilder(String oib, String name, String surname, String licenseNumber) {
+        public DriverBuilder(String oib, String name, String surname, String licenseNumber, BigDecimal salary) {
             this.oib = oib;
             this.name = name;
             this.surname = surname;
             this.licenseNumber = licenseNumber;
+            this.salary = salary;
         }
 
         public DriverBuilder email(String email) {

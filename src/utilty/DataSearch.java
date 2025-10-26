@@ -1,14 +1,13 @@
 package utilty;
 
 import entity.Route;
+import entity.superclasses.Person;
 
 import java.math.BigDecimal;
 
-public class DataSearch {
+public interface DataSearch {
 
-    private DataSearch() {}
-
-    public static Route findRouteWithLeastStops(Route[] routes) {
+    static Route findRouteWithLeastStops(Route[] routes) {
         Integer leastStops = routes[0].getStopLength();
         Route route = routes[0];
         for (Route r: routes ) {
@@ -20,7 +19,7 @@ public class DataSearch {
         return route;
     }
 
-    public static Route findRouteWithMostStops(Route[] routes) {
+    static Route findRouteWithMostStops(Route[] routes) {
         Integer mostStops = routes[0].getStopLength();
         Route route = routes[0];
         for (Route r: routes ) {
@@ -32,7 +31,7 @@ public class DataSearch {
         return route;
     }
 
-    public static Route findRouteWithDriverName(Route[] routes, String driverName) {
+    static Route findRouteWithDriverName(Route[] routes, String driverName) {
         for (Route r: routes ) {
             if (r.getDriver().getName().equals(driverName)) {
                 return r;
@@ -41,7 +40,16 @@ public class DataSearch {
         return null;
     }
 
-    public static Route findMostExpensiveRoute(Route[] routes) {
+    static Person findPersonByName(Person[] persons, String name) {
+        for (Person p: persons ) {
+            if (p.getName().equals(name)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    static Route findMostExpensiveRoute(Route[] routes) {
         BigDecimal mostExpensiveRoute = routes[0].getStopCost();
         Route route = routes[0];
         for (Route r: routes ) {
@@ -53,7 +61,7 @@ public class DataSearch {
         return route;
     }
 
-    public static void showRouteStatistics(Route[] routes) {
+    static void showRouteStatistics(Route[] routes) {
         System.out.println("Total routes: " + routes.length);
         System.out.println("Route with least stops: ");
         findRouteWithLeastStops(routes).printRoute();

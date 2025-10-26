@@ -4,6 +4,8 @@ import entity.Route;
 import entity.Stop;
 import entity.Vehicle;
 import entity.subclasses.Driver;
+import entity.subclasses.User;
+import entity.superclasses.Person;
 import utilty.DataSearch;
 
 import java.math.BigDecimal;
@@ -46,7 +48,9 @@ public class MainApp {
             String driverPhoneNumber = scanner.nextLine();
             System.out.println("Please enter driver's date of birth (DD-MM-YYYY) for " + (i + 1) + ". driver : ");
             String driverDateOfBirth = scanner.nextLine();
-            drivers[i] = new Driver.DriverBuilder(OIB, driverName, driverLastName, driverLicenseNumber).
+            System.out.println("Please enter driver's hourly pay for " + (i + 1) + ". driver : ");
+            BigDecimal driverHourlyPay = new BigDecimal(scanner.nextLine());
+            drivers[i] = new Driver.DriverBuilder(OIB, driverName, driverLastName, driverLicenseNumber, driverHourlyPay).
                     email(driverEmail).
                     phoneNumber(driverPhoneNumber).
                     dateOfBirth(LocalDate.parse(driverDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy"))).
@@ -69,6 +73,26 @@ public class MainApp {
             Integer vehicleProductionYear = scanner.nextInt();
             scanner.nextLine();
             vehicles[i] = new Vehicle(vehicleName, vehicleModel, vehicleLicensePlate, vehicleVinNumber, vehicleProductionYear);
+        }
+        System.out.println("How many users do you want to add?");
+        Integer userQuantity = scanner.nextInt();
+        scanner.nextLine();
+        User[] users = new User[userQuantity];
+        for (int i = 0; i < userQuantity; i++) {
+            System.out.println("Please enter user's first name for " + (i + 1) + ". user : ");
+            String userName = scanner.nextLine();
+            System.out.println("Please enter user's surname for " + (i + 1) + ". user : ");
+            String userSurname = scanner.nextLine();
+            System.out.println("Please enter user's OIB for  " + (i + 1) + ". user : ");
+            String userOIB = scanner.nextLine();
+            System.out.println("Please enter user's email for " + (i + 1) + ". user : ");
+            String userEmail = scanner.nextLine();
+            System.out.println("Please enter user's date of birth (DD-MM-YYYY) for " + (i + 1) + ". user : ");
+            String userDateOfBirth = scanner.nextLine();
+            users[i] = new User.UserBuilder(userOIB, userName, userSurname)
+                    .email(userEmail)
+                    .dateOfBirth(LocalDate.parse(userDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy")))
+                    .build();
         }
         System.out.println("How many routes do you want to add?");
         Integer routesQuantity = scanner.nextInt();
@@ -151,14 +175,16 @@ public class MainApp {
             System.out.println("Here are available actions, please select one: ");
             System.out.println("1) Print statistics");
             System.out.println("2) Find a driver in route by name");
+            System.out.println("3) Find a person by name");
             System.out.println("3) Quit");
 
             Integer action = scanner.nextInt();
             scanner.nextLine();
+
             if (action == 1) {
                 DataSearch.showRouteStatistics(routes);
             }
-            if (action == 2) {
+            else if (action == 2) {
                 System.out.print("Enter driver's name: ");
                 String driverName = scanner.nextLine();
                 Route foundRoute = DataSearch.findRouteWithDriverName(routes, driverName);
@@ -169,8 +195,32 @@ public class MainApp {
                     System.out.println("Driver not found");
                 }
             }
-            if (action == 3) {
+            else if (action == 3) {
+                System.out.println("Enter person's name: ");
+                String personName = scanner.nextLine();
+                Integer size = driverQuantity + userQuantity;
+                Person[] persons = new Person[size];
+                for (int i = 0; i < driverQuantity; i++) {
+                    persons[i] = drivers[i];
+                }
+                for (int i = 0; i < userQuantity; i++) {
+                    persons[i+driverQuantity] = users[i];
+                }
+                Person found = DataSearch.findPersonByName(persons, personName);
+                if (found != null) {
+                    System.out.println("Found person: " + personName);
+                    System.out.println(found.toString());
+                }
+                else  {
+                    System.out.println("Person not found");
+                }
+
+            }
+            else if (action == 4) {
                 break;
+            }
+            else {
+                System.out.println("Invalid input! Try again!");
             }
         }
     }
