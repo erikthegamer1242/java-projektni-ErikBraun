@@ -9,6 +9,11 @@
     <version>1.0</version>
     <name>A project based around a cities Public Transport System</name>
     <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.20</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

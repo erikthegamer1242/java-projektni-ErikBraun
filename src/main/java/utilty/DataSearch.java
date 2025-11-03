@@ -133,6 +133,6 @@ public interface DataSearch {
                 + "\nRoute with least stops: " + findRouteWithLeastStops(routes).toString()
                 + "\nRoute with most stops: " + findRouteWithMostStops(routes).toString()
                 + "\nMost expensive route: " + findMostExpensiveRoute(routes).toString();
-        System.out.println(format);
+        System.out.println(format); //NOSONAR: No logger
     }
 }

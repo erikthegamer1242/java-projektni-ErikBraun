@@ -48,7 +48,6 @@ public class Vehicle {
         if (this.year <= 0) {
             throw new YearNegativeException("Year cannot be negative. \n Entered year: " + this.year);
         }
-
     }
 
     /**
