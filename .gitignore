@@ -33,4 +33,4 @@ docs/
 target/
 .idea/
 logs/
-prijevoz.iml
+**/prijevoz.iml
