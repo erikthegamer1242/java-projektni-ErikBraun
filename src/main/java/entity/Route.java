@@ -11,7 +11,6 @@ import java.util.Objects;
 /**
  * Represents a whole Route with Driver, Stops and Vehicle
  * <p>
- * <p>
  * Basic info
  * <ul>
  *     <li>ID</li>
