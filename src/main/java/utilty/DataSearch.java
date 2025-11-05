@@ -4,6 +4,7 @@ import entity.Route;
 import entity.superclasses.Person;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Static interface implementing methods that search and do statistical analysis of the data
@@ -15,19 +16,19 @@ public interface DataSearch {
 
     /**
      * Finds a route that has the least amount of stops
-     * @param routes an array of routes
+     * @param routes a list of routes
      * @return If found returns the route, else null
      * @throws NullPointerException when one or more parameters are null
      */
-    static Route findRouteWithLeastStops(Route[] routes) {
+    static Route findRouteWithLeastStops(List<Route> routes) {
         if (routes == null) {
             throw new NullPointerException("routes must not be null");
         }
-        Integer leastStops = routes[0].getStopLength();
-        Route route = routes[0];
+        Integer leastStops = routes.getFirst().getStops().size();
+        Route route = routes.getFirst();
         for (Route r : routes) {
-            if (r.getStopLength() < leastStops) {
-                leastStops = r.getStopLength();
+            if (r.getStops().size() < leastStops) {
+                leastStops = r.getStops().size();
                 route = r;
             }
         }
@@ -36,19 +37,19 @@ public interface DataSearch {
 
     /**
      * Finds a route that has the most amount of stops
-     * @param routes an array of routes
+     * @param routes a list of routes
      * @return If found returns the route, else null
      * @throws NullPointerException when one or more parameters are null
      */
-    static Route findRouteWithMostStops(Route[] routes) {
+    static Route findRouteWithMostStops(List<Route> routes) {
         if (routes == null) {
             throw new NullPointerException("routes must not be null");
         }
-        Integer mostStops = routes[0].getStopLength();
-        Route route = routes[0];
+        Integer mostStops = routes.getFirst().getStops().size();
+        Route route = routes.getFirst();
         for (Route r : routes) {
-            if (r.getStopLength() > mostStops) {
-                mostStops = r.getStopLength();
+            if (r.getStops().size() > mostStops) {
+                mostStops = r.getStops().size();
                 route = r;
             }
         }
@@ -57,12 +58,12 @@ public interface DataSearch {
 
     /**
      * Finds a route that has the driver's name in it
-     * @param routes an array of routes
+     * @param routes a list of routes
      * @param driverName String name of the driver
      * @return If found returns the route, else null
      * @throws NullPointerException when one or more parameters are null
      */
-    static Route findRouteWithDriverName(Route[] routes, String driverName) {
+    static Route findRouteWithDriverName(List<Route> routes, String driverName) {
         if (routes == null) {
             throw new NullPointerException("routes must not be null");
         }
@@ -79,12 +80,12 @@ public interface DataSearch {
 
     /**
      * Finds a route that has any person's name
-     * @param persons an array of people
+     * @param persons a list of people
      * @param name String name of the driver
      * @return If found returns the route, else null
      * @throws NullPointerException when one or more parameters are null
      */
-    static Person findPersonByName(Person[] persons, String name) {
+    static Person findPersonByName(List<Person> persons, String name) {
         if (persons == null) {
             throw new NullPointerException("persons must not be null");
         }
@@ -101,16 +102,16 @@ public interface DataSearch {
 
     /**
      * Finds the most expensive route based on the stop cost and number of stops
-     * @param routes an array of people
+     * @param routes a list of people
      * @return The most expensive route
      * @throws NullPointerException when one or more parameters are null
      */
-    static Route findMostExpensiveRoute(Route[] routes) {
+    static Route findMostExpensiveRoute(List<Route> routes) {
         if (routes == null) {
             throw new NullPointerException("routes must not be null");
         }
-        BigDecimal mostExpensiveRoute = routes[0].getStopCost();
-        Route route = routes[0];
+        BigDecimal mostExpensiveRoute = routes.getFirst().getStopCost();
+        Route route = routes.getFirst();
         for (Route r : routes) {
             if (r.getStopCost().compareTo(mostExpensiveRoute) > 0) {
                 mostExpensiveRoute = r.getStopCost();
@@ -122,14 +123,14 @@ public interface DataSearch {
 
     /**
      * Prints out the route statistics
-     * @param routes an array of routes
+     * @param routes a list of routes
      * @throws NullPointerException when one or more parameters are null
      */
-    static void showRouteStatistics(Route[] routes) {
+    static void showRouteStatistics(List<Route> routes) {
         if (routes == null) {
             throw new NullPointerException("routes must not be null");
         }
-        String format = "Total routes: " + routes.length
+        String format = "Total routes: " + routes.size()
                 + "\nRoute with least stops: " + findRouteWithLeastStops(routes).toString()
                 + "\nRoute with most stops: " + findRouteWithMostStops(routes).toString()
                 + "\nMost expensive route: " + findMostExpensiveRoute(routes).toString();

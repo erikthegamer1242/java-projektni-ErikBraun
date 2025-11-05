@@ -14,7 +14,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import org.slf4j.Logger;
@@ -32,23 +34,22 @@ public class MainApp {
 
         boolean correct = false;
         Integer stopsQuantity = 0;
-        Stop[] stops = new Stop[0];
+        List<Stop> stops = new ArrayList<>();
         do {
             try {
                 System.out.println("How many stops do you want to add?");
                 stopsQuantity = scanner.nextInt();
                 scanner.nextLine();
-                stops = new Stop[stopsQuantity];
                 for (int i = 0; i < stopsQuantity; i++) {
                     System.out.println("Please enter stop ID for " + (i + 1) + ". stop : ");
                     Integer stopID = scanner.nextInt();
                     scanner.nextLine();
                     System.out.println("Please enter stop name for " + (i + 1) + ". stop: ");
                     String stopName = scanner.nextLine();
-                    stops[i] = new Stop(stopID, stopName);
+                    stops.add(new Stop(stopID, stopName));
                 }
                 correct = true;
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | NullPointerException e) {
                 logger.error("Invalid input for stops", e);
                 scanner.nextLine();
             }
@@ -56,13 +57,12 @@ public class MainApp {
 
         correct = false;
         Integer driverQuantity = 0;
-        Driver[] drivers = new Driver[0];
+        List<Driver> drivers = new ArrayList<>();
         do {
             try {
                 System.out.println("How many drivers do you want to add?");
                 driverQuantity = scanner.nextInt();
                 scanner.nextLine();
-                drivers = new Driver[driverQuantity];
                 for (int i = 0; i < driverQuantity; i++) {
                     System.out.println("Please enter driver's OIB for " + (i + 1) + ". driver : ");
                     String OIB = scanner.nextLine();
@@ -80,11 +80,11 @@ public class MainApp {
                     String driverDateOfBirth = scanner.nextLine();
                     System.out.println("Please enter driver's hourly pay for " + (i + 1) + ". driver : ");
                     BigDecimal driverHourlyPay = new BigDecimal(scanner.nextLine());
-                    drivers[i] = new Driver.DriverBuilder(OIB, driverName, driverLastName, driverLicenseNumber, driverHourlyPay).
+                    drivers.add(new Driver.DriverBuilder(OIB, driverName, driverLastName, driverLicenseNumber, driverHourlyPay).
                             email(driverEmail).
                             phoneNumber(driverPhoneNumber).
                             dateOfBirth(LocalDate.parse(driverDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy"))).
-                            build();
+                            build());
                 }
                 correct = true;
             } catch (InputMismatchException | NullPointerException e) {
@@ -95,13 +95,12 @@ public class MainApp {
 
         correct = false;
         Integer vehicleQuantity = 0;
-        Vehicle[] vehicles = new Vehicle[0];
+        List<Vehicle> vehicles = new ArrayList<>();
         do {
             try {
                 System.out.println("How many vehicles do you want to add?");
                 vehicleQuantity = scanner.nextInt();
                 scanner.nextLine();
-                vehicles = new Vehicle[vehicleQuantity];
                 for (int i = 0; i < vehicleQuantity; i++) {
                     System.out.println("Please enter vehicle's name for " + (i + 1) + ". vehicle : ");
                     String vehicleName = scanner.nextLine();
@@ -114,7 +113,7 @@ public class MainApp {
                     System.out.println("Please enter vehicle's production year for " + (i + 1) + ". vehicle : ");
                     Integer vehicleProductionYear = scanner.nextInt();
                     scanner.nextLine();
-                    vehicles[i] = new Vehicle(vehicleName, vehicleModel, vehicleLicensePlate, vehicleVinNumber, vehicleProductionYear);
+                    vehicles.add(new Vehicle(vehicleName, vehicleModel, vehicleLicensePlate, vehicleVinNumber, vehicleProductionYear));
                 }
                 correct = true;
             } catch (InputMismatchException | NullPointerException e) {
@@ -128,13 +127,12 @@ public class MainApp {
 
         correct = false;
         Integer userQuantity = 0;
-        User[] users = new User[0];
+        List<User> users = new ArrayList<>();
         do {
             try {
                 System.out.println("How many users do you want to add?");
                 userQuantity = scanner.nextInt();
                 scanner.nextLine();
-                users = new User[userQuantity];
                 for (int i = 0; i < userQuantity; i++) {
                     System.out.println("Please enter user's first name for " + (i + 1) + ". user : ");
                     String userName = scanner.nextLine();
@@ -146,10 +144,10 @@ public class MainApp {
                     String userEmail = scanner.nextLine();
                     System.out.println("Please enter user's date of birth (DD-MM-YYYY) for " + (i + 1) + ". user : ");
                     String userDateOfBirth = scanner.nextLine();
-                    users[i] = new User.UserBuilder(userOIB, userName, userSurname)
+                    users.add(new User.UserBuilder(userOIB, userName, userSurname)
                             .email(userEmail)
                             .dateOfBirth(LocalDate.parse(userDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy")))
-                            .build();
+                            .build());
                 }
                 correct = true;
             } catch (InputMismatchException | NullPointerException e) {
@@ -176,7 +174,7 @@ public class MainApp {
         } while (!correct);
 
         scanner.nextLine();
-        Route[] routes = new Route[routesQuantity];
+        List<Route> routes = new ArrayList<>();
         for (int i = 0; i < routesQuantity; i++) {
             System.out.println("Please enter route's ID for " + (i + 1) + ". route: ");
             Integer routeID = scanner.nextInt();
@@ -189,7 +187,7 @@ public class MainApp {
                     System.out.println("Please enter route's vehicle from the list below for " + (i + 1) + ". route: ");
                     for (int j = 0; j < vehicleQuantity; j++) {
                         System.out.print((j + 1) + ") ");
-                        System.out.println(vehicles[j].toString());
+                        System.out.println(vehicles.get(j).toString());
                     }
                     vehicleIndex = scanner.nextInt() - 1;
                     scanner.nextLine();
@@ -209,7 +207,7 @@ public class MainApp {
                     System.out.println("Please enter route's driver from the list below for " + (i + 1) + ". route: ");
                     for (int j = 0; j < driverQuantity; j++) {
                         System.out.print((j + 1) + ") ");
-                        System.out.println(drivers[j].toString());
+                        System.out.println(drivers.get(j).toString());
                     }
                     driverIndex = scanner.nextInt() - 1;
                     scanner.nextLine();
@@ -239,20 +237,21 @@ public class MainApp {
                 }
             }
             Integer stopCounter = 0;
-            Stop[] stopsForRoute = new Stop[stopLenght];
+            List<Stop> stopsForRoute = new ArrayList<>();
             System.out.println("Please enter stops to be added to the " + (i + 1) + ". route");
             while (stopCounter <= stopLenght - 1) {
                 try {
                     for (int j = 0; j < stopsQuantity; j++) {
                         System.out.print((j + 1) + ") ");
-                        System.out.println(stops[j].toString());
+                        System.out.println(stops.get(j).toString());
                     }
                     Integer stopIndex = scanner.nextInt() - 1;
                     scanner.nextLine();
                     if (stopIndex >= stopsQuantity || stopIndex < 0) {
                         System.out.println("Invalid index!");
                     } else {
-                        stopsForRoute[stopCounter++] = stops[stopIndex];
+                        stopsForRoute.add(stops.get(stopIndex));
+                        stopCounter++;
                     }
                 } catch (InputMismatchException | NullPointerException e) {
                     logger.error("Invalid input for stops", e);
@@ -265,7 +264,7 @@ public class MainApp {
                     System.out.println("Please enter how much a stop costs for the " + (i + 1) + ". route");
                     BigDecimal stopCost = scanner.nextBigDecimal();
                     scanner.nextLine();
-                    routes[i] = new Route(routeID, routeName, vehicles[vehicleIndex], drivers[driverIndex], stopsForRoute, stopLenght, stopCost);
+                    routes.add(new Route(routeID, routeName, vehicles.get(vehicleIndex), drivers.get(driverIndex), stopsForRoute, stopCost));
                     correct = true;
                 } catch (InputMismatchException | NullPointerException e) {
                     logger.error("Invalid input for route's cost", e);
@@ -278,9 +277,9 @@ public class MainApp {
         }
 
         System.out.println("These are all the routes: ");
-        for (int i = 0; i < routes.length; i++) {
+        for (int i = 0; i < routes.size(); i++) {
             System.out.print((i + 1) + ") ");
-            System.out.println(routes[i].toString());
+            System.out.println(routes.get(i).toString());
         }
         while (true) {
             correct = false;
@@ -316,14 +315,9 @@ public class MainApp {
             } else if (action == 3) {
                 System.out.println("Enter person's name: ");
                 String personName = scanner.nextLine();
-                Integer size = driverQuantity + userQuantity;
-                Person[] persons = new Person[size];
-                for (int i = 0; i < driverQuantity; i++) {
-                    persons[i] = drivers[i];
-                }
-                for (int i = 0; i < userQuantity; i++) {
-                    persons[i + driverQuantity] = users[i];
-                }
+                List<Person> persons = new ArrayList<>();
+                persons.addAll(users);
+                persons.addAll(drivers);
                 Person found = DataSearch.findPersonByName(persons, personName);
                 if (found != null) {
                     if (found instanceof Driver) {
