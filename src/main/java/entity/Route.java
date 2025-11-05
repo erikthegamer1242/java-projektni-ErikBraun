@@ -5,7 +5,6 @@ import entity.exceptions.RouteCostNegativeException;
 import entity.subclasses.Driver;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,6 +20,7 @@ import java.util.Objects;
  *     <li>Stops</li>
  *     <li>Each stop cost</li>
  * </ul>
+ *
  * @author erik
  * @version 1.0
  */
@@ -35,12 +35,12 @@ public class Route {
     /**
      * Constructs a new route with these parameters:
      *
-     * @param id         Unique Route ID
-     * @param routeName  Route name as a String
-     * @param vehicle    A vehicle
-     * @param driver     A driver
-     * @param stops      A list of stops
-     * @param stopCost   Cost for each stop (must be a positive decimal number)
+     * @param id        Unique Route ID
+     * @param routeName Route name as a String
+     * @param vehicle   A vehicle
+     * @param driver    A driver
+     * @param stops     A list of stops
+     * @param stopCost  Cost for each stop (must be a positive decimal number)
      * @throws RouteCostNegativeException Route cost entered as a negative number
      * @throws NullPointerException       One or more parameters is null
      */
@@ -134,7 +134,7 @@ public class Route {
     /**
      * Set stops for route
      *
-     * @param stops      List of stops
+     * @param stops List of stops
      * @throws NullPointerException if any Stop is null
      */
     public void setStops(List<Stop> stops) {
@@ -155,7 +155,7 @@ public class Route {
      * Set stop cost
      *
      * @param stopCost Decimal cost of one stop
-     * @throws NullPointerException if stop cost is null
+     * @throws NullPointerException       if stop cost is null
      * @throws RouteCostNegativeException if stop cost is negative
      */
     public void setStopCost(BigDecimal stopCost) throws RouteCostNegativeException {
@@ -167,7 +167,7 @@ public class Route {
 
     /**
      * Set route name
-     * 
+     *
      * @param routeName String containing a route name
      * @throws NullPointerException if string is null
      */
@@ -186,16 +186,12 @@ public class Route {
 
     /**
      * Overriding toString to give out a formatted route
+     *
      * @return Returns a formatted string of the route
      */
     @Override
     public String toString() {
-        return ("Route ID: " + this.id)
-        + ("\tRoute Name: " + this.routeName)
-        + ("\tDriver Name: " + this.driver.getName())
-        + ("\tVehicle Name: " + this.vehicle.getName())
-        + ("\tStop Count: " + this.stops.size())
-        + ("\tRoute Cost: " + this.getStopCost());
+        return ("Route ID: " + this.id) + ("\tRoute Name: " + this.routeName) + ("\tDriver Name: " + this.driver.getName()) + ("\tVehicle Name: " + this.vehicle.getName()) + ("\tStop Count: " + this.stops.size()) + ("\tRoute Cost: " + this.getStopCost());
     }
 
 }

@@ -65,7 +65,7 @@ public class MainApp {
                 scanner.nextLine();
                 for (int i = 0; i < driverQuantity; i++) {
                     System.out.println("Please enter driver's OIB for " + (i + 1) + ". driver : ");
-                    String OIB = scanner.nextLine();
+                    String driverOIB = scanner.nextLine();
                     System.out.println("Please enter driver's first name for " + (i + 1) + ". driver : ");
                     String driverName = scanner.nextLine();
                     System.out.println("Please enter driver's last name for " + (i + 1) + ". driver : ");
@@ -80,11 +80,7 @@ public class MainApp {
                     String driverDateOfBirth = scanner.nextLine();
                     System.out.println("Please enter driver's hourly pay for " + (i + 1) + ". driver : ");
                     BigDecimal driverHourlyPay = new BigDecimal(scanner.nextLine());
-                    drivers.add(new Driver.DriverBuilder(OIB, driverName, driverLastName, driverLicenseNumber, driverHourlyPay).
-                            email(driverEmail).
-                            phoneNumber(driverPhoneNumber).
-                            dateOfBirth(LocalDate.parse(driverDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy"))).
-                            build());
+                    drivers.add(new Driver.DriverBuilder(driverOIB, driverName, driverLastName, driverLicenseNumber, driverHourlyPay).email(driverEmail).phoneNumber(driverPhoneNumber).dateOfBirth(LocalDate.parse(driverDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy"))).build());
                 }
                 correct = true;
             } catch (InputMismatchException | NullPointerException e) {
@@ -144,10 +140,7 @@ public class MainApp {
                     String userEmail = scanner.nextLine();
                     System.out.println("Please enter user's date of birth (DD-MM-YYYY) for " + (i + 1) + ". user : ");
                     String userDateOfBirth = scanner.nextLine();
-                    users.add(new User.UserBuilder(userOIB, userName, userSurname)
-                            .email(userEmail)
-                            .dateOfBirth(LocalDate.parse(userDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy")))
-                            .build());
+                    users.add(new User.UserBuilder(userOIB, userName, userSurname).email(userEmail).dateOfBirth(LocalDate.parse(userDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy"))).build());
                 }
                 correct = true;
             } catch (InputMismatchException | NullPointerException e) {
@@ -269,7 +262,7 @@ public class MainApp {
                 } catch (InputMismatchException | NullPointerException e) {
                     logger.error("Invalid input for route's cost", e);
                     scanner.nextLine();
-                } catch ( RouteCostNegativeException e) {
+                } catch (RouteCostNegativeException e) {
                     logger.error(e.getMessage());
                 }
             } while (!correct);
@@ -281,7 +274,9 @@ public class MainApp {
             System.out.print((i + 1) + ") ");
             System.out.println(routes.get(i).toString());
         }
-        while (true) {
+
+        boolean running = true;
+        while (running) {
             correct = false;
             Integer action = 0;
             do {
@@ -289,7 +284,7 @@ public class MainApp {
                 System.out.println("1) Print statistics");
                 System.out.println("2) Find a driver in route by name");
                 System.out.println("3) Find a person by name");
-                System.out.println("3) Quit");
+                System.out.println("4) Quit");
                 try {
                     action = scanner.nextInt();
                     correct = true;
@@ -300,43 +295,46 @@ public class MainApp {
             } while (!correct);
             scanner.nextLine();
 
-            if (action == 1) {
-                DataSearch.showRouteStatistics(routes);
-            } else if (action == 2) {
-                System.out.print("Enter driver's name: ");
-                String driverName = scanner.nextLine();
-                Route foundRoute = DataSearch.findRouteWithDriverName(routes, driverName);
-                if (foundRoute != null) {
-                    System.out.println("Found route that has driver: " + driverName);
-                    System.out.println(foundRoute);
-                } else {
-                    System.out.println("Driver not found");
-                }
-            } else if (action == 3) {
-                System.out.println("Enter person's name: ");
-                String personName = scanner.nextLine();
-                List<Person> persons = new ArrayList<>();
-                persons.addAll(users);
-                persons.addAll(drivers);
-                Person found = DataSearch.findPersonByName(persons, personName);
-                if (found != null) {
-                    if (found instanceof Driver) {
-                        System.out.println("Found person: " + personName + ". He is a driver!");
+            switch (action) {
+                case 1:
+                    DataSearch.showRouteStatistics(routes);
+                    break;
+                case 2:
+                    System.out.print("Enter driver's name: ");
+                    String driverName = scanner.nextLine();
+                    Route foundRoute = DataSearch.findRouteWithDriverName(routes, driverName);
+                    if (foundRoute != null) {
+                        System.out.println("Found route that has driver: " + driverName);
+                        System.out.println(foundRoute);
+                    } else {
+                        System.out.println("Driver not found");
                     }
-                    else if (found instanceof User) {
-                        System.out.println("Found person: " + personName + ". He is a user!");
+                    break;
+                case 3:
+                    System.out.println("Enter person's name: ");
+                    String personName = scanner.nextLine();
+                    List<Person> persons = new ArrayList<>();
+                    persons.addAll(users);
+                    persons.addAll(drivers);
+                    Person found = DataSearch.findPersonByName(persons, personName);
+                    if (found != null) {
+                        if (found instanceof Driver) {
+                            System.out.println("Found person: " + personName + ". He is a driver!");
+                        } else if (found instanceof User) {
+                            System.out.println("Found person: " + personName + ". He is a user!");
+                        }
+                        System.out.println(found);
+                    } else {
+                        System.out.println("Person not found");
                     }
-                    System.out.println(found);
-                } else {
-                    System.out.println("Person not found");
-                }
-
-            } else if (action == 4) {
-                break;
-            } else {
-                System.out.println("Invalid input! Try again!");
+                    break;
+                case 4:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid input! Try again!");
+                    break;
             }
         }
     }
-
 }
