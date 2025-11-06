@@ -51,7 +51,9 @@ public class MainApp {
                 correct = true;
             } catch (InputMismatchException | NullPointerException e) {
                 logger.error("Invalid input for stops", e);
-                scanner.nextLine();
+                if (e instanceof InputMismatchException) {
+                    scanner.nextLine();
+                }
             }
         } while (!correct);
 
@@ -85,7 +87,9 @@ public class MainApp {
                 correct = true;
             } catch (InputMismatchException | NullPointerException e) {
                 logger.error("Invalid input for drivers", e);
-                scanner.nextLine();
+                if (e instanceof InputMismatchException) {
+                    scanner.nextLine();
+                }
             }
         } while (!correct);
 
@@ -109,12 +113,25 @@ public class MainApp {
                     System.out.println("Please enter vehicle's production year for " + (i + 1) + ". vehicle : ");
                     Integer vehicleProductionYear = scanner.nextInt();
                     scanner.nextLine();
-                    vehicles.add(new Vehicle(vehicleName, vehicleModel, vehicleLicensePlate, vehicleVinNumber, vehicleProductionYear));
+                    System.out.println("Choose motor type for " + (i + 1) + ". vehicle : ");
+                    Integer idx = 1;
+                    for (Vehicle.MotorType motorType : Vehicle.MotorType.values()) {
+                        System.out.print(idx++ + ") ");
+                        System.out.println(motorType.toString());
+                    }
+                    Integer enumChoice = scanner.nextInt() - 1;
+                    scanner.nextLine();
+                    if (enumChoice < 0 || enumChoice > Vehicle.MotorType.values().length) {
+                        throw new InputMismatchException("Invalid choice for motor type enum!");
+                    }
+                    vehicles.add(new Vehicle(vehicleName, vehicleModel, vehicleLicensePlate, vehicleVinNumber, vehicleProductionYear, Vehicle.MotorType.values()[enumChoice]));
                 }
                 correct = true;
             } catch (InputMismatchException | NullPointerException e) {
                 logger.error("Invalid input for vehicles", e);
-                scanner.nextLine();
+                if (e instanceof InputMismatchException) {
+                    scanner.nextLine();
+                }
             } catch (YearNegativeException e) {
                 logger.error(e.getMessage());
                 scanner.nextLine();
@@ -145,10 +162,11 @@ public class MainApp {
                 correct = true;
             } catch (InputMismatchException | NullPointerException e) {
                 logger.error("Invalid input for users", e);
-                scanner.nextLine();
+                if (e instanceof InputMismatchException) {
+                    scanner.nextLine();
+                }
             } catch (DateTimeParseException e) {
                 logger.error("Invalid DOB entered for user", e);
-                scanner.nextLine();
             }
         } while (!correct);
 
@@ -162,7 +180,9 @@ public class MainApp {
                 correct = true;
             } catch (InputMismatchException | NullPointerException e) {
                 logger.error("Invalid input for routes", e);
-                scanner.nextLine();
+                if (e instanceof InputMismatchException) {
+                    scanner.nextLine();
+                }
             }
         } while (!correct);
 
@@ -191,7 +211,9 @@ public class MainApp {
                     }
                 } catch (InputMismatchException | NullPointerException e) {
                     logger.error("Invalid input for route's vehicle", e);
-                    scanner.nextLine();
+                    if (e instanceof InputMismatchException) {
+                        scanner.nextLine();
+                    }
                 }
             }
             Integer driverIndex = 0;
@@ -211,6 +233,9 @@ public class MainApp {
                     }
                 } catch (InputMismatchException | NullPointerException e) {
                     logger.error("Invalid input for route's driver", e);
+                    if (e instanceof InputMismatchException) {
+                        scanner.nextLine();
+                    }
                 }
             }
             Integer stopLenght = 0;
@@ -226,7 +251,9 @@ public class MainApp {
                     }
                 } catch (InputMismatchException | NullPointerException e) {
                     logger.error("Invalid input for route's stops", e);
-                    scanner.nextLine();
+                    if (e instanceof InputMismatchException) {
+                        scanner.nextLine();
+                    }
                 }
             }
             Integer stopCounter = 0;
@@ -248,7 +275,9 @@ public class MainApp {
                     }
                 } catch (InputMismatchException | NullPointerException e) {
                     logger.error("Invalid input for stops", e);
-                    scanner.nextLine();
+                    if (e instanceof InputMismatchException) {
+                        scanner.nextLine();
+                    }
                 }
             }
             correct = false;
@@ -261,7 +290,9 @@ public class MainApp {
                     correct = true;
                 } catch (InputMismatchException | NullPointerException e) {
                     logger.error("Invalid input for route's cost", e);
-                    scanner.nextLine();
+                    if (e instanceof InputMismatchException) {
+                        scanner.nextLine();
+                    }
                 } catch (RouteCostNegativeException e) {
                     logger.error(e.getMessage());
                 }
@@ -290,7 +321,9 @@ public class MainApp {
                     correct = true;
                 } catch (InputMismatchException | NullPointerException e) {
                     logger.error("Invalid input for action", e);
-                    scanner.nextLine();
+                    if (e instanceof InputMismatchException) {
+                        scanner.nextLine();
+                    }
                 }
             } while (!correct);
             scanner.nextLine();
