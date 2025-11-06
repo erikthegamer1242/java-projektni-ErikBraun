@@ -14,10 +14,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -349,12 +346,13 @@ public class MainApp {
                     List<Person> persons = new ArrayList<>();
                     persons.addAll(users);
                     persons.addAll(drivers);
+                    persons.sort(Comparator.comparing(Person::getName).thenComparing(Person::getSurname));
                     Person found = DataSearch.findPersonByName(persons, personName);
                     if (found != null) {
                         if (found instanceof Driver) {
-                            System.out.println("Found person: " + personName + ". He is a driver!");
+                            System.out.println("Found " + personName + ". He is a driver!");
                         } else if (found instanceof User) {
-                            System.out.println("Found person: " + personName + ". He is a user!");
+                            System.out.println("Found " + personName + ". He is a user!");
                         }
                         System.out.println(found);
                     } else {

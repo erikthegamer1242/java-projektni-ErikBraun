@@ -1,9 +1,12 @@
 package utilty;
 
 import entity.Route;
+import entity.subclasses.User;
 import entity.superclasses.Person;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -92,12 +95,13 @@ public interface DataSearch {
         if (name == null) {
             throw new NullPointerException("name must not be null");
         }
-        for (Person p : persons) {
-            if (p.getName().equals(name)) {
-                return p;
-            }
+        Comparator<Person> comparator = Comparator.comparing(Person::getName);
+
+        Integer idx = Collections.binarySearch(persons, new User.UserBuilder("1", name, "1").build(), comparator);
+        if (idx < 0) {
+            return null;
         }
-        return null;
+        return persons.get(idx);
     }
 
     /**
