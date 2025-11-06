@@ -31,16 +31,16 @@ public class MainApp {
         Scanner scanner = new Scanner(System.in);
 
         boolean correct = false;
-        Integer stopsQuantity = 0;
+
         List<Stop> stops = new ArrayList<>();
         do {
             try {
                 System.out.println("How many stops do you want to add?");
-                stopsQuantity = scanner.nextInt();
+                int stopsQuantity = scanner.nextInt();
                 scanner.nextLine();
                 for (int i = 0; i < stopsQuantity; i++) {
                     System.out.println("Please enter stop ID for " + (i + 1) + ". stop : ");
-                    Integer stopID = scanner.nextInt();
+                    int stopID = scanner.nextInt();
                     scanner.nextLine();
                     System.out.println("Please enter stop name for " + (i + 1) + ". stop: ");
                     String stopName = scanner.nextLine();
@@ -56,12 +56,11 @@ public class MainApp {
         } while (!correct);
 
         correct = false;
-        Integer driverQuantity = 0;
         List<Driver> drivers = new ArrayList<>();
         do {
             try {
                 System.out.println("How many drivers do you want to add?");
-                driverQuantity = scanner.nextInt();
+                int driverQuantity = scanner.nextInt();
                 scanner.nextLine();
                 for (int i = 0; i < driverQuantity; i++) {
                     System.out.println("Please enter driver's OIB for " + (i + 1) + ". driver : ");
@@ -92,12 +91,11 @@ public class MainApp {
         } while (!correct);
 
         correct = false;
-        Integer vehicleQuantity = 0;
         List<Vehicle> vehicles = new ArrayList<>();
         do {
             try {
                 System.out.println("How many vehicles do you want to add?");
-                vehicleQuantity = scanner.nextInt();
+                int vehicleQuantity = scanner.nextInt();
                 scanner.nextLine();
                 for (int i = 0; i < vehicleQuantity; i++) {
                     System.out.println("Please enter vehicle's name for " + (i + 1) + ". vehicle : ");
@@ -109,15 +107,15 @@ public class MainApp {
                     System.out.println("Please enter vehicle's vin number for " + (i + 1) + ". vehicle : ");
                     String vehicleVinNumber = scanner.nextLine();
                     System.out.println("Please enter vehicle's production year for " + (i + 1) + ". vehicle : ");
-                    Integer vehicleProductionYear = scanner.nextInt();
+                    int vehicleProductionYear = scanner.nextInt();
                     scanner.nextLine();
                     System.out.println("Choose motor type for " + (i + 1) + ". vehicle : ");
-                    Integer idx = 1;
+                    int idx = 1;
                     for (Vehicle.MotorType motorType : Vehicle.MotorType.values()) {
                         System.out.print(idx++ + ") ");
                         System.out.println(motorType.toString());
                     }
-                    Integer enumChoice = scanner.nextInt() - 1;
+                    int enumChoice = scanner.nextInt() - 1;
                     scanner.nextLine();
                     if (enumChoice < 0 || enumChoice > Vehicle.MotorType.values().length) {
                         throw new InputMismatchException("Invalid choice for motor type enum!");
@@ -137,12 +135,11 @@ public class MainApp {
         } while (!correct);
 
         correct = false;
-        Integer userQuantity = 0;
         List<User> users = new ArrayList<>();
         do {
             try {
                 System.out.println("How many users do you want to add?");
-                userQuantity = scanner.nextInt();
+                int userQuantity = scanner.nextInt();
                 scanner.nextLine();
                 for (int i = 0; i < userQuantity; i++) {
                     System.out.println("Please enter user's first name for " + (i + 1) + ". user : ");
@@ -169,8 +166,7 @@ public class MainApp {
         } while (!correct);
 
         correct = false;
-        Integer routesQuantity = 0;
-
+        int routesQuantity = 0;
         do {
             try {
                 System.out.println("How many routes do you want to add?");
@@ -192,17 +188,17 @@ public class MainApp {
             scanner.nextLine();
             System.out.println("Please enter route's name for " + (i + 1) + ". route: ");
             String routeName = scanner.nextLine();
-            Integer vehicleIndex = 0;
+            int vehicleIndex;
             while (true) {
                 try {
                     System.out.println("Please enter route's vehicle from the list below for " + (i + 1) + ". route: ");
-                    for (int j = 0; j < vehicleQuantity; j++) {
+                    for (int j = 0; j < vehicles.size(); j++) {
                         System.out.print((j + 1) + ") ");
                         System.out.println(vehicles.get(j).toString());
                     }
                     vehicleIndex = scanner.nextInt() - 1;
                     scanner.nextLine();
-                    if (vehicleIndex >= vehicleQuantity || vehicleIndex < 0) {
+                    if (vehicleIndex >= vehicles.size() || vehicleIndex < 0) {
                         System.out.println("Invalid index!");
                     } else {
                         break;
@@ -214,17 +210,18 @@ public class MainApp {
                     }
                 }
             }
-            Integer driverIndex = 0;
+
+            int driverIndex;
             while (true) {
                 try {
                     System.out.println("Please enter route's driver from the list below for " + (i + 1) + ". route: ");
-                    for (int j = 0; j < driverQuantity; j++) {
+                    for (int j = 0; j < drivers.size(); j++) {
                         System.out.print((j + 1) + ") ");
                         System.out.println(drivers.get(j).toString());
                     }
                     driverIndex = scanner.nextInt() - 1;
                     scanner.nextLine();
-                    if (driverIndex >= driverQuantity || driverIndex < 0) {
+                    if (driverIndex >= drivers.size() || driverIndex < 0) {
                         System.out.println("Invalid index!");
                     } else {
                         break;
@@ -236,13 +233,14 @@ public class MainApp {
                     }
                 }
             }
-            Integer stopLenght = 0;
+
+            int stopLength;
             while (true) {
                 try {
                     System.out.println("Enter how many stops to be added to the " + (i + 1) + ". route");
-                    stopLenght = scanner.nextInt();
+                    stopLength = scanner.nextInt();
                     scanner.nextLine();
-                    if (stopLenght > stopsQuantity || stopLenght < 0) {
+                    if (stopLength > stops.size() || stopLength < 0) {
                         System.out.println("Not enough stops available!");
                     } else {
                         break;
@@ -254,18 +252,18 @@ public class MainApp {
                     }
                 }
             }
-            Integer stopCounter = 0;
+            int stopCounter = 0;
             List<Stop> stopsForRoute = new ArrayList<>();
             System.out.println("Please enter stops to be added to the " + (i + 1) + ". route");
-            while (stopCounter <= stopLenght - 1) {
+            while (stopCounter <= stopLength - 1) {
                 try {
-                    for (int j = 0; j < stopsQuantity; j++) {
+                    for (int j = 0; j < stops.size(); j++) {
                         System.out.print((j + 1) + ") ");
                         System.out.println(stops.get(j).toString());
                     }
-                    Integer stopIndex = scanner.nextInt() - 1;
+                    int stopIndex = scanner.nextInt() - 1;
                     scanner.nextLine();
-                    if (stopIndex >= stopsQuantity || stopIndex < 0) {
+                    if (stopIndex >= stops.size() || stopIndex < 0) {
                         System.out.println("Invalid index!");
                     } else {
                         stopsForRoute.add(stops.get(stopIndex));
@@ -307,7 +305,7 @@ public class MainApp {
         boolean running = true;
         while (running) {
             correct = false;
-            Integer action = 0;
+            int action = 0;
             do {
                 System.out.println("Here are available actions, please select one: ");
                 System.out.println("1) Print statistics");
