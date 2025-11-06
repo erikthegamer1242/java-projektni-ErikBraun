@@ -1,6 +1,10 @@
 package entity.superclasses;
 
+import entity.Vehicle;
+import entity.subclasses.Driver;
+
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Contains basic info about a person
@@ -48,6 +52,7 @@ public abstract class Person {
 
     /**
      * Gets a person's name
+     *
      * @return String name
      */
     public String getName() {
@@ -56,6 +61,7 @@ public abstract class Person {
 
     /**
      * Gets a person's surname
+     *
      * @return String surname
      */
     public String getSurname() {
@@ -64,6 +70,7 @@ public abstract class Person {
 
     /**
      * Gets a person's oib
+     *
      * @return String oib
      */
     public String getOib() {
@@ -72,6 +79,7 @@ public abstract class Person {
 
     /**
      * Gets a person's email
+     *
      * @return String email
      */
     public String getEmail() {
@@ -80,6 +88,7 @@ public abstract class Person {
 
     /**
      * Gets a person's phone number
+     *
      * @return String phone number
      */
     public String getPhoneNumber() {
@@ -88,6 +97,7 @@ public abstract class Person {
 
     /**
      * Gets a person's date of birth
+     *
      * @return LocalDate date of birth
      */
     public LocalDate getDateOfBirth() {
@@ -101,4 +111,26 @@ public abstract class Person {
      */
     @Override
     public abstract String toString();
+
+    /**
+     * Overriding equals to return proper matching for custom class.
+     *
+     * @param o the reference object with which to compare.
+     * @return true if the object are equal false otherwise.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Person person)) return false;
+        return Objects.equals(oib, person.oib) && Objects.equals(name, person.name) && Objects.equals(surname, person.surname);
+    }
+
+    /**
+     * Overriding hashCode to return proper hash for custom class.
+     *
+     * @return int hash of the object
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(oib, name, surname);
+    }
 }

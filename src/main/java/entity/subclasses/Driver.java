@@ -8,6 +8,7 @@ import java.util.Objects;
 
 /**
  * Driver class containing extend data related to driver's like licenseNumber, salary
+ *
  * @author erik
  * @version 1.0
  */
@@ -48,13 +49,7 @@ public final class Driver extends Person implements Employee {
      */
     @Override
     public String toString() {
-        return "Driver Name: " + this.name
-                + "\tDriver Surname: " + this.surname
-                + "\tDriver LicenseNumber: " + this.licenseNumber
-                + "\tDriver Email: " + this.email
-                + "\tDriver DateOfBirth: "
-                + this.dateOfBirth + "\tDriver Salary: "
-                + calculatePay(salary, BigDecimal.valueOf(160));
+        return "Driver Name: " + this.name + "\tDriver Surname: " + this.surname + "\tDriver LicenseNumber: " + this.licenseNumber + "\tDriver Email: " + this.email + "\tDriver DateOfBirth: " + this.dateOfBirth + "\tDriver Salary: " + calculatePay(salary, BigDecimal.valueOf(160));
     }
 
     /**
@@ -117,7 +112,7 @@ public final class Driver extends Person implements Employee {
             this.email = Objects.requireNonNull(email, "email must not be null");
             return this;
         }
-        
+
         /**
          * Set optional parameter phoneNumber.
          *
@@ -129,7 +124,7 @@ public final class Driver extends Person implements Employee {
             this.phoneNumber = Objects.requireNonNull(phoneNumber, "phoneNumber must not be null");
             return this;
         }
-        
+
         /**
          * Set optional parameter dateOfBirth.
          *
@@ -145,6 +140,7 @@ public final class Driver extends Person implements Employee {
 
         /**
          * Calls the constructor of the driver class
+         *
          * @return returns new object of driver, with all parameters set up
          */
         public Driver build() {

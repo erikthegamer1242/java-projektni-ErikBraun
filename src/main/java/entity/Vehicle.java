@@ -223,4 +223,25 @@ public final class Vehicle {
                 + ("\tVehicle MotorType: " + this.motorType.toString());
     }
 
+    /**
+     * Overriding equals to return proper matching for custom class.
+     *
+     * @param o the reference object with which to compare.
+     * @return true if the object are equal false otherwise.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Vehicle vehicle)) return false;
+        return Objects.equals(name, vehicle.name) && Objects.equals(model, vehicle.model) && Objects.equals(licensePlate, vehicle.licensePlate) && Objects.equals(vin, vehicle.vin) && Objects.equals(year, vehicle.year) && motorType == vehicle.motorType;
+    }
+
+    /**
+     * Overriding hashCode to return proper hash for custom class.
+     *
+     * @return int hash of the object
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, model, licensePlate, vin, year, motorType);
+    }
 }

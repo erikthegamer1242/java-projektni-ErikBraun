@@ -24,7 +24,7 @@ import java.util.Objects;
  * @author erik
  * @version 1.0
  */
-public class Route {
+public final class Route {
     private Integer id;
     private String routeName;
     private Vehicle vehicle;
@@ -194,4 +194,25 @@ public class Route {
         return ("Route ID: " + this.id) + ("\tRoute Name: " + this.routeName) + ("\tDriver Name: " + this.driver.getName()) + ("\tVehicle Name: " + this.vehicle.getName()) + ("\tStop Count: " + this.stops.size()) + ("\tRoute Cost: " + this.getStopCost());
     }
 
+    /**
+     * Overriding equals to return proper matching for custom class.
+     *
+     * @param o the reference object with which to compare.
+     * @return true if the object are equal false otherwise.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Route route)) return false;
+        return Objects.equals(id, route.id) && Objects.equals(routeName, route.routeName) && Objects.equals(vehicle, route.vehicle) && Objects.equals(driver, route.driver) && Objects.equals(stops, route.stops) && Objects.equals(stopCost, route.stopCost);
+    }
+
+    /**
+     * Overriding hashCode to return proper hash for custom class.
+     *
+     * @return int hash of the object
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, routeName, vehicle, driver, stops, stopCost);
+    }
 }
