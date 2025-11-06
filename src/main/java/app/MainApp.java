@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -312,7 +313,8 @@ public class MainApp {
                 System.out.println("1) Print statistics");
                 System.out.println("2) Find a driver in route by name");
                 System.out.println("3) Find a person by name");
-                System.out.println("4) Quit");
+                System.out.println("4) Print all routes");
+                System.out.println("5) Quit");
                 try {
                     action = scanner.nextInt();
                     correct = true;
@@ -361,6 +363,15 @@ public class MainApp {
                     }
                     break;
                 case 4:
+                    Map<Integer, List<Route>> allRoutes = routes.stream()
+                            .collect(Collectors.groupingBy(route -> route.getStops().size()));
+                    allRoutes.forEach((n, r) -> {
+                        System.out.println("++++++ Routes with " + n + " stop" + ((n != 1) ? "s" : "") +": ++++++\n");
+                        r.forEach(System.out::println);
+                        System.out.println();
+                    });
+                    break;
+                case 5:
                     running = false;
                     break;
                 default:
