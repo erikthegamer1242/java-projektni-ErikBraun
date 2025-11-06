@@ -135,8 +135,8 @@ public interface DataSearch {
             throw new NullPointerException("routes must not be null");
         }
         String format = "Total routes: " + routes.size()
-                + "\nRoute with least stops: " + findRouteWithLeastStops(routes).toString()
-                + "\nRoute with most stops: " + findRouteWithMostStops(routes).toString()
+                + "\nRoute with least stops: " + routes.getFirst().toString()
+                + "\nRoute with most stops: " + routes.getLast().toString()
                 + "\nMost expensive route: " + findMostExpensiveRoute(routes).toString();
         System.out.println(format); //NOSONAR: No logger
     }

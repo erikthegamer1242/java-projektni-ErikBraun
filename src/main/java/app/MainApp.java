@@ -327,6 +327,7 @@ public class MainApp {
 
             switch (action) {
                 case 1:
+                    routes.sort(Comparator.comparingInt(r -> r.getStops().size()));
                     DataSearch.showRouteStatistics(routes);
                     break;
                 case 2:
