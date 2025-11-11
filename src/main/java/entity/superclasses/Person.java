@@ -1,8 +1,5 @@
 package entity.superclasses;
 
-import entity.Vehicle;
-import entity.subclasses.Driver;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
