@@ -5,7 +5,7 @@ package entity.exceptions;
  * @author erik
  * @version 1.0
  */
-public class YearNegativeException extends Exception { // NOSONAR: Custom exception, not an empty class
+public class YearNegativeException extends RuntimeException { // NOSONAR: Custom exception, not an empty class
 
     public YearNegativeException(Throwable cause) {
         super(cause);

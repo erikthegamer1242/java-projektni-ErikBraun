@@ -5,7 +5,7 @@ package entity.exceptions;
  * @author erik
  * @version 1.0
  */
-public class RouteCostNegativeException extends Exception { // NOSONAR: Custom exception, not an empty class
+public class RouteCostNegativeException extends RuntimeException { // NOSONAR: Custom exception, not an empty class
 
     public RouteCostNegativeException() {
         super("Route cost cannot be negative");

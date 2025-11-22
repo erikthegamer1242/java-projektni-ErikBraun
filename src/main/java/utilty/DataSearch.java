@@ -5,9 +5,7 @@ import entity.subclasses.User;
 import entity.superclasses.Person;
 
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Static interface implementing methods that search and do statistical analysis of the data
@@ -16,17 +14,17 @@ import java.util.List;
  */
 
 public interface DataSearch {
+    final String ROUTES_MESSAGE = "routes must not be null";
 
     /**
      * Finds a route that has the least amount of stops
-     * @param routes a list of routes
-     * @return If found returns the route, else null
+     * @param inRoutes a list of routes
+     * @return If found returns the route, else first route
      * @throws NullPointerException when one or more parameters are null
+     * @throws NoSuchElementException when the list is empty
      */
-    static Route findRouteWithLeastStops(List<Route> routes) {
-        if (routes == null) {
-            throw new NullPointerException("routes must not be null");
-        }
+    static Route findRouteWithLeastStops(List<Route> inRoutes) {
+        List<Route> routes = Objects.requireNonNull(inRoutes, ROUTES_MESSAGE);
         Integer leastStops = routes.getFirst().getStops().size();
         Route route = routes.getFirst();
         for (Route r : routes) {
@@ -40,14 +38,13 @@ public interface DataSearch {
 
     /**
      * Finds a route that has the most amount of stops
-     * @param routes a list of routes
-     * @return If found returns the route, else null
+     * @param inRoutes a list of routes
+     * @return If found returns the route, else first route
      * @throws NullPointerException when one or more parameters are null
+     * @throws NoSuchElementException when the list is empty
      */
-    static Route findRouteWithMostStops(List<Route> routes) {
-        if (routes == null) {
-            throw new NullPointerException("routes must not be null");
-        }
+    static Route findRouteWithMostStops(List<Route> inRoutes) {
+        List<Route> routes = Objects.requireNonNull(inRoutes, ROUTES_MESSAGE);
         Integer mostStops = routes.getFirst().getStops().size();
         Route route = routes.getFirst();
         for (Route r : routes) {
@@ -63,57 +60,55 @@ public interface DataSearch {
      * Finds a route that has the driver's name in it
      * @param routes a list of routes
      * @param driverName String name of the driver
-     * @return If found returns the route, else null
+     * @return If found returns the route, else an empty optional
      * @throws NullPointerException when one or more parameters are null
      */
-    static Route findRouteWithDriverName(List<Route> routes, String driverName) {
+    static Optional<Route> findRouteWithDriverName(List<Route> routes, String driverName) {
         if (routes == null) {
-            throw new NullPointerException("routes must not be null");
+            throw new NullPointerException(ROUTES_MESSAGE);
         }
         if (driverName == null) {
             throw new NullPointerException("driverName must not be null");
         }
         for (Route r : routes) {
             if (r.getDriver().getName().equals(driverName)) {
-                return r;
+                return Optional.of(r);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
      * Finds a route that has any person's name
      * @param persons a list of people
      * @param name String name of the driver
-     * @return If found returns the route, else null
+     * @return If found returns the person, else null. Wrapped with optional
      * @throws NullPointerException when one or more parameters are null
      */
-    static Person findPersonByName(List<Person> persons, String name) {
+    static Optional<Person> findPersonByName(List<Person> persons, String name) {
         if (persons == null) {
             throw new NullPointerException("persons must not be null");
         }
         if (name == null) {
             throw new NullPointerException("name must not be null");
         }
-        Comparator<Person> comparator = Comparator.comparing(Person::getName);
 
-        Integer idx = Collections.binarySearch(persons, new User.UserBuilder("1", name, "1").build(), comparator);
+        Integer idx = Collections.binarySearch(persons, new User.UserBuilder("1", name, "1").build(), (p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()));
         if (idx < 0) {
-            return null;
+            return Optional.empty();
         }
-        return persons.get(idx);
+        return Optional.of(persons.get(idx));
     }
 
     /**
      * Finds the most expensive route based on the stop cost and number of stops
-     * @param routes a list of people
+     * @param inRoutes a list of people
      * @return The most expensive route
      * @throws NullPointerException when one or more parameters are null
+     * @throws NoSuchElementException when the list is empty
      */
-    static Route findMostExpensiveRoute(List<Route> routes) {
-        if (routes == null) {
-            throw new NullPointerException("routes must not be null");
-        }
+    static Route findMostExpensiveRoute(List<Route> inRoutes) {
+        List<Route> routes = Objects.requireNonNull(inRoutes, ROUTES_MESSAGE);
         BigDecimal mostExpensiveRoute = routes.getFirst().getStopCost();
         Route route = routes.getFirst();
         for (Route r : routes) {
@@ -129,10 +124,11 @@ public interface DataSearch {
      * Prints out the route statistics
      * @param routes a list of routes
      * @throws NullPointerException when one or more parameters are null
+     * @throws NoSuchElementException when the list is empty
      */
     static void showRouteStatistics(List<Route> routes) {
         if (routes == null) {
-            throw new NullPointerException("routes must not be null");
+            throw new NullPointerException(ROUTES_MESSAGE);
         }
         String format = "Total routes: " + routes.size()
                 + "\nRoute with least stops: " + routes.getFirst().toString()

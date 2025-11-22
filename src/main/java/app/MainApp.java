@@ -299,7 +299,7 @@ public class MainApp {
         System.out.println("These are all the routes: ");
         for (int i = 0; i < routes.size(); i++) {
             System.out.print((i + 1) + ") ");
-            System.out.println(routes.get(i).toString());
+            System.out.println(routes.get(i));
         }
 
         boolean running = true;
@@ -333,10 +333,10 @@ public class MainApp {
                 case 2:
                     System.out.print("Enter driver's name: ");
                     String driverName = scanner.nextLine();
-                    Route foundRoute = DataSearch.findRouteWithDriverName(routes, driverName);
-                    if (foundRoute != null) {
+                    Optional<Route> foundRoute = DataSearch.findRouteWithDriverName(routes, driverName);
+                    if (foundRoute.isPresent()) {
                         System.out.println("Found route that has driver: " + driverName);
-                        System.out.println(foundRoute);
+                        System.out.println(foundRoute.get());
                     } else {
                         System.out.println("Driver not found");
                     }
@@ -348,14 +348,14 @@ public class MainApp {
                     persons.addAll(users);
                     persons.addAll(drivers);
                     persons.sort(Comparator.comparing(Person::getName).thenComparing(Person::getSurname));
-                    Person found = DataSearch.findPersonByName(persons, personName);
-                    if (found != null) {
-                        if (found instanceof Driver) {
+                    Optional<Person> found = DataSearch.findPersonByName(persons, personName);
+                    if (found.isPresent()) {
+                        if (found.get() instanceof Driver) {
                             System.out.println("Found " + personName + ". He is a driver!");
-                        } else if (found instanceof User) {
+                        } else if (found.get() instanceof User) {
                             System.out.println("Found " + personName + ". He is a user!");
                         }
-                        System.out.println(found);
+                        System.out.println(found.get());
                     } else {
                         System.out.println("Person not found");
                     }
