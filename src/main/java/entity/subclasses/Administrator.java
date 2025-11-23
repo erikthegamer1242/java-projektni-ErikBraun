@@ -7,51 +7,39 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * Driver class containing extend data related to driver's like licenseNumber, salary
+ * Administrator class containing extended data related to administrators
  *
  * @author erik
  * @version 1.0
  */
-
-public final class Driver extends Person implements Employed {
-    private final String licenseNumber;
+public final class Administrator extends Person implements Employed, AdministratorActions {
     private final BigDecimal salary;
     private final BigDecimal workingHours;
 
     /**
-     * Constructs a new driver based on data from the builder pattern
+     * Constructs a new administrator based on data from the builder pattern
      *
      * @param builder builder pattern containing parameters defined bellow
      */
-    private Driver(DriverBuilder builder) {
+    private Administrator(Administrator.AdministratorBuilder builder) {
         this.oib = builder.oib;
         this.surname = builder.surname;
         this.name = builder.name;
         this.email = builder.email;
         this.phoneNumber = builder.phoneNumber;
         this.dateOfBirth = builder.dateOfBirth;
-        this.licenseNumber = builder.licenseNumber;
         this.salary = builder.salary;
         this.workingHours = builder.workingHours;
     }
 
     /**
-     * Get driver's licence number
+     * Overriding toString to give out a formatted Administrator
      *
-     * @return String driver's licence number
-     */
-    public String getLicenseNumber() {
-        return licenseNumber;
-    }
-
-    /**
-     * Overriding toString to give out a formatted driver
-     *
-     * @return Returns a formatted string of the driver
+     * @return Returns a formatted string of the Administrator
      */
     @Override
     public String toString() {
-        return "Driver Name: " + this.name + "\tDriver Surname: " + this.surname + "\tDriver LicenseNumber: " + this.licenseNumber + "\tDriver Email: " + this.email + "\tDriver DateOfBirth: " + this.dateOfBirth + "\tDriver Salary: " + calculatePay();
+        return "Administrator Name: " + this.name + "\tAdministrator Surname: " + this.surname + "\tAdministrator Email: " + this.email + "\tAdministrator DateOfBirth: " + this.dateOfBirth + "\tAdministrator Salary: " + calculatePay();
     }
 
     @Override
@@ -60,14 +48,13 @@ public final class Driver extends Person implements Employed {
     }
 
     /**
-     * Subclass implementing a builder pattern to ease the creation of a driver object when having optional parameter
+     * Subclass implementing a builder pattern to ease the creation of an Administrator object when having optional parameter
      * <p>
      * Required fields:
      * <ul>
      *     <li>OIB</li>
      *     <li>Name</li>
      *     <li>Surname</li>
-     *     <li>Driver licence number</li>
      *     <li>Salary</li>
      *     <li>Working Hours</li>
      * </ul>
@@ -79,11 +66,10 @@ public final class Driver extends Person implements Employed {
      *     <li>Date of birth (set to unix EPOCH)</li>
      * </ul>
      */
-    public static class DriverBuilder {
+    public static class AdministratorBuilder {
         private final String oib;
         private final String name;
         private final String surname;
-        private final String licenseNumber;
         private final BigDecimal salary;
         private final BigDecimal workingHours;
 
@@ -94,19 +80,17 @@ public final class Driver extends Person implements Employed {
         /**
          * Constructs a new builder pattern object with only the required parameter
          *
-         * @param oib           String driver's OIB
-         * @param name          String driver's first name
-         * @param surname       String driver's last name
-         * @param licenseNumber String driver's licence number
-         * @param salary        Decimal driver's hourly pay
-         * @param workingHours  Decimal driver's working hours
+         * @param oib           String Administrator's OIB
+         * @param name          String Administrator's first name
+         * @param surname       String Administrator's last name
+         * @param salary        Decimal Administrator's hourly pay
+         * @param workingHours  Decimal Administrator's working hours
          * @throws NullPointerException when one or more parameter are null
          */
-        public DriverBuilder(String oib, String name, String surname, String licenseNumber, BigDecimal salary, BigDecimal workingHours) {
+        public AdministratorBuilder(String oib, String name, String surname, BigDecimal salary, BigDecimal workingHours) {
             this.oib = Objects.requireNonNull(oib, "oib must not be null");
             this.name = Objects.requireNonNull(name, "name must not be null");
             this.surname = Objects.requireNonNull(surname, "surname must not be null");
-            this.licenseNumber = Objects.requireNonNull(licenseNumber, "licenseNumber must not be null");
             this.salary = Objects.requireNonNull(salary, "salary must not be null");
             this.workingHours = Objects.requireNonNull(workingHours, "workingHours must not be null");
         }
@@ -114,11 +98,11 @@ public final class Driver extends Person implements Employed {
         /**
          * Set optional parameter email.
          *
-         * @param email String driver's email
+         * @param email String Administrator's email
          * @return this builder
          * @throws NullPointerException if email is null
          */
-        public DriverBuilder email(String email) {
+        public Administrator.AdministratorBuilder email(String email) {
 
             this.email = Objects.requireNonNull(email, "email must not be null");
             return this;
@@ -127,11 +111,11 @@ public final class Driver extends Person implements Employed {
         /**
          * Set optional parameter phoneNumber.
          *
-         * @param phoneNumber String driver's phone number
+         * @param phoneNumber String Administrator's phone number
          * @return this builder
          * @throws NullPointerException if phoneNumber is null
          */
-        public DriverBuilder phoneNumber(String phoneNumber) {
+        public Administrator.AdministratorBuilder phoneNumber(String phoneNumber) {
             this.phoneNumber = Objects.requireNonNull(phoneNumber, "phoneNumber must not be null");
             return this;
         }
@@ -139,23 +123,23 @@ public final class Driver extends Person implements Employed {
         /**
          * Set optional parameter dateOfBirth.
          *
-         * @param dateOfBirth LocalDate driver's date of birth
+         * @param dateOfBirth LocalDate Administrator's date of birth
          * @return this builder
          * @throws NullPointerException if dateOfBirth is null
          */
-        public DriverBuilder dateOfBirth(LocalDate dateOfBirth) {
+        public Administrator.AdministratorBuilder dateOfBirth(LocalDate dateOfBirth) {
             Objects.requireNonNull(dateOfBirth, "dateOfBirth must not be null");
             this.dateOfBirth = dateOfBirth;
             return this;
         }
 
         /**
-         * Calls the constructor of the driver class
+         * Calls the constructor of the Administrator class
          *
-         * @return returns new object of driver, with all parameters set up
+         * @return returns new object of Administrator, with all parameters set up
          */
-        public Driver build() {
-            return new Driver(this);
+        public Administrator build() {
+            return new Administrator(this);
         }
     }
 }

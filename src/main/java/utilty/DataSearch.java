@@ -1,6 +1,7 @@
 package utilty;
 
 import entity.Route;
+import entity.subclasses.Employed;
 import entity.subclasses.User;
 import entity.superclasses.Person;
 
@@ -9,6 +10,7 @@ import java.util.*;
 
 /**
  * Static interface implementing methods that search and do statistical analysis of the data
+ *
  * @author erik
  * @version 1.0
  */
@@ -18,9 +20,10 @@ public interface DataSearch {
 
     /**
      * Finds a route that has the least amount of stops
+     *
      * @param inRoutes a list of routes
      * @return If found returns the route, else first route
-     * @throws NullPointerException when one or more parameters are null
+     * @throws NullPointerException   when one or more parameters are null
      * @throws NoSuchElementException when the list is empty
      */
     static Route findRouteWithLeastStops(List<Route> inRoutes) {
@@ -38,9 +41,10 @@ public interface DataSearch {
 
     /**
      * Finds a route that has the most amount of stops
+     *
      * @param inRoutes a list of routes
      * @return If found returns the route, else first route
-     * @throws NullPointerException when one or more parameters are null
+     * @throws NullPointerException   when one or more parameters are null
      * @throws NoSuchElementException when the list is empty
      */
     static Route findRouteWithMostStops(List<Route> inRoutes) {
@@ -58,7 +62,8 @@ public interface DataSearch {
 
     /**
      * Finds a route that has the driver's name in it
-     * @param routes a list of routes
+     *
+     * @param routes     a list of routes
      * @param driverName String name of the driver
      * @return If found returns the route, else an empty optional
      * @throws NullPointerException when one or more parameters are null
@@ -79,13 +84,14 @@ public interface DataSearch {
     }
 
     /**
-     * Finds a route that has any person's name
+     * Finds a person that has any person's name
+     *
      * @param persons a list of people
-     * @param name String name of the driver
+     * @param name    String name of the person
      * @return If found returns the person, else null. Wrapped with optional
      * @throws NullPointerException when one or more parameters are null
      */
-    static Optional<Person> findPersonByName(List<Person> persons, String name) {
+    static Optional<Person> findPersonByName(List<? extends Person> persons, String name) {
         if (persons == null) {
             throw new NullPointerException("persons must not be null");
         }
@@ -102,9 +108,10 @@ public interface DataSearch {
 
     /**
      * Finds the most expensive route based on the stop cost and number of stops
+     *
      * @param inRoutes a list of people
      * @return The most expensive route
-     * @throws NullPointerException when one or more parameters are null
+     * @throws NullPointerException   when one or more parameters are null
      * @throws NoSuchElementException when the list is empty
      */
     static Route findMostExpensiveRoute(List<Route> inRoutes) {
@@ -122,18 +129,20 @@ public interface DataSearch {
 
     /**
      * Prints out the route statistics
+     *
      * @param routes a list of routes
-     * @throws NullPointerException when one or more parameters are null
+     * @throws NullPointerException   when one or more parameters are null
      * @throws NoSuchElementException when the list is empty
      */
     static void showRouteStatistics(List<Route> routes) {
         if (routes == null) {
             throw new NullPointerException(ROUTES_MESSAGE);
         }
-        String format = "Total routes: " + routes.size()
-                + "\nRoute with least stops: " + routes.getFirst().toString()
-                + "\nRoute with most stops: " + routes.getLast().toString()
-                + "\nMost expensive route: " + findMostExpensiveRoute(routes).toString();
+        String format = "Total routes: " + routes.size() + "\nRoute with least stops: " + routes.getFirst().toString() + "\nRoute with most stops: " + routes.getLast().toString() + "\nMost expensive route: " + findMostExpensiveRoute(routes).toString();
         System.out.println(format); //NOSONAR: No logger
+    }
+
+    static <T extends Person & Employed> void calculatePayForAllEmployees(List<T> people) {
+        people.forEach(p -> System.out.println(p.calculatePay()));
     }
 }

@@ -6,6 +6,7 @@ import entity.Vehicle;
 import entity.exceptions.RouteCostNegativeException;
 import entity.exceptions.YearNegativeException;
 import entity.subclasses.Driver;
+import entity.subclasses.Employed;
 import entity.subclasses.User;
 import entity.superclasses.Person;
 import utilty.DataSearch;
@@ -79,7 +80,9 @@ public class MainApp {
                     String driverDateOfBirth = scanner.nextLine();
                     System.out.println("Please enter driver's hourly pay for " + (i + 1) + ". driver : ");
                     BigDecimal driverHourlyPay = new BigDecimal(scanner.nextLine());
-                    drivers.add(new Driver.DriverBuilder(driverOIB, driverName, driverLastName, driverLicenseNumber, driverHourlyPay).email(driverEmail).phoneNumber(driverPhoneNumber).dateOfBirth(LocalDate.parse(driverDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy"))).build());
+                    System.out.println("Please enter driver's working hours for " + (i + 1) + ". driver : ");
+                    BigDecimal driverWorkingHours = new BigDecimal(scanner.nextLine());
+                    drivers.add(new Driver.DriverBuilder(driverOIB, driverName, driverLastName, driverLicenseNumber, driverHourlyPay, driverWorkingHours).email(driverEmail).phoneNumber(driverPhoneNumber).dateOfBirth(LocalDate.parse(driverDateOfBirth, DateTimeFormatter.ofPattern("dd-MM-yyyy"))).build());
                 }
                 correct = true;
             } catch (InputMismatchException | NullPointerException e) {
@@ -312,7 +315,8 @@ public class MainApp {
                 System.out.println("2) Find a driver in route by name");
                 System.out.println("3) Find a person by name");
                 System.out.println("4) Print all routes");
-                System.out.println("5) Quit");
+                System.out.println("5) Calculate all drivers pay");
+                System.out.println("6) Quit");
                 try {
                     action = scanner.nextInt();
                     correct = true;
@@ -370,6 +374,9 @@ public class MainApp {
                     });
                     break;
                 case 5:
+                    DataSearch.calculatePayForAllEmployees(drivers);
+                    break;
+                case 6:
                     running = false;
                     break;
                 default:
