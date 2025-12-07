@@ -33,6 +33,11 @@ public final class Route {
     private BigDecimal stopCost;
 
     /**
+     * Empty public constructor to allow XML and JSON deserialization
+     */
+    public Route() {}
+
+    /**
      * Constructs a new route with these parameters:
      *
      * @param id        Unique Route ID

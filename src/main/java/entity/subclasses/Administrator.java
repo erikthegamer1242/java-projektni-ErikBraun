@@ -13,8 +13,13 @@ import java.util.Objects;
  * @version 1.0
  */
 public final class Administrator extends Person implements Employed, AdministratorActions {
-    private final BigDecimal salary;
-    private final BigDecimal workingHours;
+    private BigDecimal salary;
+    private BigDecimal workingHours;
+
+    /**
+     * Empty public constructor to allow XML and JSON deserialization
+     */
+    public Administrator() {}
 
     /**
      * Constructs a new administrator based on data from the builder pattern
@@ -45,6 +50,18 @@ public final class Administrator extends Person implements Employed, Administrat
     @Override
     public BigDecimal calculatePay() {
         return salary.multiply(workingHours);
+    }
+
+    /**
+     * Overriding equals to return proper matching for custom class.
+     *
+     * @param o the reference object with which to compare.
+     * @return true if the object are equal false otherwise.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Administrator administrator)) return false;
+        return Objects.equals(oib, administrator.oib) && Objects.equals(name, administrator.name) && Objects.equals(surname, administrator.surname);
     }
 
     /**

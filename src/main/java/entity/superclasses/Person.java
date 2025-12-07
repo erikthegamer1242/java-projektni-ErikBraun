@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Contains basic info about a person
  * <p>
- * Implements Getters
+ * Implements Getters and Setters for all fields
  * <p>
  * Basic info
  * <ul>
@@ -57,12 +57,30 @@ public abstract class Person {
     }
 
     /**
+     * Sets a person's name
+     *
+     * @param name String person's name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
      * Gets a person's surname
      *
      * @return String surname
      */
     public String getSurname() {
         return surname;
+    }
+
+    /**
+     * Sets a person's surname
+     *
+     * @param surname String person's surname
+     */
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     /**
@@ -75,12 +93,30 @@ public abstract class Person {
     }
 
     /**
+     * Sets a person's oib
+     *
+     * @param oib String person's personal identification number
+     */
+    public void setOib(String oib) {
+        this.oib = oib;
+    }
+
+    /**
      * Gets a person's email
      *
      * @return String email
      */
     public String getEmail() {
         return email;
+    }
+
+    /**
+     * Sets a person's email
+     *
+     * @param email String person's email
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
@@ -93,12 +129,30 @@ public abstract class Person {
     }
 
     /**
+     * Sets a person's phone number
+     *
+     * @param phoneNumber String person's phone number
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
      * Gets a person's date of birth
      *
      * @return LocalDate date of birth
      */
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    /**
+     * Sets a person's date of birth
+     *
+     * @param dateOfBirth LocalDate person's date of birth
+     */
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     /**

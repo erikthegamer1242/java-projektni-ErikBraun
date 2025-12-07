@@ -31,6 +31,11 @@ public final class Vehicle {
     private MotorType motorType;
 
     /**
+     * Empty public constructor to allow XML and JSON deserialization
+     */
+    public Vehicle() {}
+
+    /**
      * Used to set motor type for each vehicle.
      */
     public enum MotorType {
@@ -153,6 +158,12 @@ public final class Vehicle {
      * @return enum MotorType
      */
     public MotorType getMotorType() {return motorType;}
+
+    /**
+     * Set vehicle motor type
+     * @param motorType enum MotorType
+     */
+    public void setMotorType(MotorType motorType) {this.motorType = motorType;}
 
     /**
      * Set vehicle name

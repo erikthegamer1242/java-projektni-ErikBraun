@@ -13,7 +13,12 @@ import java.util.UUID;
  */
 
 public final class User extends Person {
-    private final UUID subscriberID;
+    private UUID subscriberID;
+
+    /**
+     * Empty public constructor to allow XML and JSON deserialization
+     */
+    public User() {}
 
     /**
      * Constructs a new user based on data from the builder pattern
@@ -40,6 +45,14 @@ public final class User extends Person {
     }
 
     /**
+     * Set a user's subscriber card ID
+     * @param subscriberID UUID of the card
+     */
+    public void setSubscriberID(UUID subscriberID) {
+        this.subscriberID = subscriberID;
+    }
+
+    /**
      * Overriding toString to give out a formatted user
      *
      * @return Returns a formatted string of the user
@@ -47,6 +60,18 @@ public final class User extends Person {
     @Override
     public String toString() {
         return "User Name: " + this.name + "\tUser Surname: " + this.surname + "\tUser Card/SubscriberID: " + this.subscriberID + "\tUser Email: " + this.email + "\tUser DateOfBirth: " + this.dateOfBirth;
+    }
+
+    /**
+     * Overriding equals to return proper matching for custom class.
+     *
+     * @param o the reference object with which to compare.
+     * @return true if the object are equal false otherwise.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof User user)) return false;
+        return Objects.equals(oib, user.oib) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname);
     }
 
     /**

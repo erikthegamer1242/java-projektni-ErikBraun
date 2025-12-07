@@ -14,9 +14,14 @@ import java.util.Objects;
  */
 
 public final class Driver extends Person implements Employed {
-    private final String licenseNumber;
-    private final BigDecimal salary;
-    private final BigDecimal workingHours;
+    private String licenseNumber;
+    private BigDecimal salary;
+    private BigDecimal workingHours;
+
+    /**
+     * Empty public constructor to allow XML and JSON deserialization
+     */
+    public Driver() {}
 
     /**
      * Constructs a new driver based on data from the builder pattern
@@ -45,6 +50,51 @@ public final class Driver extends Person implements Employed {
     }
 
     /**
+     * Sets driver's licence number
+     *
+     * @param licenseNumber String driver's licence number
+     */
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
+
+    /**
+     * Get driver's hourly salary rate
+     *
+     * @return BigDecimal driver's salary rate
+     */
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
+    /**
+     * Sets driver's hourly salary rate
+     *
+     * @param salary BigDecimal driver's salary rate
+     */
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
+
+    /**
+     * Get driver's working hours
+     *
+     * @return BigDecimal driver's working hours
+     */
+    public BigDecimal getWorkingHours() {
+        return workingHours;
+    }
+
+    /**
+     * Sets driver's working hours
+     *
+     * @param workingHours BigDecimal driver's working hours
+     */
+    public void setWorkingHours(BigDecimal workingHours) {
+        this.workingHours = workingHours;
+    }
+
+    /**
      * Overriding toString to give out a formatted driver
      *
      * @return Returns a formatted string of the driver
@@ -58,6 +108,11 @@ public final class Driver extends Person implements Employed {
     public BigDecimal calculatePay() {
         return salary.multiply(workingHours);
     }
+
+    /**
+     * Driver relies on Person.equals()/hashCode() which compare oib, name and surname.
+     * Redundant overrides were removed to avoid duplicate/identical implementations.
+     */
 
     /**
      * Subclass implementing a builder pattern to ease the creation of a driver object when having optional parameter
