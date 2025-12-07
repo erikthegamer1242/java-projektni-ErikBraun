@@ -1,5 +1,6 @@
 package entity.superclasses;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -21,7 +22,7 @@ import java.util.Objects;
  * @author erik
  * @version 1.0
  */
-public abstract class Person {
+public abstract class Person implements Serializable {
     /**
      * A person's name
      */

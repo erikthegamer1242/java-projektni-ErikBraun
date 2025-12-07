@@ -6,9 +6,12 @@ import entity.Vehicle;
 import entity.subclasses.Driver;
 import entity.subclasses.User;
 import entity.superclasses.Person;
+import utilty.BackupDTO;
+import utilty.BinaryHelper;
 import utilty.DataSearch;
 import utilty.JSONHelper;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -64,7 +67,9 @@ public class MainApp {
                 System.out.println("3) Find a person by name");
                 System.out.println("4) Print all routes");
                 System.out.println("5) Calculate all drivers pay");
-                System.out.println("6) Quit");
+                System.out.println("6) Run backup");
+                System.out.println("7) Restore backup");
+                System.out.println("8) Quit");
                 try {
                     action = scanner.nextInt();
                     correct = true;
@@ -125,6 +130,37 @@ public class MainApp {
                     DataSearch.calculatePayForAllEmployees(drivers);
                     break;
                 case 6:
+                    System.out.println("Warning! Taking a backup will override the previous backup. Are you sure? (Y/N)");
+                    if (scanner.nextLine().equalsIgnoreCase("Y")) {
+                        try {
+                            BinaryHelper.writeAllDataToFile(users, drivers, vehicles, stops, routes, "src/main/resources/backup/backup.dat");
+                        } catch (IOException e) {
+                            logger.error("Error writing to backup file", e);
+                        }
+                    } else {
+                        System.out.println("Canceling the backup...");
+                    }
+                    break;
+                case 7:
+                    System.out.println("Warning! Restoring a backup will override all current in-memory objects. Are you sure? (Y/N)");
+                    if (scanner.nextLine().equalsIgnoreCase("Y")) {
+                        try {
+                            BackupDTO restoredData = BinaryHelper.readAllDataFromFile("src/main/resources/backup/backup.dat");
+                            users = restoredData.users();
+                            drivers = restoredData.drivers();
+                            vehicles = restoredData.vehicles();
+                            routes = restoredData.routes();
+                            stops = restoredData.stops();
+                        } catch (IOException | ClassNotFoundException e) {
+                            logger.error("Error reading from backup", e);
+                        }
+                    }
+                    else {
+                        System.out.println("Canceling restore...");
+                    }
+                    System.out.println();
+                    break;
+                case 8:
                     running = false;
                     try {
                         JSONHelper.writeListToJSON(users, "src/main/resources/data/users.json");
@@ -135,9 +171,7 @@ public class MainApp {
                     } catch (Exception e) {
                         logger.error("Error while writing to JSON", e);
                         System.out.println("Error while writing to JSON\nDo you still want to quit the application? (Y/N)");
-                        scanner.nextLine();
-                        String response = scanner.nextLine();
-                        if (response.equalsIgnoreCase("N")) {
+                        if (scanner.nextLine().equalsIgnoreCase("N")) {
                             running = true;
                         }
                     }

@@ -2,6 +2,7 @@ package entity.subclasses;
 
 import entity.superclasses.Person;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
@@ -12,7 +13,7 @@ import java.util.UUID;
  * @version 1.0
  */
 
-public final class User extends Person {
+public final class User extends Person implements Serializable {
     private UUID subscriberID;
 
     /**

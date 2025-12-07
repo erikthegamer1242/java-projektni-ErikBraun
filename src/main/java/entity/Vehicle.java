@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import entity.exceptions.YearNegativeException;
@@ -22,7 +23,7 @@ import entity.exceptions.YearNegativeException;
  * @version 1.0
  */
 
-public final class Vehicle {
+public final class Vehicle implements Serializable {
     private String name;
     private String model;
     private String licensePlate;

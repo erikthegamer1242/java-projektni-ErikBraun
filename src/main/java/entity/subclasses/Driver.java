@@ -2,6 +2,7 @@ package entity.subclasses;
 
 import entity.superclasses.Person;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -13,7 +14,7 @@ import java.util.Objects;
  * @version 1.0
  */
 
-public final class Driver extends Person implements Employed {
+public final class Driver extends Person implements Employed, Serializable {
     private String licenseNumber;
     private BigDecimal salary;
     private BigDecimal workingHours;

@@ -20,9 +20,9 @@ import java.util.Scanner;
 
 /**
  * Static interface implementing methods for reading data from the console using Scanner
- *  *
- *  * @author erik
- *  * @version 1.0
+ *
+ *  @author erik
+ *  @version 1.0
  */
 public interface InputData {
     /**

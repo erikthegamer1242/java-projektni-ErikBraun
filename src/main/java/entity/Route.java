@@ -4,6 +4,7 @@ package entity;
 import entity.exceptions.RouteCostNegativeException;
 import entity.subclasses.Driver;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +25,7 @@ import java.util.Objects;
  * @author erik
  * @version 1.0
  */
-public final class Route {
+public final class Route implements Serializable {
     private Integer id;
     private String routeName;
     private Vehicle vehicle;

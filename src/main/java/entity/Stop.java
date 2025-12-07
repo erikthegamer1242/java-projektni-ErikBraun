@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Objects;
 public record Stop (
         Integer id,
         String location
-) {
+) implements Serializable {
     /**
      * Overriding toString to give out a formatted stop
      * @return Formatted string that better represents the record

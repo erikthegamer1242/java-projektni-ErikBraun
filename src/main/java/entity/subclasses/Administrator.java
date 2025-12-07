@@ -2,6 +2,7 @@ package entity.subclasses;
 
 import entity.superclasses.Person;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -12,7 +13,7 @@ import java.util.Objects;
  * @author erik
  * @version 1.0
  */
-public final class Administrator extends Person implements Employed, AdministratorActions {
+public final class Administrator extends Person implements Employed, AdministratorActions, Serializable {
     private BigDecimal salary;
     private BigDecimal workingHours;
 
