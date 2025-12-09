@@ -67,7 +67,7 @@ public class MainApp {
 
                 try {
                     action = scanner.nextInt();
-                    XMLHelper.writeOneAction("User selected: " + listActions(action), "src/main/resources/actions/actions.xml");
+                    XMLHelper.writeOneAction(XMLHelper.getCurrentDateAndTime() + " - User selected: " + listActions(action), "src/main/resources/actions/actions.xml");
                     correct = true;
 
                 } catch (InputMismatchException | NullPointerException e) {

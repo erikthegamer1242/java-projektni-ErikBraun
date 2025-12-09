@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,5 +68,9 @@ public interface XMLHelper {
         ActionLoggerDTO actions = new ActionLoggerDTO(readAllActions(pathName).getAction());
         actions.addAction(action);
         writeNewActions(actions, pathName);
+    }
+
+    public static String getCurrentDateAndTime() {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }
