@@ -6,10 +6,8 @@ import entity.Vehicle;
 import entity.subclasses.Driver;
 import entity.subclasses.User;
 import entity.superclasses.Person;
-import utilty.BackupDTO;
-import utilty.BinaryHelper;
-import utilty.DataSearch;
-import utilty.JSONHelper;
+import jakarta.xml.bind.JAXBException;
+import utilty.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -50,6 +48,7 @@ public class MainApp {
             logger.error("Error reading from JSON", e);
         }
 
+
         System.out.println("These are all the routes: ");
         for (int i = 0; i < routes.size(); i++) {
             System.out.print((i + 1) + ") ");
@@ -62,22 +61,23 @@ public class MainApp {
             int action = 0;
             do {
                 System.out.println("Here are available actions, please select one: ");
-                System.out.println("1) Print statistics");
-                System.out.println("2) Find a driver in route by name");
-                System.out.println("3) Find a person by name");
-                System.out.println("4) Print all routes");
-                System.out.println("5) Calculate all drivers pay");
-                System.out.println("6) Run backup");
-                System.out.println("7) Restore backup");
-                System.out.println("8) Quit");
+                for(int i = 1; i < 9; i++) {
+                    System.out.println(i + ") " + listActions(i));
+                }
+
                 try {
                     action = scanner.nextInt();
+                    XMLHelper.writeOneAction("User selected: " + listActions(action), "src/main/resources/actions/actions.xml");
                     correct = true;
+
                 } catch (InputMismatchException | NullPointerException e) {
                     logger.error("Invalid input for action", e);
                     if (e instanceof InputMismatchException) {
                         scanner.nextLine();
                     }
+                } catch (JAXBException e) {
+                    logger.error("Error while writing to XML", e);
+                    scanner.nextLine();
                 }
             } while (!correct);
             scanner.nextLine();
@@ -182,5 +182,19 @@ public class MainApp {
                     break;
             }
         }
+    }
+
+    public static String listActions(Integer idx) {
+        return switch (idx) {
+            case 1 -> "Print statistics";
+            case 2 -> "Find a driver in route by name";
+            case 3 -> "Find a person by name";
+            case 4 -> "Print all routes";
+            case 5 -> "Calculate all drivers pay";
+            case 6 -> "Run backup";
+            case 7 -> "Restore backup";
+            case 8 -> "Quit";
+            default -> "";
+        };
     }
 }

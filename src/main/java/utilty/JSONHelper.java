@@ -31,11 +31,18 @@ public interface JSONHelper {
         }
     }
 
+    /**
+     * Read a list of any object type from a json file
+     * @param filePath the file to read from
+     * @param anonymousClass the class type to deserialize into
+     * @return List of objects
+     * @param <T> the return list type
+     * @throws Exception whenever there is an issue with reading (JSON issues, file issues...)
+     */
     @java.lang.SuppressWarnings({"squid:S112"})
     public static <T> List<T> readListFromJSON(String filePath, Class<?> anonymousClass) throws Exception {
         try (Jsonb jsonb = JsonbBuilder.create()) {
-            String jsonLista = Files.readString(Paths.get(filePath));
-            return jsonb.fromJson(jsonLista, anonymousClass.getGenericSuperclass());
+            return jsonb.fromJson(Files.readString(Paths.get(filePath)), anonymousClass.getGenericSuperclass());
         }
     }
 }
