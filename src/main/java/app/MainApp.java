@@ -75,7 +75,7 @@ public class MainApp {
                     if (e instanceof InputMismatchException) {
                         scanner.nextLine();
                     }
-                } catch (JAXBException e) {
+                } catch (JAXBException | IOException e) {
                     logger.error("Error while writing to XML", e);
                     scanner.nextLine();
                 }

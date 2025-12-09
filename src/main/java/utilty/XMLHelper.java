@@ -7,6 +7,8 @@ import jakarta.xml.bind.Unmarshaller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,16 +47,22 @@ public interface XMLHelper {
      * @param pathName the file to read from
      * @param actions the {@link ActionLoggerDTO} object to write to the XML file
      * @throws JAXBException whenever there is an issue with JAXB library
+     * @throws IOException whenever there is an issue creating directories to the file
      */
-    public static void writeNewActions(ActionLoggerDTO actions, String pathName) throws JAXBException {
-            JAXBContext jaxbContext = JAXBContext.newInstance(ActionLoggerDTO.class);
+    public static void writeNewActions(ActionLoggerDTO actions, String pathName) throws JAXBException, IOException {
+        try {
+            Files.createDirectories(Paths.get(pathName).getParent());
+        } catch (IOException e) {
+            throw new IOException("Error creating directory", e);
+        }
+        JAXBContext jaxbContext = JAXBContext.newInstance(ActionLoggerDTO.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
             marshaller.marshal(actions, new File(pathName));
     }
 
-    public static void writeOneAction(String action, String pathName) throws JAXBException {
+    public static void writeOneAction(String action, String pathName) throws JAXBException, IOException {
         ActionLoggerDTO actions = new ActionLoggerDTO(readAllActions(pathName).getAction());
         actions.addAction(action);
         writeNewActions(actions, pathName);

@@ -7,6 +7,8 @@ import entity.subclasses.Driver;
 import entity.subclasses.User;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -29,6 +31,7 @@ public interface BinaryHelper {
      * @throws IOException when there is an issue with writing
      */
     public static void writeAllDataToFile(List<User> users, List<Driver> drivers, List<Vehicle> vehicles, List<Stop> stops, List<Route> routes, String pathName) throws IOException {
+        Files.createDirectories(Paths.get(pathName).getParent());
         internalWriter(new BackupDTO(users, drivers, vehicles, stops, routes), pathName);
     }
 

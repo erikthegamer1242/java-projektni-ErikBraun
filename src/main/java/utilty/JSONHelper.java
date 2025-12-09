@@ -4,6 +4,7 @@ import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -26,6 +27,7 @@ public interface JSONHelper {
      */
     @java.lang.SuppressWarnings({"squid:S112"})
     public static void writeListToJSON(List<?> listToWrite, String filePath) throws Exception {
+        Files.createDirectories(Paths.get(filePath).getParent());
         try (Jsonb jsonb = JsonbBuilder.create(); FileWriter writer = new FileWriter(filePath)) {
             writer.write(jsonb.toJson(listToWrite));
         }
