@@ -8,4 +8,6 @@ module braun.erik.prijevoz {
 
     opens braun.erik.prijevoz to javafx.fxml;
     exports braun.erik.prijevoz;
+    exports braun.erik.prijevoz.controller;
+    opens braun.erik.prijevoz.controller to javafx.fxml;
 }
