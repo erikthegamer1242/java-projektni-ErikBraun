@@ -33,6 +33,10 @@ public final class Route implements Serializable {
     private List<Stop> stops;
     private BigDecimal stopCost;
 
+    public String getDriverName() {
+        return driver.getName();
+    }
+
     /**
      * Empty public constructor to allow XML and JSON deserialization
      */

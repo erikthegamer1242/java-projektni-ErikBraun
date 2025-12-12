@@ -66,6 +66,14 @@ public final class Administrator extends Person implements Employed, Administrat
     }
 
     /**
+     * Overriding hashCode to return proper hash for custom class.
+     *
+     * @return int hash of the object
+     */
+    @Override
+    public int hashCode() {return super.hashCode();}
+
+    /**
      * Subclass implementing a builder pattern to ease the creation of an Administrator object when having optional parameter
      * <p>
      * Required fields:

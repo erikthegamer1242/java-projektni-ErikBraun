@@ -76,6 +76,16 @@ public final class User extends Person implements Serializable {
     }
 
     /**
+     * Overriding hashCode to return proper hash for custom class.
+     *
+     * @return int hash of the object
+     */
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    /**
      * Subclass implementing a builder pattern to ease the creation of a user object when having optional parameter
      * <p>
      * Required fields:

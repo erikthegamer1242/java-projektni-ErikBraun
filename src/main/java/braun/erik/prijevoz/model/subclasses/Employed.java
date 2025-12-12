@@ -1,7 +1,6 @@
 package braun.erik.prijevoz.model.subclasses;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 /**
  * Adds methods only available to employees
