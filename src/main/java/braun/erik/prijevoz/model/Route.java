@@ -6,6 +6,7 @@ import braun.erik.prijevoz.model.subclasses.Driver;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,10 +34,21 @@ public final class Route implements Serializable {
     private List<Stop> stops;
     private BigDecimal stopCost;
 
-    public String getDriverName() {
-        return driver.getName();
-    }
-
+    public String getDriverName() { return driver.getName(); }
+    public String getDriverSurname() { return driver.getSurname(); }
+    public String getDriverOib() { return driver.getOib(); }
+    public String getDriverEmail() { return driver.getEmail(); }
+    public String getDriverPhoneNumber() { return driver.getPhoneNumber(); }
+    public LocalDate getDriverDateOfBirth() { return driver.getDateOfBirth(); }
+    public String getDriverLicenseNumber() { return driver.getLicenseNumber(); }
+    public BigDecimal getDriverSalary() { return driver.getSalary(); }
+    public BigDecimal getDriverWorkingHours() { return driver.getWorkingHours(); }
+    public String getVehicleName() { return vehicle.getName(); }
+    public String getVehicleModel() { return vehicle.getModel(); }
+    public String getVehicleLicensePlate() { return vehicle.getLicensePlate(); }
+    public String getVehicleVin() { return vehicle.getVin(); }
+    public Integer getVehicleYear() { return vehicle.getYear(); }
+    public Vehicle.MotorType getVehicleMotorType() { return vehicle.getMotorType(); }
     /**
      * Empty public constructor to allow XML and JSON deserialization
      */
@@ -65,7 +77,6 @@ public final class Route implements Serializable {
         }
         this.stops = Objects.requireNonNull(stops, "Stops cannot be null");
     }
-
     /**
      * Get stop ID
      *
@@ -74,7 +85,6 @@ public final class Route implements Serializable {
     public Integer getId() {
         return id;
     }
-
     /**
      * Get route vehicle
      *
@@ -83,7 +93,6 @@ public final class Route implements Serializable {
     public Vehicle getVehicle() {
         return vehicle;
     }
-
     /**
      * Get route driver
      *
@@ -92,7 +101,6 @@ public final class Route implements Serializable {
     public Driver getDriver() {
         return driver;
     }
-
     /**
      * Get route stops
      *
@@ -101,7 +109,6 @@ public final class Route implements Serializable {
     public List<Stop> getStops() {
         return stops;
     }
-
     /**
      * Get route name
      *
@@ -110,7 +117,6 @@ public final class Route implements Serializable {
     public String getRouteName() {
         return routeName;
     }
-
     /**
      * Set ID for route
      *
@@ -120,7 +126,6 @@ public final class Route implements Serializable {
     public void setId(Integer id) {
         this.id = Objects.requireNonNull(id, "Route ID cannot be null");
     }
-
     /**
      * Set Vehicle for route
      *
@@ -130,7 +135,6 @@ public final class Route implements Serializable {
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = Objects.requireNonNull(vehicle, "Vehicle cannot be null");
     }
-
     /**
      * Set Driver for route
      *
@@ -140,7 +144,6 @@ public final class Route implements Serializable {
     public void setDriver(Driver driver) {
         this.driver = Objects.requireNonNull(driver, "Driver cannot be null");
     }
-
     /**
      * Set stops for route
      *
@@ -150,7 +153,6 @@ public final class Route implements Serializable {
     public void setStops(List<Stop> stops) {
         this.stops = Objects.requireNonNull(stops, "Stops cannot be null");
     }
-
     /**
      * Append a new stop to the end of the list
      *
@@ -160,7 +162,6 @@ public final class Route implements Serializable {
     public void addStop(Stop stop) {
         this.stops.add(Objects.requireNonNull(stop, "Stop cannot be null"));
     }
-
     /**
      * Set stop cost
      *
@@ -174,7 +175,6 @@ public final class Route implements Serializable {
             throw new RouteCostNegativeException("Route cost cannot be negative. \n Entered route cost: " + this.stopCost);
         }
     }
-
     /**
      * Set route name
      *
@@ -184,7 +184,6 @@ public final class Route implements Serializable {
     public void setRouteName(String routeName) {
         this.routeName = Objects.requireNonNull(routeName, "Route name cannot be null");
     }
-
     /**
      * Calculates the whole route cost based on the number of routes, and per stop cost
      *
@@ -193,7 +192,6 @@ public final class Route implements Serializable {
     public BigDecimal getStopCost() {
         return this.stopCost.multiply(BigDecimal.valueOf(this.stops.size()));
     }
-
     /**
      * Overriding toString to give out a formatted route
      *
@@ -203,7 +201,6 @@ public final class Route implements Serializable {
     public String toString() {
         return ("Route ID: " + this.id) + ("\tRoute Name: " + this.routeName) + ("\tDriver Name: " + this.driver.getName()) + ("\tVehicle Name: " + this.vehicle.getName()) + ("\tStop Count: " + this.stops.size()) + ("\tRoute Cost: " + this.getStopCost());
     }
-
     /**
      * Overriding equals to return proper matching for custom class.
      *
