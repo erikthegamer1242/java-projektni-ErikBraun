@@ -7,6 +7,7 @@ module braun.erik.prijevoz {
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
     requires javafx.base;
+    requires javafx.graphics;
 
     opens braun.erik.prijevoz to javafx.fxml;
     opens braun.erik.prijevoz.model.superclasses to javafx.fxml, javafx.base;

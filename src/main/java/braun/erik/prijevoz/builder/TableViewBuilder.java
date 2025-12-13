@@ -23,7 +23,6 @@ public interface TableViewBuilder {
             @Override
             protected void updateItem(Object item, boolean empty) {
                 super.updateItem(item, empty);
-
                 if (empty) {
                     setText("");
                 } else if (item == null) {

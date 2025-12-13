@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,4 +14,40 @@
            </TableView>
        </ScrollPane>
    </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Driver">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Search" />
+                  <MenuItem mnemonicParsing="false" text="Add" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="User">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Search" />
+                  <MenuItem mnemonicParsing="false" text="Add" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Route">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Search" />
+                  <MenuItem mnemonicParsing="false" text="Add" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Stop">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Search" />
+                  <MenuItem mnemonicParsing="false" text="Add" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Vehicle">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Search" />
+                  <MenuItem mnemonicParsing="false" text="Add" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
 </BorderPane>

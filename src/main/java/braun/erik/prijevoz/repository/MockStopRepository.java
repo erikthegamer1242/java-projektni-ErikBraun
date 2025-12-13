@@ -10,9 +10,9 @@ public class MockStopRepository implements StopRepository {
     private final List<Stop> stops = new ArrayList<>();
 
     public MockStopRepository() {
-        stops.add(new Stop(1, "1"));
-        stops.add(new Stop(2, "2"));
-        stops.add(new Stop(3, "3"));
+        stops.add(new Stop(1, "Caviceva"));
+        stops.add(new Stop(2, "Peroviceva"));
+        stops.add(new Stop(3, "Mirkoviceva"));
     }
 
     @Override

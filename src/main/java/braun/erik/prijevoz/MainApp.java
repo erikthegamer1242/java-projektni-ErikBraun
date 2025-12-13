@@ -9,17 +9,18 @@ import java.io.IOException;
 
 public class MainApp extends Application {
 
-    private Scene scene;
+    private static Stage mainStage;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("views/main-view.fxml"));
-        scene = new Scene(fxmlLoader.load(), 1280, 720);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+        mainStage = stage;
+        stage.setTitle("Main screen");
         stage.setScene(scene);
         stage.show();
     }
 
-    public Scene getScene() {
-        return scene;
+    public static Stage getMainStage() {
+        return mainStage;
     }
 }
