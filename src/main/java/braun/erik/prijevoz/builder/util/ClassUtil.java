@@ -1,10 +1,10 @@
-package braun.erik.prijevoz.builder.utils;
+package braun.erik.prijevoz.builder.util;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
-public interface ClassUtils {
+public interface ClassUtil {
     static List<Field> getAllFields(List<Field> fields, Class<?> type) {
         if (type.getSuperclass() != null) {
             getAllFields(fields, type.getSuperclass());

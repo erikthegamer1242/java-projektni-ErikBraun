@@ -4,7 +4,11 @@ import braun.erik.prijevoz.model.Vehicle;
 
 import java.util.List;
 
-public interface VehicleRepository {
+public interface VehicleRepository extends Repository<Vehicle> {
 
-    List<Vehicle> getVehicles();
+    @Override
+    public List<Vehicle> get();
+
+    @Override
+    public void set(List<Vehicle> list);
 }

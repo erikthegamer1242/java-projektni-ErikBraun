@@ -17,7 +17,12 @@ public class MockDriverRepository implements DriverRepository {
     }
 
     @Override
-    public List<Driver> getDrivers() {
+    public List<Driver> get() {
         return drivers;
+    }
+
+    @Override
+    public void set(List<Driver> list) {
+        drivers.addAll(list);
     }
 }

@@ -4,7 +4,11 @@ import braun.erik.prijevoz.model.Stop;
 
 import java.util.List;
 
-public interface StopRepository {
+public interface StopRepository extends Repository<Stop> {
 
-    public List<Stop> getStops();
+    @Override
+    public List<Stop> get();
+
+    @Override
+    public void set(List<Stop> list);
 }

@@ -1,7 +1,6 @@
 package braun.erik.prijevoz.repository;
 
 import braun.erik.prijevoz.model.Vehicle;
-import braun.erik.prijevoz.model.subclasses.Driver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,12 @@ public class MockVehicleRepository implements VehicleRepository {
     }
 
     @Override
-    public List<Vehicle> getVehicles() {
+    public List<Vehicle> get() {
         return vehicles;
+    }
+
+    @Override
+    public void set(List<Vehicle> list) {
+        vehicles.addAll(list);
     }
 }

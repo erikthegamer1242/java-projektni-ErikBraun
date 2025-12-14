@@ -4,7 +4,11 @@ import braun.erik.prijevoz.model.subclasses.Driver;
 
 import java.util.List;
 
-public interface DriverRepository {
+public interface DriverRepository extends Repository<Driver> {
 
-    List<Driver> getDrivers();
+    @Override
+    List<Driver> get();
+
+    @Override
+    void set(List<Driver> list);
 }

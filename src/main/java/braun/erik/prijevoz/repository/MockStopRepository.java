@@ -16,7 +16,12 @@ public class MockStopRepository implements StopRepository {
     }
 
     @Override
-    public List<Stop> getStops() {
+    public List<Stop> get() {
         return stops;
+    }
+
+    @Override
+    public void set(List<Stop> list) {
+        stops.addAll(list);
     }
 }

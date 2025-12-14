@@ -1,6 +1,6 @@
 package braun.erik.prijevoz.builder;
 
-import braun.erik.prijevoz.builder.utils.ClassUtils;
+import braun.erik.prijevoz.builder.util.ClassUtil;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -17,7 +17,7 @@ public interface TableViewBuilder {
     static final String DATE_FORMAT = "dd.MM.yyyy";
 
     static <T> void addColumn(TableView<T> tableView, String fieldName, String displayName) {
-        TableColumn<T, Object> column = new TableColumn<>(ClassUtils.toDisplayName(displayName));
+        TableColumn<T, Object> column = new TableColumn<>(ClassUtil.toDisplayName(displayName));
         column.setCellValueFactory(new PropertyValueFactory<>(fieldName));
         column.setCellFactory(col -> new TableCell<>() {
             @Override
@@ -38,9 +38,9 @@ public interface TableViewBuilder {
     }
 
     public static <T> void build(TableView<T> initTable, List<T> data, Class<T> type) {
-        List<Field> classFields = ClassUtils.getAllFields(new ArrayList<>(), type);
+        List<Field> classFields = ClassUtil.getAllFields(new ArrayList<>(), type);
         for (Field field : classFields) {
-            if (ClassUtils.isJavaLang(field.getType())) {
+            if (ClassUtil.isJavaLang(field.getType())) {
                 addColumn(initTable, field.getName(), field.getName());
             }
             else {
@@ -49,13 +49,13 @@ public interface TableViewBuilder {
                     fieldPascalCase = fieldPascalCase.substring(0, 1).toUpperCase() + fieldPascalCase.substring(1);
                 }
 
-                List<Field> nestedClassFields = ClassUtils.getAllFields(new ArrayList<>(), field.getType());
+                List<Field> nestedClassFields = ClassUtil.getAllFields(new ArrayList<>(), field.getType());
                 for (Field nestedField : nestedClassFields) {
                     String nestedFieldPascalCase =  nestedField.getName();
                     if (!nestedFieldPascalCase.isEmpty()) {
                         nestedFieldPascalCase = nestedField.getName().substring(0, 1).toUpperCase() + nestedFieldPascalCase.substring(1);
                     }
-                    addColumn(initTable, fieldPascalCase + nestedFieldPascalCase, ClassUtils.toDisplayName(field.getName()) + ": " + ClassUtils.toDisplayName(nestedField.getName()));
+                    addColumn(initTable, fieldPascalCase + nestedFieldPascalCase, ClassUtil.toDisplayName(field.getName()) + ": " + ClassUtil.toDisplayName(nestedField.getName()));
                 }
             }
 
