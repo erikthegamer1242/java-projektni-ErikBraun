@@ -2,7 +2,6 @@ package braun.erik.prijevoz.repository;
 
 import braun.erik.prijevoz.MainApp;
 import braun.erik.prijevoz.model.Stop;
-import braun.erik.prijevoz.model.subclasses.Driver;
 import braun.erik.prijevoz.repository.util.JSONHelper;
 import braun.erik.prijevoz.util.DialogUtil;
 

@@ -2,11 +2,9 @@ package braun.erik.prijevoz.repository;
 
 import braun.erik.prijevoz.MainApp;
 import braun.erik.prijevoz.model.Route;
-import braun.erik.prijevoz.model.subclasses.Driver;
 import braun.erik.prijevoz.repository.util.JSONHelper;
 import braun.erik.prijevoz.util.DialogUtil;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 

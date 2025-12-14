@@ -1,12 +1,10 @@
 package braun.erik.prijevoz.repository;
 
 import braun.erik.prijevoz.MainApp;
-import braun.erik.prijevoz.model.subclasses.Driver;
 import braun.erik.prijevoz.model.subclasses.User;
 import braun.erik.prijevoz.repository.util.JSONHelper;
 import braun.erik.prijevoz.util.DialogUtil;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

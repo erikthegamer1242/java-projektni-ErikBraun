@@ -2,7 +2,6 @@ package braun.erik.prijevoz.controller;
 
 import braun.erik.prijevoz.model.subclasses.Driver;
 import braun.erik.prijevoz.repository.JSONDriverRepository;
-import braun.erik.prijevoz.repository.MockDriverRepository;
 import braun.erik.prijevoz.repository.Repository;
 
 public class DriverSearchViewController extends SearchViewController<Driver> {
