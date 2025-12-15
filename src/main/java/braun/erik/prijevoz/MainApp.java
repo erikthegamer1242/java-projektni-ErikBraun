@@ -1,6 +1,5 @@
 package braun.erik.prijevoz;
 
-import braun.erik.prijevoz.controller.MainViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,8 +16,6 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("views/main-view.fxml"));
-        MainViewController mainController = new MainViewController();
-        fxmlLoader.setController(mainController);
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Main screen");
         stage.setScene(scene);

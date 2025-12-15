@@ -15,6 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -73,6 +75,8 @@ public abstract class SearchViewController<T> implements ActivateController {
                 repository.get(),
                 getEntityClass()
         );
+
+
     }
 
     void runSearch(ActionEvent event) {
@@ -125,10 +129,10 @@ public abstract class SearchViewController<T> implements ActivateController {
         String fieldName = textField.getId();
         final String getterName = "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
 
-        return methodName -> {
+        return classInstance -> {
             try {
                 var method = clazz.getMethod(getterName);
-                Object value = method.invoke(methodName);
+                Object value = method.invoke(classInstance);
                 if (value instanceof LocalDate localDate) {
                     value = localDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
                 }

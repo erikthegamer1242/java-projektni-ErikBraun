@@ -1,10 +1,10 @@
 package braun.erik.prijevoz.builder;
 
 import braun.erik.prijevoz.builder.util.ClassUtil;
+import braun.erik.prijevoz.builder.util.NestedPropertyValueFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ public interface TableViewBuilder {
 
     static <T> void addColumn(TableView<T> tableView, String fieldName, String displayName) {
         TableColumn<T, Object> column = new TableColumn<>(ClassUtil.toDisplayName(displayName));
-        column.setCellValueFactory(new PropertyValueFactory<>(fieldName));
+        column.setCellValueFactory(new NestedPropertyValueFactory<>(fieldName));
         column.setCellFactory(col -> new TableCell<>() {
             @Override
             protected void updateItem(Object item, boolean empty) {
@@ -55,7 +55,7 @@ public interface TableViewBuilder {
                     if (!nestedFieldPascalCase.isEmpty()) {
                         nestedFieldPascalCase = nestedField.getName().substring(0, 1).toUpperCase() + nestedFieldPascalCase.substring(1);
                     }
-                    addColumn(initTable, fieldPascalCase + nestedFieldPascalCase, ClassUtil.toDisplayName(field.getName()) + ": " + ClassUtil.toDisplayName(nestedField.getName()));
+                    addColumn(initTable, fieldPascalCase + "." + nestedFieldPascalCase, ClassUtil.toDisplayName(field.getName()) + ": " + ClassUtil.toDisplayName(nestedField.getName()));
                 }
             }
 

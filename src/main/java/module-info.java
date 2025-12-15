@@ -11,7 +11,6 @@ module braun.erik.prijevoz {
     requires jakarta.xml.bind;
     requires jakarta.json.bind;
     requires org.slf4j;
-
     opens braun.erik.prijevoz to javafx.fxml, jakarta.xml.bind;
     opens braun.erik.prijevoz.repository to jakarta.xml.bind;
     opens braun.erik.prijevoz.repository.util to jakarta.xml.bind;

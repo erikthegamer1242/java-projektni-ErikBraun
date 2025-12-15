@@ -34,8 +34,6 @@ public class MenuController {
         activeController.onActivate();
     }
 
-
-
     public void showScreen(ActionEvent event) {
         Object clickedButton = event.getSource();
         List<String> location = new ArrayList<>();
