@@ -5,16 +5,37 @@ import braun.erik.prijevoz.repository.util.XMLHelper;
 import braun.erik.prijevoz.util.DialogUtil;
 import jakarta.xml.bind.JAXBException;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
-import javafx.stage.Stage;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MenuController {
+
+    private SearchViewController<?> activeController;
+    private GridPane searchGridPane;
+    private TableView<?> tableView;
+
+    public void setContentArea(GridPane searchGridPane, TableView<?> tableView) {
+        this.searchGridPane = searchGridPane;
+        this.tableView = tableView;
+    }
+
+    public void switchController(SearchViewController<?> newController) {
+        if (activeController != null) {
+            activeController.onDeactivate();
+        }
+
+        activeController = newController;
+        activeController.setContentArea(searchGridPane, tableView);
+        activeController.onActivate();
+    }
+
+
+
     public void showScreen(ActionEvent event) {
         Object clickedButton = event.getSource();
         List<String> location = new ArrayList<>();
@@ -26,13 +47,7 @@ public class MenuController {
         }
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("views/main-view.fxml"));
-            fxmlLoader.setController(chooseController(location));
-            Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
-            Stage stage = MainApp.getMainStage();
-            stage.setTitle("Main screen");
-            stage.setScene(scene);
-            stage.show();
+            switchController(chooseController(location));
             XMLHelper.writeOneAction(XMLHelper.getCurrentDateAndTime() + " - User selected: " + String.join("", location), "src/main/resources/braun/erik/prijevoz/actions/actions.xml");
         } catch (JAXBException e) {
             DialogUtil.showLoadingScreenErrorDialog();
@@ -44,7 +59,7 @@ public class MenuController {
 
     }
 
-    private static Object chooseController(List<String> location) {
+    private static SearchViewController<?> chooseController(List<String> location) {
         if ("search".equals(location.getLast())) {
             if ("driver".equals(location.getFirst())) {
                 return new DriverSearchViewController();

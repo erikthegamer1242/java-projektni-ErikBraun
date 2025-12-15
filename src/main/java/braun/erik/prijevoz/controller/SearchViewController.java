@@ -9,7 +9,6 @@ import braun.erik.prijevoz.util.DialogUtil;
 import jakarta.xml.bind.JAXBException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -22,30 +21,60 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class SearchViewController<T> {
+public abstract class SearchViewController<T> implements ActivateController {
     static final String DATE_FORMAT = "dd.MM.yyyy";
 
-    @FXML
     private TableView<T> tableView;
 
-    @FXML
     private GridPane searchGridPane;
 
     protected Repository<T> repository;
-    protected Class<T> entityClass;
+    private boolean initialized = false;
 
     protected abstract Repository<T> getRepository();
 
     protected abstract Class<T> getEntityClass();
 
-    @FXML
-    void initialize() {
-        repository = getRepository();
-        SearchParameterBuilder.build(searchGridPane, getEntityClass(), this::runSearch, this::clear);
-        TableViewBuilder.build(tableView, repository.get(), getEntityClass());
+    @SuppressWarnings("unchecked")
+    public void setContentArea(GridPane searchGridPane, TableView<?> tableView) {
+        this.searchGridPane = searchGridPane;
+        this.tableView = (TableView<T>) tableView;
     }
 
-    @FXML
+    @Override
+    public final void onActivate() {
+        if (!initialized) {
+            initOnce();
+            initialized = true;
+        }
+    }
+
+    @Override
+    public final void onDeactivate() {
+    }
+
+    protected void initOnce() {
+        repository = getRepository();
+
+        // Clear existing content from previous controller
+        searchGridPane.getChildren().clear();
+        tableView.getColumns().clear();
+        tableView.getItems().clear();
+
+        SearchParameterBuilder.build(
+                searchGridPane,
+                getEntityClass(),
+                this::runSearch,
+                this::clear
+        );
+
+        TableViewBuilder.build(
+                tableView,
+                repository.get(),
+                getEntityClass()
+        );
+    }
+
     void runSearch(ActionEvent event) {
         if (repository == null || repository.get().isEmpty()) {
             return;
@@ -71,7 +100,6 @@ public abstract class SearchViewController<T> {
         }
     }
 
-    @FXML
     void clear(ActionEvent event) {
         tableView.getItems().clear();
         ObservableList<Node> gridPaneChildren = searchGridPane.getChildren();
