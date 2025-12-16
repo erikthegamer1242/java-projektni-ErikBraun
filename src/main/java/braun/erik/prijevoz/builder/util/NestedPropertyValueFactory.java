@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 
 public class NestedPropertyValueFactory<S, T> implements Callback<TableColumn.CellDataFeatures<S, T>, ObservableValue<T>> {
 
-    private String fieldName;
+    private final String fieldName;
 
     public NestedPropertyValueFactory(String fieldName) {
         this.fieldName = fieldName;

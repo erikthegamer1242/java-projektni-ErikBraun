@@ -5,6 +5,7 @@ import braun.erik.prijevoz.builder.util.NestedPropertyValueFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;

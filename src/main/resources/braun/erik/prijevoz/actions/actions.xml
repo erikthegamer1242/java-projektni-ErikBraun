@@ -31,4 +31,17 @@
     <action>2025-12-15 14:05:34 - User selected: route_search</action>
     <action>2025-12-15 14:08:54 - User selected: route_search</action>
     <action>2025-12-15 14:10:57 - User selected: route_search</action>
+    <action>2025-12-16 15:54:43 - User selected: route_search</action>
+    <action>2025-12-16 15:54:55 - User selected: driver_search</action>
+    <action>2025-12-16 15:55:00 - User selected: Sorting: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2025-12-16 15:55:04 - User selected: Sorting: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2025-12-16 15:55:11 - User selected: Sorting: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2025-12-16 15:56:17 - User selected: route_search</action>
+    <action>2025-12-16 15:58:21 - User selected: route_search</action>
+    <action>2025-12-16 15:58:47 - User selected: Sorting: class braun.erik.prijevoz.model.Route</action>
+    <action>2025-12-16 15:58:49 - User selected: Clearing sort parameters: class braun.erik.prijevoz.model.Route</action>
+    <action>2025-12-16 16:00:53 - User selected: route_search</action>
+    <action>2025-12-16 16:01:06 - User selected: Sorting: class braun.erik.prijevoz.model.Route</action>
+    <action>2025-12-16 16:01:09 - User selected: Sorting: class braun.erik.prijevoz.model.Route</action>
+    <action>2025-12-16 16:01:10 - User selected: Clearing sort parameters: class braun.erik.prijevoz.model.Route</action>
 </actions>

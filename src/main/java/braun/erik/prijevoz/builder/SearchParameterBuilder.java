@@ -64,12 +64,12 @@ public interface SearchParameterBuilder {
         gridPane.add(buttonBar, 1, rowIndex);
         GridPane.setValignment(buttonBar, VPos.BOTTOM);
 
-        Button searchButton = new Button("Search");
-        searchButton.setMnemonicParsing(false);
+        Button searchButton = new Button("_Search");
+        searchButton.setMnemonicParsing(true);
         searchButton.setOnAction(searchMethod);
 
-        Button clearButton = new Button("Clear");
-        clearButton.setMnemonicParsing(false);
+        Button clearButton = new Button("_Clear");
+        clearButton.setMnemonicParsing(true);
         clearButton.setOnAction(clearMethod);
 
         buttonBar.getButtons().addAll(searchButton, clearButton);
