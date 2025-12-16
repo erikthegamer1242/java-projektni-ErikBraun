@@ -5,6 +5,7 @@ import braun.erik.prijevoz.repository.util.XMLHelper;
 import braun.erik.prijevoz.util.DialogUtil;
 import jakarta.xml.bind.JAXBException;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
@@ -34,6 +35,7 @@ public class MenuController {
         activeController.onActivate();
     }
 
+    @FXML
     public void showScreen(ActionEvent event) {
         Object clickedButton = event.getSource();
         List<String> location = new ArrayList<>();
