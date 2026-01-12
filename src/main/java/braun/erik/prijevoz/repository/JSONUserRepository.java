@@ -11,29 +11,35 @@ import java.util.List;
 public class JSONUserRepository implements UserRepository {
 
     private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/users.json";
-    private List<User> users;
 
-    @java.lang.SuppressWarnings({"squid:S2133"})
-    public JSONUserRepository() {
-        try {
-            users = JSONHelper.readListFromJSON(PATH, new ArrayList<User>() {
-            }.getClass());
-        } catch (Exception e) {
-            DialogUtil.showReadErrorDialog("users");
-            MainApp.logger.error("Cannot read JSON users", e);
+    private static class DataHolder {
+        private static final List<User> USERS = loadUsers();
+
+        @java.lang.SuppressWarnings({"squid:S2133"})
+        private static List<User> loadUsers() {
+            try {
+                return JSONHelper.readListFromJSON(PATH, new ArrayList<User>() {
+                }.getClass());
+            } catch (Exception e) {
+                DialogUtil.showReadErrorDialog("users");
+                MainApp.logger.error("Cannot read JSON users", e);
+                return new ArrayList<>();
+            }
         }
     }
 
+    public JSONUserRepository() { /* Backwards compatibility before singleton */ }
+
     @Override
     public List<User> get() {
-        return users;
+        return DataHolder.USERS;
     }
 
     @Override
     public void set(List<User> list) {
-        users.addAll(list);
+        DataHolder.USERS.addAll(list);
         try {
-            JSONHelper.writeListToJSON(users, PATH);
+            JSONHelper.writeListToJSON(DataHolder.USERS, PATH);
         } catch (Exception e) {
             DialogUtil.showWriteErrorDialog("users");
             MainApp.logger.error("Cannot write JSON users", e);

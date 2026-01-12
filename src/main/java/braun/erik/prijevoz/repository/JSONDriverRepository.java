@@ -11,29 +11,35 @@ import java.util.List;
 public class JSONDriverRepository implements DriverRepository {
 
     private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/drivers.json";
-    private List<Driver> drivers;
 
-    @java.lang.SuppressWarnings({"squid:S2133"})
-    public JSONDriverRepository() {
-        try {
-            drivers = JSONHelper.readListFromJSON(PATH, new ArrayList<Driver>() {
-            }.getClass());
-        } catch (Exception e) {
-            DialogUtil.showReadErrorDialog("drivers");
-            MainApp.logger.error("Cannot read JSON drivers", e);
+    private static class DataHolder {
+        private static final List<Driver> DRIVERS = loadDrivers();
+
+        @java.lang.SuppressWarnings({"squid:S2133"})
+        private static List<Driver> loadDrivers() {
+            try {
+                return JSONHelper.readListFromJSON(PATH, new ArrayList<Driver>() {
+                }.getClass());
+            } catch (Exception e) {
+                DialogUtil.showReadErrorDialog("drivers");
+                MainApp.logger.error("Cannot read JSON drivers", e);
+                return new ArrayList<>();
+            }
         }
     }
 
+    public JSONDriverRepository() { /* Backwards compatibility before singleton */ }
+
     @Override
     public List<Driver> get() {
-        return drivers;
+        return DataHolder.DRIVERS;
     }
 
     @Override
     public void set(List<Driver> list) {
-        drivers.addAll(list);
+        DataHolder.DRIVERS.addAll(list);
         try {
-            JSONHelper.writeListToJSON(drivers, PATH);
+            JSONHelper.writeListToJSON(DataHolder.DRIVERS, PATH);
         } catch (Exception e) {
             DialogUtil.showWriteErrorDialog("drivers");
             MainApp.logger.error("Cannot write JSON drivers", e);

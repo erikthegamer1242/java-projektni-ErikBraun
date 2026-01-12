@@ -29,6 +29,9 @@ public class AddParameterBuilder {
     static Map<String, Pair<VBox, Field>> dropDownVBoxes = new HashMap<>();
     static GridPane mainGridPane;
 
+    private AddParameterBuilder() {
+    }
+
     static VBox appendChild(String fieldName) {
         if (!dropDownVBoxes.containsKey(fieldName)) {
             throw new IllegalStateException("Field " + fieldName + " not found");
@@ -50,7 +53,7 @@ public class AddParameterBuilder {
         DropdownConfig config = dropDownFieldType.getAnnotation(DropdownConfig.class);
         boolean canAddMultiple = config != null && config.allowMultiple();
 
-        if (dropDownVBox.getChildren().stream().noneMatch(node -> node instanceof HBox) && canAddMultiple) {
+        if (dropDownVBox.getChildren().stream().noneMatch(HBox.class::isInstance) && canAddMultiple) {
             Button addDropdownButton = new Button("_+");
             addDropdownButton.setMnemonicParsing(true);
             addDropdownButton.setOnAction(AddParameterBuilder::addDropdown);

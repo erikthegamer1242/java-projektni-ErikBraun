@@ -11,29 +11,35 @@ import java.util.List;
 public class JSONRouteRepository implements RouteRepository {
 
     private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/routes.json";
-    private List<Route> routes;
 
-    @java.lang.SuppressWarnings({"squid:S2133"})
-    public JSONRouteRepository() {
-        try {
-            routes = JSONHelper.readListFromJSON(PATH, new ArrayList<Route>() {
-            }.getClass());
-        } catch (Exception e) {
-            DialogUtil.showReadErrorDialog("routes");
-            MainApp.logger.error("Cannot read JSON routes", e);
+    private static class DataHolder {
+        private static final List<Route> ROUTES = loadRoutes();
+
+        @java.lang.SuppressWarnings({"squid:S2133"})
+        private static List<Route> loadRoutes() {
+            try {
+                return JSONHelper.readListFromJSON(PATH, new ArrayList<Route>() {
+                }.getClass());
+            } catch (Exception e) {
+                DialogUtil.showReadErrorDialog("routes");
+                MainApp.logger.error("Cannot read JSON routes", e);
+                return new ArrayList<>();
+            }
         }
     }
 
+    public JSONRouteRepository() { /* Backwards compatibility before singleton */ }
+
     @Override
     public List<Route> get() {
-        return routes;
+        return DataHolder.ROUTES;
     }
 
     @Override
     public void set(List<Route> list) {
-        routes.addAll(list);
+        DataHolder.ROUTES.addAll(list);
         try {
-            JSONHelper.writeListToJSON(routes, PATH);
+            JSONHelper.writeListToJSON(DataHolder.ROUTES, PATH);
         } catch (Exception e) {
             DialogUtil.showWriteErrorDialog("routes");
             MainApp.logger.error("Cannot write JSON routes", e);

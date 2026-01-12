@@ -2,6 +2,7 @@ package braun.erik.prijevoz.builder;
 
 import braun.erik.prijevoz.builder.util.ClassUtil;
 import braun.erik.prijevoz.builder.util.NestedPropertyValueFactory;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -60,6 +61,8 @@ public interface TableViewBuilder {
             }
 
         }
-        initTable.getItems().addAll(data);
+        ObservableList<T> items = initTable.getItems();
+        items.setAll(data);
+
     }
 }

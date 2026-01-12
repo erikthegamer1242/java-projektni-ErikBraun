@@ -11,29 +11,35 @@ import java.util.List;
 public class JSONStopRepository implements StopRepository {
 
     private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/stops.json";
-    private List<Stop> stops;
 
-    @java.lang.SuppressWarnings({"squid:S2133"})
-    public JSONStopRepository() {
-        try {
-            stops = JSONHelper.readListFromJSON(PATH, new ArrayList<Stop>() {
-            }.getClass());
-        } catch (Exception e) {
-            DialogUtil.showReadErrorDialog("stops");
-            MainApp.logger.error("Cannot read JSON stops", e);
+    private static class DataHolder {
+        private static final List<Stop> STOPS = loadStops();
+
+        @java.lang.SuppressWarnings({"squid:S2133"})
+        private static List<Stop> loadStops() {
+            try {
+                return JSONHelper.readListFromJSON(PATH, new ArrayList<Stop>() {
+                }.getClass());
+            } catch (Exception e) {
+                DialogUtil.showReadErrorDialog("stops");
+                MainApp.logger.error("Cannot read JSON stops", e);
+                return new ArrayList<>();
+            }
         }
     }
 
+    public JSONStopRepository() { /* Backwards compatibility before singleton */ }
+
     @Override
     public List<Stop> get() {
-        return stops;
+        return DataHolder.STOPS;
     }
 
     @Override
     public void set(List<Stop> list) {
-        stops.addAll(list);
+        DataHolder.STOPS.addAll(list);
         try {
-            JSONHelper.writeListToJSON(stops, PATH);
+            JSONHelper.writeListToJSON(DataHolder.STOPS, PATH);
         } catch (Exception e) {
             DialogUtil.showWriteErrorDialog("stops");
             MainApp.logger.error("Cannot write JSON stops", e);

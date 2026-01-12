@@ -8,6 +8,7 @@ import braun.erik.prijevoz.repository.Repository;
 import braun.erik.prijevoz.repository.util.XMLHelper;
 import braun.erik.prijevoz.util.DialogUtil;
 import jakarta.xml.bind.JAXBException;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
@@ -65,24 +66,22 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
                 repository.get(),
                 getEntityClass()
         );
-
-
     }
 
     void add(ActionEvent event) {
+        System.out.println(repository.get().size());
         addToRepository();
         searchGridPane.getChildren().clear();
         tableView.getItems().clear();
+        ObservableList<T> items = tableView.getItems();
+        items.setAll(repository.get());
+        System.out.println(repository.get().size());
+
         AddParameterBuilder.build(
                 searchGridPane,
                 getEntityClass(),
                 this::add,
                 this::clear
-        );
-        TableViewBuilder.build(
-                tableView,
-                repository.get(),
-                getEntityClass()
         );
 
         try {
@@ -117,7 +116,7 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
             MainApp.logger.error("Cannot save action", e);
         } catch (IOException e) {
             DialogUtil.showLoadingScreenErrorDialog();
-            MainApp.logger.error("Cannot load actions and save action: " + getEntityClass().toString(), e);
+            MainApp.logger.error("Cannot load actions and save action: {}", getEntityClass().toString(), e);
         }
     }
 }

@@ -14,9 +14,4 @@ public interface MotorTypeRepository extends Repository<Vehicle.MotorType> {
     default void set(List<Vehicle.MotorType> list) {
         throw new UnsupportedOperationException("This should never be called");
     }
-
-    @Override
-    default void add(Vehicle.MotorType type) {
-        throw new UnsupportedOperationException("This should never be called");
-    }
 }

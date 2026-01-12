@@ -1,8 +1,11 @@
 package braun.erik.prijevoz.controller.util;
 
+import braun.erik.prijevoz.MainApp;
+import braun.erik.prijevoz.util.DialogUtil;
+
 import java.lang.reflect.Method;
 
-public class ReflectionUtils {
+public interface ReflectionUtils {
 
     public static void setField(Object obj, String fieldName, Object value) {
         try {
@@ -22,7 +25,8 @@ public class ReflectionUtils {
                 throw new NoSuchMethodException("No setter found for field: " + setterName);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            DialogUtil.showErrorDialog("Error setting field: " + fieldName, e.getMessage());
+            MainApp.logger.error("Error setting field: {}", fieldName, e);
         }
     }
 }

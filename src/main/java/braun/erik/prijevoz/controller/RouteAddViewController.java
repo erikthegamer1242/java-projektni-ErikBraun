@@ -36,7 +36,7 @@ public class RouteAddViewController extends AddViewController<Route> {
     @Override
     protected void addToRepository() {
         Route route = new Route();
-        route.setId(r.nextInt());
+        route.setId(r.nextInt(1000000));
         ObservableList<Node> gridPaneChildren = searchGridPane.getChildren();
 
         for (var node : gridPaneChildren) {
