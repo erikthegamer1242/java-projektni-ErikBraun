@@ -10,7 +10,7 @@ import java.util.List;
 
 public class JSONUserRepository implements UserRepository {
 
-    private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/drivers.json";
+    private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/users.json";
     private List<User> users;
 
     @java.lang.SuppressWarnings({"squid:S2133"})

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class JSONStopRepository implements StopRepository {
 
-    private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/drivers.json";
+    private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/stops.json";
     private List<Stop> stops;
 
     @java.lang.SuppressWarnings({"squid:S2133"})

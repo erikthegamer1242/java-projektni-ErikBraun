@@ -1,12 +1,13 @@
 package braun.erik.prijevoz.model;
 
 
+import braun.erik.prijevoz.components.DropdownConfig;
+import braun.erik.prijevoz.components.HideConfig;
 import braun.erik.prijevoz.model.exceptions.RouteCostNegativeException;
 import braun.erik.prijevoz.model.subclasses.Driver;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,29 +27,16 @@ import java.util.Objects;
  * @author erik
  * @version 1.0
  */
-public final class Route implements Serializable {
+public final class Route implements Serializable, DisplayOption {
+    @HideConfig(hide = true)
     private Integer id;
     private String routeName;
     private Vehicle vehicle;
     private Driver driver;
+    @DropdownConfig(allowMultiple = true)
     private List<Stop> stops;
     private BigDecimal stopCost;
 
-    public String getDriverName() { return driver.getName(); }
-    public String getDriverSurname() { return driver.getSurname(); }
-    public String getDriverOib() { return driver.getOib(); }
-    public String getDriverEmail() { return driver.getEmail(); }
-    public String getDriverPhoneNumber() { return driver.getPhoneNumber(); }
-    public LocalDate getDriverDateOfBirth() { return driver.getDateOfBirth(); }
-    public String getDriverLicenseNumber() { return driver.getLicenseNumber(); }
-    public BigDecimal getDriverSalary() { return driver.getSalary(); }
-    public BigDecimal getDriverWorkingHours() { return driver.getWorkingHours(); }
-    public String getVehicleName() { return vehicle.getName(); }
-    public String getVehicleModel() { return vehicle.getModel(); }
-    public String getVehicleLicensePlate() { return vehicle.getLicensePlate(); }
-    public String getVehicleVin() { return vehicle.getVin(); }
-    public Integer getVehicleYear() { return vehicle.getYear(); }
-    public Vehicle.MotorType getVehicleMotorType() { return vehicle.getMotorType(); }
     /**
      * Empty public constructor to allow XML and JSON deserialization
      */
@@ -221,5 +209,10 @@ public final class Route implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, routeName, vehicle, driver, stops, stopCost);
+    }
+
+    @Override
+    public String simpleName() {
+        return routeName;
     }
 }

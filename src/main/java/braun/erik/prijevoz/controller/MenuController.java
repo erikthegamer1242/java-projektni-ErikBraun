@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MenuController {
 
-    private SearchViewController<?> activeController;
+    private ViewController<?> activeController;
     private GridPane searchGridPane;
     private TableView<?> tableView;
 
@@ -25,7 +25,7 @@ public class MenuController {
         this.tableView = tableView;
     }
 
-    public void switchController(SearchViewController<?> newController) {
+    public void switchController(ViewController<?> newController) {
         if (activeController != null) {
             activeController.onDeactivate();
         }
@@ -47,7 +47,11 @@ public class MenuController {
         }
 
         try {
-            switchController(chooseController(location));
+            if ("search".equals(location.getLast())) {
+                switchController(chooseSearchController(location));
+            } else if ("add".equals(location.getLast())) {
+                switchController(chooseAddController(location));
+            }
             XMLHelper.writeOneAction(XMLHelper.getCurrentDateAndTime() + " - User selected: " + String.join("", location), "src/main/resources/braun/erik/prijevoz/actions/actions.xml");
         } catch (JAXBException e) {
             DialogUtil.showLoadingScreenErrorDialog();
@@ -59,25 +63,45 @@ public class MenuController {
 
     }
 
-    private static SearchViewController<?> chooseController(List<String> location) {
-        if ("search".equals(location.getLast())) {
-            if ("driver".equals(location.getFirst())) {
-                return new DriverSearchViewController();
-            }
-            if ("route".equals(location.getFirst())) {
-                return new RouteSearchViewController();
-            }
-            if ("stop".equals(location.getFirst())) {
-                return new StopSearchViewController();
-            }
-            if ("user".equals(location.getFirst())) {
-                return new UserSearchViewController();
-            }
-            if ("vehicle".equals(location.getFirst())) {
-                return new VehicleSearchViewController();
-            }
+    private static SearchViewController<?> chooseSearchController(List<String> location) {
+
+        if ("driver".equals(location.getFirst())) {
+            return new DriverSearchViewController();
         }
-        DialogUtil.showErrorDialog("Feature not yet implemented!", "You currently cannot add anything, we will revert you back to the first screen!");
+        if ("route".equals(location.getFirst())) {
+            return new RouteSearchViewController();
+        }
+        if ("stop".equals(location.getFirst())) {
+            return new StopSearchViewController();
+        }
+        if ("user".equals(location.getFirst())) {
+            return new UserSearchViewController();
+        }
+        if ("vehicle".equals(location.getFirst())) {
+            return new VehicleSearchViewController();
+        }
+        DialogUtil.showErrorDialog("Feature not yet implemented!", "We currently don't support that, you will be reverted back to the first screen!");
         return new DriverSearchViewController();
+    }
+
+    private static AddViewController<?> chooseAddController(List<String> location) {
+        if ("driver".equals(location.getFirst())) {
+            return new DriverAddViewController();
+        }
+        if ("route".equals(location.getFirst())) {
+            return new RouteAddViewController();
+        }
+        if ("stop".equals(location.getFirst())) {
+            return new StopAddViewController();
+        }
+        if ("user".equals(location.getFirst())) {
+            return new UserAddViewController();
+        }
+        if ("vehicle".equals(location.getFirst())) {
+            return new VehicleAddViewController();
+        }
+
+        DialogUtil.showErrorDialog("Feature not yet implemented!", "We currently don't support that, you will be reverted back to the first screen!");
+        return new DriverAddViewController();
     }
 }

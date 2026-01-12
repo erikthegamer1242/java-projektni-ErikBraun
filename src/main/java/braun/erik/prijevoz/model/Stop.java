@@ -1,5 +1,7 @@
 package braun.erik.prijevoz.model;
 
+import braun.erik.prijevoz.components.HideConfig;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,9 +13,10 @@ import java.util.Objects;
  * @version 1.0
  */
 public record Stop (
+        @HideConfig(hide = true)
         Integer id,
         String location
-) implements Serializable {
+) implements Serializable, DisplayOption {
     /**
      * Overriding toString to give out a formatted stop
      * @return Formatted string that better represents the record
@@ -43,6 +46,29 @@ public record Stop (
     @Override
     public int hashCode() {
         return Objects.hash(id, location);
+    }
+
+    @Override
+    public String simpleName() {
+        return location;
+    }
+
+    /**
+     * Getter used with JavaFX get property
+     *
+     * @return Integer id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * Getter used with JavaFX get property
+     *
+     * @return String location
+     */
+    public String getLocation() {
+        return location;
     }
 }
 

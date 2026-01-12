@@ -36,7 +36,7 @@ public interface SearchParameterBuilder {
         int rowIndex = 0;
         List<Field> classFields = ClassUtil.getAllFields(new ArrayList<>(), type);
         for (Field field : classFields) {
-            if (ClassUtil.isJavaLang(field.getType())) {
+            if (ClassUtil.isJavaLang(field.getType()) || field.getType().isEnum()) {
                 addSearchParameter(gridPane, field.getName(), ClassUtil.toDisplayName(field.getName()), rowIndex++);
             } else {
                 String fieldPascalCase = field.getName();

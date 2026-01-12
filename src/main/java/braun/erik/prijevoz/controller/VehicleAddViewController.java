@@ -4,7 +4,7 @@ import braun.erik.prijevoz.model.Vehicle;
 import braun.erik.prijevoz.repository.JSONVehicleRepository;
 import braun.erik.prijevoz.repository.Repository;
 
-public class VehicleSearchViewController extends SearchViewController<Vehicle> {
+public class VehicleAddViewController extends AddViewController<Vehicle> {
 
     @Override
     protected Repository<Vehicle> getRepository() {
@@ -14,5 +14,10 @@ public class VehicleSearchViewController extends SearchViewController<Vehicle> {
     @Override
     protected Class<Vehicle> getEntityClass() {
         return Vehicle.class;
+    }
+
+    @Override
+    protected void addToRepository() {
+        System.out.println("VehicleAddViewController.addToRepository");
     }
 }

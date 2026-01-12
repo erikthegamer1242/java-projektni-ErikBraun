@@ -20,7 +20,6 @@ public class NestedPropertyValueFactory<S, T> implements Callback<TableColumn.Ce
     @Override
     public ObservableValue<T> call(TableColumn.CellDataFeatures<S, T> var1) {
         if (fieldName.contains(".")) {
-            System.out.println("cutcemose");
             try {
                 Object obj = ClassUtil.getNestedFieldGetterValue(fieldName, (var1).getValue());
                 return new ReadOnlyObjectWrapper<>((T) obj);

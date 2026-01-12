@@ -10,7 +10,7 @@ import java.util.List;
 
 public class JSONVehicleRepository implements VehicleRepository {
 
-    private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/drivers.json";
+    private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/vehicles.json";
     private List<Vehicle> vehicles;
 
     @java.lang.SuppressWarnings({"squid:S2133"})

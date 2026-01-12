@@ -4,7 +4,7 @@ import braun.erik.prijevoz.model.Stop;
 import braun.erik.prijevoz.repository.JSONStopRepository;
 import braun.erik.prijevoz.repository.Repository;
 
-public class StopSearchViewController extends SearchViewController<Stop> {
+public class StopAddViewController extends AddViewController<Stop> {
 
     @Override
     protected Repository<Stop> getRepository() {
@@ -14,5 +14,10 @@ public class StopSearchViewController extends SearchViewController<Stop> {
     @Override
     protected Class<Stop> getEntityClass() {
         return Stop.class;
+    }
+
+    @Override
+    protected void addToRepository() {
+        System.out.println("StopAddViewController.addToRepository");
     }
 }

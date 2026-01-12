@@ -21,7 +21,7 @@ public class MainViewController {
     @FXML
     private void initialize() {
         menuController.setContentArea(searchGridPane, tableView);
-        menuController.switchController(new DriverSearchViewController());
+        menuController.switchController(new RouteAddViewController());
     }
 }
 

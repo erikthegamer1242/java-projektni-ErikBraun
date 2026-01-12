@@ -11,5 +11,4 @@ public interface RouteRepository extends Repository<Route> {
 
     @Override
     public void set(List<Route> list);
-
 }

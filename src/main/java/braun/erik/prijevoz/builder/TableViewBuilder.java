@@ -40,7 +40,7 @@ public interface TableViewBuilder {
     public static <T> void build(TableView<T> initTable, List<T> data, Class<T> type) {
         List<Field> classFields = ClassUtil.getAllFields(new ArrayList<>(), type);
         for (Field field : classFields) {
-            if (ClassUtil.isJavaLang(field.getType())) {
+            if (ClassUtil.isJavaLang(field.getType()) || field.getType().isEnum()) {
                 addColumn(initTable, field.getName(), field.getName());
             }
             else {

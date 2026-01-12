@@ -1,9 +1,9 @@
 package braun.erik.prijevoz.model;
 
+import braun.erik.prijevoz.model.exceptions.YearNegativeException;
+
 import java.io.Serializable;
 import java.util.Objects;
-
-import braun.erik.prijevoz.model.exceptions.YearNegativeException;
 
 /**
  * Contains information about a vehicle
@@ -23,7 +23,7 @@ import braun.erik.prijevoz.model.exceptions.YearNegativeException;
  * @version 1.0
  */
 
-public final class Vehicle implements Serializable {
+public final class Vehicle implements Serializable, DisplayOption {
     private String name;
     private String model;
     private String licensePlate;
@@ -36,10 +36,15 @@ public final class Vehicle implements Serializable {
      */
     public Vehicle() {}
 
+    @Override
+    public String simpleName() {
+        return name + " " + model + ": " + licensePlate;
+    }
+
     /**
      * Used to set motor type for each vehicle.
      */
-    public enum MotorType {
+    public enum MotorType implements DisplayOption {
         /**
          * Diesel engine.
          */
@@ -75,11 +80,34 @@ public final class Vehicle implements Serializable {
         }
 
         /**
+         * Return constant's description
+         *
+         * @return string description
+         */
+        public String getDescription() {
+            return description;
+        }
+
+        /**
+         * Return constant's name
+         *
+         * @return string name
+         */
+        public String getName() {
+            return this.name();
+        }
+
+        /**
          * Overriding toString to return our description instead of the constant name
          * @return String description
          */
         @Override
         public String toString() {
+            return description;
+        }
+
+        @Override
+        public String simpleName() {
             return description;
         }
     }

@@ -1,5 +1,7 @@
 package braun.erik.prijevoz.model.superclasses;
 
+import braun.erik.prijevoz.model.DisplayOption;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -22,7 +24,7 @@ import java.util.Objects;
  * @author erik
  * @version 1.0
  */
-public abstract class Person implements Serializable {
+public abstract class Person implements Serializable, DisplayOption {
     /**
      * A person's name
      */
@@ -184,5 +186,10 @@ public abstract class Person implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(oib, name, surname);
+    }
+
+    @Override
+    public String simpleName() {
+        return name + surname;
     }
 }
