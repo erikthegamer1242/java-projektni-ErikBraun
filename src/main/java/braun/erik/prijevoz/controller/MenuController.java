@@ -14,17 +14,39 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class used for navigation between controllers
+ *
+ * @author erik
+ * @version 1.0
+ */
 public class MenuController {
+
+    /**
+     * Default constructor.
+     */
+    public MenuController() {
+        // intentionally empty to remove Javadoc warning
+    }
 
     private ViewController<?> activeController;
     private GridPane searchGridPane;
     private TableView<?> tableView;
 
+    /**
+     * Sets TableView and GridPane to be used with all controllers
+     * @param searchGridPane GridPane to use
+     * @param tableView TableView to use
+     */
     public void setContentArea(GridPane searchGridPane, TableView<?> tableView) {
         this.searchGridPane = searchGridPane;
         this.tableView = tableView;
     }
 
+    /**
+     * Method to switch to a new controller
+     * @param newController new controller
+     */
     public void switchController(ViewController<?> newController) {
         if (activeController != null) {
             activeController.onDeactivate();
@@ -35,6 +57,10 @@ public class MenuController {
         activeController.onActivate();
     }
 
+    /**
+     * JavaFX button handler for switch the controller
+     * @param event JavaFX event
+     */
     @FXML
     public void showScreen(ActionEvent event) {
         Object clickedButton = event.getSource();
@@ -63,6 +89,11 @@ public class MenuController {
 
     }
 
+    /**
+     * Based on a string return a search view controller
+     * @param location string location
+     * @return search view controller
+     */
     private static SearchViewController<?> chooseSearchController(List<String> location) {
 
         if ("driver".equals(location.getFirst())) {
@@ -84,6 +115,11 @@ public class MenuController {
         return new DriverSearchViewController();
     }
 
+    /**
+     * Based on a string return an add view controller
+     * @param location string location
+     * @return search add controller
+     */
     private static AddViewController<?> chooseAddController(List<String> location) {
         if ("driver".equals(location.getFirst())) {
             return new DriverAddViewController();

@@ -11,7 +11,20 @@ import javafx.scene.control.TextField;
 
 import java.util.List;
 
+/**
+ * Typed class of add view controller of type stop
+ *
+ * @author erik
+ * @version 1.0
+ */
 public class StopAddViewController extends AddViewController<Stop> {
+
+    /**
+     * Default constructor.
+     */
+    public StopAddViewController() {
+        // intentionally empty to remove Javadoc warning
+    }
 
     @Override
     protected Repository<Stop> getRepository() {

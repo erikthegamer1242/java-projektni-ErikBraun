@@ -14,6 +14,10 @@ import java.util.UUID;
  */
 
 public final class User extends Person implements Serializable {
+
+    /**
+     * UUID of the user's card/mobile phone
+     */
     private UUID subscriberID;
 
     /**

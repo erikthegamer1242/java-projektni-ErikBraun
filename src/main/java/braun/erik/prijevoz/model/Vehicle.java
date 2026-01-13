@@ -24,11 +24,35 @@ import java.util.Objects;
  */
 
 public final class Vehicle implements Serializable, DisplayOption {
+
+    /**
+     * Vehicle name
+     */
     private String name;
+
+    /**
+     * Vehicle model
+     */
     private String model;
+
+    /**
+     * Vehicle license plate number
+     */
     private String licensePlate;
+
+    /**
+     * Vehicle VIN number
+     */
     private String vin;
+
+    /**
+     * Vehicle production year
+     */
     private Integer year;
+
+    /**
+     * Vehicle ENUM motor type
+     */
     private MotorType motorType;
 
     /**

@@ -8,6 +8,12 @@ import braun.erik.prijevoz.util.DialogUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Concrete implementation of driver repository using JSON as backend
+ *
+ * @author erik
+ * @version 1.0
+ */
 public class JSONDriverRepository implements DriverRepository {
 
     private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/drivers.json";
@@ -28,6 +34,9 @@ public class JSONDriverRepository implements DriverRepository {
         }
     }
 
+    /**
+     * Default constructor.
+     */
     public JSONDriverRepository() { /* Backwards compatibility before singleton */ }
 
     @Override

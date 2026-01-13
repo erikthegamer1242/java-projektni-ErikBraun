@@ -16,6 +16,7 @@ public sealed interface AdministratorActions permits Administrator {
      * Add a person, or it's subclass to an existing list
      * @param people list to be added to
      * @param person object to add
+     * @param <T> person object
      */
     default <T extends Person> void addPersonToList(List<? super T> people, T person) {
         people.add(person);
@@ -25,6 +26,7 @@ public sealed interface AdministratorActions permits Administrator {
      * Remove a person, or it's subclass from an existing list
      * @param people list to be removed from
      * @param person object to remove
+     * @param <T> person object
      */
     default <T extends Person> void removePersonFromList(List<? super T> people, T person) {
         people.remove(person);

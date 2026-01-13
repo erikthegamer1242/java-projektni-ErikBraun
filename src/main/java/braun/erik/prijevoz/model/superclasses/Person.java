@@ -25,6 +25,14 @@ import java.util.Objects;
  * @version 1.0
  */
 public abstract class Person implements Serializable, DisplayOption {
+
+    /**
+     * Default constructor.
+     */
+    protected Person() {
+        // intentionally empty to remove Javadoc warning
+    }
+
     /**
      * A person's name
      */

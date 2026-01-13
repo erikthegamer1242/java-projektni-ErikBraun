@@ -4,7 +4,6 @@ import braun.erik.prijevoz.MainApp;
 import braun.erik.prijevoz.builder.SearchParameterBuilder;
 import braun.erik.prijevoz.builder.TableViewBuilder;
 import braun.erik.prijevoz.model.DisplayOption;
-import braun.erik.prijevoz.repository.Repository;
 import braun.erik.prijevoz.repository.util.XMLHelper;
 import braun.erik.prijevoz.util.DialogUtil;
 import jakarta.xml.bind.JAXBException;
@@ -22,15 +21,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * Abstract class for creating a search view controller
+ *
+ * @param <T> type of entity
+ * @author erik
+ * @version 1.0
+ */
 public abstract class SearchViewController<T extends DisplayOption> extends ViewController<T> {
-    static final String DATE_FORMAT = "dd.MM.yyyy";
 
-    protected Repository<T> repository;
-    private boolean initialized = false;
-
-    protected abstract Repository<T> getRepository();
-
-    protected abstract Class<T> getEntityClass();
+    /**
+     * Default constructor.
+     */
+    SearchViewController() {
+        // intentionally empty to remove Javadoc warning
+    }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -51,6 +56,9 @@ public abstract class SearchViewController<T extends DisplayOption> extends View
     public final void onDeactivate() {
     }
 
+    /**
+     * Initializes data, GridPane and TableView on controller activation
+     */
     protected void initOnce() {
         repository = getRepository();
 

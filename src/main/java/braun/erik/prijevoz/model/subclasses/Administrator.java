@@ -14,7 +14,15 @@ import java.util.Objects;
  * @version 1.0
  */
 public final class Administrator extends Person implements Employed, AdministratorActions, Serializable {
+
+    /**
+     * Admin's hourly salary
+     */
     private BigDecimal salary;
+
+    /**
+     * Admin's monthly working hours
+     */
     private BigDecimal workingHours;
 
     /**

@@ -8,6 +8,12 @@ import braun.erik.prijevoz.util.DialogUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Concrete implementation of vehicle repository using JSON as backend
+ *
+ * @author erik
+ * @version 1.0
+ */
 public class JSONVehicleRepository implements VehicleRepository {
 
     private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/vehicles.json";
@@ -28,6 +34,9 @@ public class JSONVehicleRepository implements VehicleRepository {
         }
     }
 
+    /**
+     * Default constructor
+     */
     public JSONVehicleRepository() { /* Backwards compatibility before singleton */ }
 
     @Override

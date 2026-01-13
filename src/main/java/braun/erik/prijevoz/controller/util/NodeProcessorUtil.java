@@ -14,8 +14,19 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Static interface used to set different types of data to an entity using reflection
+ *
+ * @author erik
+ * @version 1.0
+ */
 public interface NodeProcessorUtil {
 
+    /**
+     * Calls methods based on node types
+     * @param node node to check
+     * @param entity object to place data into
+     */
     public static void processNode(Node node, Object entity) {
         if (node instanceof NumberTextField numberTextField) {
             processNumberTextField(numberTextField, entity);
@@ -28,6 +39,12 @@ public interface NodeProcessorUtil {
         }
     }
 
+    /**
+     * Called for a NumberTextField
+     * @param numberTextField node with data
+     * @param entity object to place data into
+     * @throws IllegalArgumentException when data is invalid
+     */
     public static void processNumberTextField(NumberTextField numberTextField, Object entity) throws IllegalArgumentException {
         if (numberTextField.getText().isEmpty()) {
             DialogUtil.showErrorDialogWithDescription(
@@ -40,6 +57,12 @@ public interface NodeProcessorUtil {
         }
     }
 
+    /**
+     * Called for a TextField
+     * @param textField node with data
+     * @param entity object to place data into
+     * @throws IllegalArgumentException when data is invalid
+     */
     public static void processTextField(TextField textField, Object entity) throws IllegalArgumentException {
         if (textField.getText().isEmpty()) {
             DialogUtil.showCannotBeEmptyErrorDialog(
@@ -50,6 +73,12 @@ public interface NodeProcessorUtil {
         }
     }
 
+    /**
+     * Called for a DatePicker
+     * @param datePicker node with data
+     * @param entity object to place data into
+     * @throws IllegalArgumentException when data is invalid
+     */
     public static void processDatePicker(DatePicker datePicker, Object entity) throws IllegalArgumentException {
         if (datePicker.getValue() == null) {
             DialogUtil.showCannotBeEmptyErrorDialog(
@@ -60,6 +89,12 @@ public interface NodeProcessorUtil {
         }
     }
 
+    /**
+     * Tests to see if a VBox contains only one ComboBox or more
+     * @param vBox to check
+     * @param entity object to place data into
+     * @throws IllegalArgumentException when data is invalid
+     */
     public static void processVBox(VBox vBox, Object entity) throws IllegalArgumentException {
         if (vBox.getChildren().isEmpty() || vBox.getChildren() == null) {
             DialogUtil.showCannotBeEmptyErrorDialog(ClassUtil.toDisplayName(vBox.getId()));
@@ -71,10 +106,21 @@ public interface NodeProcessorUtil {
         }
     }
 
+    /**
+     * Checks to see if a VBox contains only one ComboBox
+     * @param vBox to check
+     * @return true if single combobox, false if more
+     */
     public static boolean isSingleComboBox(VBox vBox) {
         return vBox.getChildren().size() == 1 && vBox.getChildren().getFirst() instanceof ComboBox<?>;
     }
 
+    /**
+     * Called for a single ComboBox inside a VBox
+     * @param vBox node with data
+     * @param entity object to place data into
+     * @throws IllegalArgumentException when data is invalid
+     */
     public static void processSingleComboBox(VBox vBox, Object entity) throws IllegalArgumentException {
         ComboBox<?> comboBox = (ComboBox<?>) vBox.getChildren().getFirst();
         if (comboBox.getValue() == null) {
@@ -85,6 +131,12 @@ public interface NodeProcessorUtil {
         }
     }
 
+    /**
+     * Called for a multiple ComboBoxes inside a VBox
+     * @param vBox node with data
+     * @param entity object to place data into
+     * @throws IllegalArgumentException when data is invalid
+     */
     public static void processMultipleComboBoxes(VBox vBox, Object entity) throws IllegalArgumentException {
         List<DisplayOption> items = new ArrayList<>();
         for (var child : vBox.getChildren()) {

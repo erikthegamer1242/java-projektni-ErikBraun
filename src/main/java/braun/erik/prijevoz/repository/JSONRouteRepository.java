@@ -8,6 +8,12 @@ import braun.erik.prijevoz.util.DialogUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Concrete implementation of route repository using JSON as backend
+ *
+ * @author erik
+ * @version 1.0
+ */
 public class JSONRouteRepository implements RouteRepository {
 
     private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/routes.json";
@@ -28,6 +34,9 @@ public class JSONRouteRepository implements RouteRepository {
         }
     }
 
+    /**
+     * Default constructor
+     */
     public JSONRouteRepository() { /* Backwards compatibility before singleton */ }
 
     @Override

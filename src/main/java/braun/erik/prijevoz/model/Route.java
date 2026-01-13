@@ -28,13 +28,37 @@ import java.util.Objects;
  * @version 1.0
  */
 public final class Route implements Serializable, DisplayOption {
+
+    /**
+     * Route ID
+     */
     @HideConfig(hide = true)
     private Integer id;
+
+    /**
+     * Route name
+     */
     private String routeName;
+
+    /**
+     * Vehicle used on route
+     */
     private Vehicle vehicle;
+
+    /**
+     * Driver driving the vehicle
+     */
     private Driver driver;
+
+    /**
+     * Locations for the driver to stop at
+     */
     @DropdownConfig(allowMultiple = true)
     private List<Stop> stops;
+
+    /**
+     * Cost of going to one stop
+     */
     private BigDecimal stopCost;
 
     /**

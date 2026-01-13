@@ -8,6 +8,12 @@ import braun.erik.prijevoz.util.DialogUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Concrete implementation of user repository using JSON as backend
+ *
+ * @author erik
+ * @version 1.0
+ */
 public class JSONUserRepository implements UserRepository {
 
     private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/users.json";
@@ -28,6 +34,9 @@ public class JSONUserRepository implements UserRepository {
         }
     }
 
+    /**
+     * Default constructor
+     */
     public JSONUserRepository() { /* Backwards compatibility before singleton */ }
 
     @Override

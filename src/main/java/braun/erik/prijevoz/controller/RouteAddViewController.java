@@ -9,7 +9,20 @@ import javafx.scene.Node;
 
 import java.util.List;
 
+/**
+ * Typed class of add view controller of type route
+ *
+ * @author erik
+ * @version 1.0
+ */
 public class RouteAddViewController extends AddViewController<Route> {
+
+    /**
+     * Default constructor.
+     */
+    public RouteAddViewController() {
+        // intentionally empty to remove Javadoc warning
+    }
 
     @Override
     protected Repository<Route> getRepository() {

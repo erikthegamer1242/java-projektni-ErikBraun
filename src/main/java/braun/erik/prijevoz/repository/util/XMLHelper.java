@@ -28,6 +28,7 @@ public interface XMLHelper {
      * @param pathName the file to read from
      * @return ActionLoggerDTO object
      * @throws JAXBException whenever there is an issue with JAXB library
+     * @throws IOException when there is an issue reading the file
      */
     public static ActionLoggerDTO readAllActions(String pathName) throws JAXBException, IOException {
             JAXBContext jaxbContext = JAXBContext.newInstance(ActionLoggerDTO.class);
@@ -66,12 +67,24 @@ public interface XMLHelper {
             marshaller.marshal(actions, new File(pathName));
     }
 
+    /**
+     * Writes one action to the logger
+     *
+     * @param action   action to write
+     * @param pathName of the XML
+     * @throws JAXBException whenever there is an issue with JAXB library
+     * @throws IOException   whenever there is an issue creating directories to the file
+     */
     public static void writeOneAction(String action, String pathName) throws JAXBException, IOException {
         ActionLoggerDTO actions = new ActionLoggerDTO(readAllActions(pathName).getAction());
         actions.addAction(action);
         writeNewActions(actions, pathName);
     }
 
+    /**
+     * Gets and formats the current time
+     * @return string formatted current time
+     */
     public static String getCurrentDateAndTime() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }

@@ -4,7 +4,6 @@ import braun.erik.prijevoz.MainApp;
 import braun.erik.prijevoz.builder.AddParameterBuilder;
 import braun.erik.prijevoz.builder.TableViewBuilder;
 import braun.erik.prijevoz.model.DisplayOption;
-import braun.erik.prijevoz.repository.Repository;
 import braun.erik.prijevoz.repository.util.XMLHelper;
 import braun.erik.prijevoz.util.DialogUtil;
 import jakarta.xml.bind.JAXBException;
@@ -16,19 +15,36 @@ import javafx.scene.layout.GridPane;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ * Abstract class for creating an add view controller
+ *
+ * @param <T> type of entity
+ * @author erik
+ * @version 1.0
+ */
 public abstract class AddViewController<T extends DisplayOption> extends ViewController<T> {
-    static final String DATE_FORMAT = "dd.MM.yyyy";
 
-    protected Repository<T> repository;
-    private boolean initialized = false;
+    /**
+     * Default constructor.
+     */
+    AddViewController() {
+        // intentionally empty to remove Javadoc warning
+    }
 
+    /**
+     * Random used of entity IDs
+     */
     Random r = new Random();
+
+    /**
+     * Upper bound for random
+     */
     protected static final Integer BOUND = 1000000;
 
-    protected abstract Repository<T> getRepository();
-
-    protected abstract Class<T> getEntityClass();
-
+    /**
+     * Adds new data to an entity
+     * @throws IllegalArgumentException when a parameter is invalid
+     */
     protected abstract void addToRepository() throws IllegalArgumentException;
 
     @SuppressWarnings("unchecked")
@@ -50,6 +66,9 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
     public final void onDeactivate() {
     }
 
+    /**
+     * Initializes data, GridPane and TableView on controller activation
+     */
     protected void initOnce() {
         repository = getRepository();
 
@@ -72,6 +91,10 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
         );
     }
 
+    /**
+     * Method used on JavaFX button to add data
+     * @param event JavaFX event
+     */
     void add(ActionEvent event) {
         try {
             addToRepository();
@@ -102,6 +125,10 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
         }
     }
 
+    /**
+     * Method used on JavaFX button to clear and reset the data in a controller
+     * @param event JavaFX event
+     */
     void clear(ActionEvent event) {
         searchGridPane.getChildren().clear();
         tableView.getItems().clear();
@@ -123,7 +150,7 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
             MainApp.logger.error("Cannot save action", e);
         } catch (IOException e) {
             DialogUtil.showLoadingScreenErrorDialog();
-            MainApp.logger.error("Cannot load actions and save action: {}", getEntityClass().toString(), e);
+            MainApp.logger.error("Cannot load actions and save action: {}", getEntityClass(), e);
         }
     }
 }

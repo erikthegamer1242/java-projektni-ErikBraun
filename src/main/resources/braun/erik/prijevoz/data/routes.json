@@ -45,7 +45,7 @@
     },
     "id": 200001,
     "routeName": "Aaviceva",
-    "stopCost": 51589939.2,
+    "stopCost": 103179878.4,
     "stops": [
       {
         "getId": 100001,
@@ -83,7 +83,7 @@
     },
     "id": 300001,
     "routeName": "Baviceva",
-    "stopCost": 385987033190.7,
+    "stopCost": 1157961099572.1,
     "stops": [
       {
         "getId": 100001,
@@ -127,7 +127,7 @@
     },
     "id": -1095521265,
     "routeName": "IdeGas",
-    "stopCost": 2015232,
+    "stopCost": 4030464,
     "stops": [
       {
         "getId": 100001,
@@ -165,7 +165,7 @@
     },
     "id": 67690,
     "routeName": "IdeFas",
-    "stopCost": 1008623616,
+    "stopCost": 2017247232,
     "stops": [
       {
         "getId": 100001,
@@ -555,7 +555,7 @@
     },
     "id": 775818,
     "routeName": "234324",
-    "stopCost": 48468,
+    "stopCost": 96936,
     "stops": [
       {
         "getId": 200001,
@@ -568,6 +568,44 @@
         "getLocation": "Baviceva",
         "id": 300001,
         "location": "Baviceva"
+      }
+    ],
+    "vehicle": {
+      "licensePlate": "DA-1284-EB",
+      "model": "Corsa",
+      "motorType": "DIESEL",
+      "name": "Opel",
+      "vin": "00FGEVDNWE548",
+      "year": 2001
+    }
+  },
+  {
+    "driver": {
+      "dateOfBirth": "2025-12-12",
+      "email": "123",
+      "name": "123",
+      "oib": "123",
+      "phoneNumber": "123",
+      "surname": "123",
+      "licenseNumber": "123123",
+      "salary": 12312,
+      "workingHours": 123123
+    },
+    "id": 421927,
+    "routeName": "Testic",
+    "stopCost": 24,
+    "stops": [
+      {
+        "getId": 200001,
+        "getLocation": "Aaviceva",
+        "id": 200001,
+        "location": "Aaviceva"
+      },
+      {
+        "getId": 246090,
+        "getLocation": "Peniceva",
+        "id": 246090,
+        "location": "Peniceva"
       }
     ],
     "vehicle": {

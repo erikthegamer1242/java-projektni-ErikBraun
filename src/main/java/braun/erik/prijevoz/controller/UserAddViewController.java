@@ -12,7 +12,20 @@ import javafx.scene.control.DatePicker;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Typed class of add view controller of type user
+ *
+ * @author erik
+ * @version 1.0
+ */
 public class UserAddViewController extends AddViewController<User> {
+
+    /**
+     * Default constructor.
+     */
+    public UserAddViewController() {
+        // intentionally empty to remove Javadoc warning
+    }
 
     @Override
     public Repository<User> getRepository() {

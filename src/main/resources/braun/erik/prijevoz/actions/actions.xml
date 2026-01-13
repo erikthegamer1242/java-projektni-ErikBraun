@@ -297,4 +297,13 @@
     <action>2026-01-13 12:09:05 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
     <action>2026-01-13 12:09:45 - User selected: Clearing sort parameters: class braun.erik.prijevoz.model.Route
     </action>
+    <action>2026-01-13 13:10:05 - User selected: driver_search</action>
+    <action>2026-01-13 13:10:06 - User selected: driver_add</action>
+    <action>2026-01-13 13:10:09 - User selected: route_add</action>
+    <action>2026-01-13 13:10:24 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-13 14:06:49 - User selected: driver_search</action>
+    <action>2026-01-13 14:06:50 - User selected: driver_add</action>
+    <action>2026-01-13 14:06:52 - User selected: route_search</action>
+    <action>2026-01-13 14:06:53 - User selected: route_add</action>
+    <action>2026-01-13 14:06:58 - User selected: route_search</action>
 </actions>

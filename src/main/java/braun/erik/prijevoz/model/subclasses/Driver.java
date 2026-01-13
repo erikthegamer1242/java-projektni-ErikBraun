@@ -15,14 +15,27 @@ import java.util.Objects;
  */
 
 public final class Driver extends Person implements Employed, Serializable {
+    /**
+     * A driver's license number
+     */
     private String licenseNumber;
+
+    /**
+     * Driver's hourly salary
+     */
     private BigDecimal salary;
+
+    /**
+     * Driver's monthly working hours
+     */
     private BigDecimal workingHours;
 
     /**
      * Empty public constructor to allow XML and JSON deserialization
      */
-    public Driver() {}
+    public Driver() {
+        super();
+    }
 
     /**
      * Constructs a new driver based on data from the builder pattern

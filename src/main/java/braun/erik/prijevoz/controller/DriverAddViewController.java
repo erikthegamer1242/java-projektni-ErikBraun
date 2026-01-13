@@ -12,7 +12,20 @@ import javafx.scene.control.DatePicker;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Typed class of add view controller of type driver
+ *
+ * @author erik
+ * @version 1.0
+ */
 public class DriverAddViewController extends AddViewController<Driver> {
+
+    /**
+     * Default constructor.
+     */
+    public DriverAddViewController() {
+        // intentionally empty to remove Javadoc warning
+    }
 
     @Override
     protected Repository<Driver> getRepository() {

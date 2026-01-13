@@ -17,7 +17,22 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class used to build all search parameters for a certain entity
+ *
+ * @author erik
+ * @version 1.0
+ */
+
 public interface SearchParameterBuilder {
+
+    /**
+     * Add a search parameter based on its type
+     * @param gridPane GridPane to add into
+     * @param fieldName name of the field
+     * @param displayName prettified name of the filed to show to the user
+     * @param rowIndex row in which to add the parameter
+     */
     static void addSearchParameter(GridPane gridPane, String fieldName, String displayName, Integer rowIndex) {
         Text text = new Text();
         text.setText(displayName + ":");
@@ -32,6 +47,14 @@ public interface SearchParameterBuilder {
         GridPane.setMargin(textField, new Insets(5, 30, 5, 30));
     }
 
+    /**
+     * Builds the whole UI for all the parameters
+     * @param gridPane GridPane to populate with UI elements
+     * @param type entity type
+     * @param searchMethod method instance for search button callback
+     * @param clearMethod method instance for clear button callback
+     * @param <T> entity type
+     */
     public static <T> void build(GridPane gridPane, Class<T> type, EventHandler<ActionEvent> searchMethod, EventHandler<ActionEvent> clearMethod) {
         int rowIndex = 0;
         List<Field> classFields = ClassUtil.getAllFields(new ArrayList<>(), type);

@@ -24,7 +24,7 @@ public class ActionLoggerDTO{
 
     /**
      * Constructs an instance with default actions
-     * @param action List<String> actions
+     * @param action {@code List&lt;String&gt;} actions
      */
     public ActionLoggerDTO(List<String> action) {
         this.action = action;
@@ -32,7 +32,7 @@ public class ActionLoggerDTO{
 
     /**
      * Get the whole action list
-     * @return List<String> actions
+     * @return {@code List&lt;String&gt;} actions
      */
     public List<String> getAction() {
         return action;
@@ -40,7 +40,7 @@ public class ActionLoggerDTO{
 
     /**
      * Set a whole list of actions
-     * @param action List<String> actions
+     * @param action {@code List&lt;String&gt;} actions
      */
     public void setAction(List<String> action) {
         this.action = action;

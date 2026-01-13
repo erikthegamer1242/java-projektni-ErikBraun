@@ -26,9 +26,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
-import static braun.erik.prijevoz.builder.AddParameterBuilder.appendChild;
+/**
+ * Static interface implementing helper methods to create input parameters
+ *
+ * @author erik
+ * @version 1.0
+ */
 
-public interface AddParametarBuilderHelper {
+public interface AddParameterBuilderHelper {
+
+    /**
+     * Checks to see input parameter type and adds it
+     * @param gridPane GridPane to add into
+     * @param type field type
+     * @param fieldName field name
+     * @param displayName prettified field name to show to the user
+     * @param rowIndex row to add to
+     */
     static void addInputParameter(GridPane gridPane, Field type, String fieldName, String displayName, Integer rowIndex) {
         Text text = new Text();
         text.setText(displayName + ":");
@@ -65,6 +79,15 @@ public interface AddParametarBuilderHelper {
         GridPane.setMargin(textField, new Insets(5, 30, 5, 30));
     }
 
+    /**
+     * Add a dropdown to an VBox
+     * @param dropDownVBoxes Map of all the dropdown VBoxes for all data types
+     * @param gridPane GridPane to add into
+     * @param field field type
+     * @param fieldName field name
+     * @param displayName prettified field name to show to the user
+     * @param rowIndex row to add to
+     */
     static void addDropdownParameter(Map<String, Pair<VBox, Field>> dropDownVBoxes, GridPane gridPane, Field field, String fieldName, String displayName, Integer rowIndex) {
         Text text = new Text();
         text.setText(displayName + ":");
@@ -78,7 +101,7 @@ public interface AddParametarBuilderHelper {
             return new Pair<>(newVBox, field);
         });
 
-        VBox dropDownVBox = appendChild(fieldName);
+        VBox dropDownVBox = AddParameterBuilder.appendChild(fieldName);
         gridPane.add(text, 0, rowIndex);
         GridPane.setMargin(text, new Insets(10, 0, 5, 0));
         GridPane.setHalignment(text, HPos.RIGHT);
@@ -88,6 +111,13 @@ public interface AddParametarBuilderHelper {
         GridPane.setMargin(dropDownVBox, new Insets(5, 30, 5, 30));
     }
 
+    /**
+     * Adds a dropdown or other input depending on the type
+     * @param dropDownVBoxes Map of all the dropdown VBoxes for all data types
+     * @param gridPane GridPane to add into
+     * @param field field type
+     * @param rowIndex row to add to
+     */
     static void addInputOrDropdown(Map<String, Pair<VBox, Field>> dropDownVBoxes, GridPane gridPane, Field field, Integer rowIndex) {
         if (java.util.List.class.isAssignableFrom(field.getType()) || field.getType().isEnum()) {
             addDropdownParameter(dropDownVBoxes, gridPane, field, field.getName(), ClassUtil.toDisplayName(field.getName()), rowIndex);
@@ -96,6 +126,12 @@ public interface AddParametarBuilderHelper {
         }
     }
 
+    /**
+     * Creates a ComboBox from a field
+     * @param field field type
+     * @param fieldName field name
+     * @return ComboBox
+     */
     static ComboBox<DisplayOption> addComboBox(Field field, String fieldName) {
         Class<?> rawType = field.getType().equals(List.class) ? (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0] : field.getType();
 

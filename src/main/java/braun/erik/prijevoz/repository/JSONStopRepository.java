@@ -8,6 +8,12 @@ import braun.erik.prijevoz.util.DialogUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Concrete implementation of stop repository using JSON as backend
+ *
+ * @author erik
+ * @version 1.0
+ */
 public class JSONStopRepository implements StopRepository {
 
     private static final String PATH = "src/main/resources/braun/erik/prijevoz/data/stops.json";
@@ -28,6 +34,9 @@ public class JSONStopRepository implements StopRepository {
         }
     }
 
+    /**
+     * Default constructor
+     */
     public JSONStopRepository() { /* Backwards compatibility before singleton */ }
 
     @Override

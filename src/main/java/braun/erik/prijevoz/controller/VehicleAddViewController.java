@@ -9,7 +9,20 @@ import javafx.scene.Node;
 
 import java.util.List;
 
+/**
+ * Typed class of add view controller of type vehicle
+ *
+ * @author erik
+ * @version 1.0
+ */
 public class VehicleAddViewController extends AddViewController<Vehicle> {
+
+    /**
+     * Default constructor.
+     */
+    public VehicleAddViewController() {
+        // intentionally empty to remove Javadoc warning
+    }
 
     @Override
     protected Repository<Vehicle> getRepository() {

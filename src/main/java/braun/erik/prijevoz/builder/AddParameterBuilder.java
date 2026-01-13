@@ -23,7 +23,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static braun.erik.prijevoz.builder.AddParametarBuilderHelper.*;
+import static braun.erik.prijevoz.builder.AddParameterBuilderHelper.*;
+
+/**
+ * Class used to build all add parameters for a certain entity
+ *
+ * @author erik
+ * @version 1.0
+ */
 
 public class AddParameterBuilder {
     static Map<String, Pair<VBox, Field>> dropDownVBoxes = new HashMap<>();
@@ -31,6 +38,12 @@ public class AddParameterBuilder {
 
     private AddParameterBuilder() {
     }
+
+    /**
+     * Appends a child to a VBox
+     * @param fieldName string name of the field to be used as id and VBox lookup
+     * @return Vbox newly built VBox
+     */
 
     static VBox appendChild(String fieldName) {
         if (!dropDownVBoxes.containsKey(fieldName)) {
@@ -68,6 +81,10 @@ public class AddParameterBuilder {
         return dropDownVBox;
     }
 
+    /**
+     * Appends a new ComboBOx to an existing VBox depending on the button(field name) id
+     * @param event JavaFX event
+     */
     private static void addDropdown(ActionEvent event) {
         if (event.getSource() instanceof Button button) {
             VBox newVbox = appendChild(button.getId());
@@ -77,7 +94,16 @@ public class AddParameterBuilder {
         }
     }
 
-    public static <T> void build(GridPane gridPane, Class<T> type, EventHandler<ActionEvent> searchMethod, EventHandler<ActionEvent> clearMethod) {
+    /**
+     * Builds the whole UI for all the parameters
+     *
+     * @param gridPane    GridPane to populate with UI elements
+     * @param type        entity type
+     * @param addMethod   method instance for add button callback
+     * @param clearMethod method instance for clear button callback
+     * @param <T>         entity type
+     */
+    public static <T> void build(GridPane gridPane, Class<T> type, EventHandler<ActionEvent> addMethod, EventHandler<ActionEvent> clearMethod) {
         int rowIndex = 0;
         dropDownVBoxes.clear();
         mainGridPane = gridPane;
@@ -106,7 +132,7 @@ public class AddParameterBuilder {
 
         Button searchButton = new Button("_Add");
         searchButton.setMnemonicParsing(true);
-        searchButton.setOnAction(searchMethod);
+        searchButton.setOnAction(addMethod);
 
         Button clearButton = new Button("_Clear");
         clearButton.setMnemonicParsing(true);
