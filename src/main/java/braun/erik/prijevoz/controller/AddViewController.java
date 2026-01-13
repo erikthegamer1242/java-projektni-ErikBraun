@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.util.Random;
 
 public abstract class AddViewController<T extends DisplayOption> extends ViewController<T> {
     static final String DATE_FORMAT = "dd.MM.yyyy";
@@ -21,11 +22,14 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
     protected Repository<T> repository;
     private boolean initialized = false;
 
+    Random r = new Random();
+    protected static final Integer BOUND = 1000000;
+
     protected abstract Repository<T> getRepository();
 
     protected abstract Class<T> getEntityClass();
 
-    protected abstract void addToRepository();
+    protected abstract void addToRepository() throws IllegalArgumentException;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -69,13 +73,16 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
     }
 
     void add(ActionEvent event) {
-        System.out.println(repository.get().size());
-        addToRepository();
+        try {
+            addToRepository();
+        } catch (IllegalArgumentException e) {
+            MainApp.logger.error("Error saving {}: ", getEntityClass(), e);
+            return;
+        }
         searchGridPane.getChildren().clear();
         tableView.getItems().clear();
         ObservableList<T> items = tableView.getItems();
         items.setAll(repository.get());
-        System.out.println(repository.get().size());
 
         AddParameterBuilder.build(
                 searchGridPane,

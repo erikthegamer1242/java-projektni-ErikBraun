@@ -1,1 +1,26 @@
-[{"id":100001,"location":"Caviceva"},{"id":200001,"location":"Aaviceva"},{"id":300001,"location":"Baviceva"}]
+[
+  {
+    "getId": 100001,
+    "getLocation": "Caviceva",
+    "id": 100001,
+    "location": "Caviceva"
+  },
+  {
+    "getId": 200001,
+    "getLocation": "Aaviceva",
+    "id": 200001,
+    "location": "Aaviceva"
+  },
+  {
+    "getId": 300001,
+    "getLocation": "Baviceva",
+    "id": 300001,
+    "location": "Baviceva"
+  },
+  {
+    "getId": 246090,
+    "getLocation": "Peniceva",
+    "id": 246090,
+    "location": "Peniceva"
+  }
+]

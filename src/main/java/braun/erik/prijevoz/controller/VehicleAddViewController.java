@@ -1,8 +1,13 @@
 package braun.erik.prijevoz.controller;
 
+import braun.erik.prijevoz.controller.util.NodeProcessorUtil;
 import braun.erik.prijevoz.model.Vehicle;
 import braun.erik.prijevoz.repository.JSONVehicleRepository;
 import braun.erik.prijevoz.repository.Repository;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+
+import java.util.List;
 
 public class VehicleAddViewController extends AddViewController<Vehicle> {
 
@@ -17,7 +22,13 @@ public class VehicleAddViewController extends AddViewController<Vehicle> {
     }
 
     @Override
-    protected void addToRepository() {
-        System.out.println("VehicleAddViewController.addToRepository");
+    protected void addToRepository() throws IllegalArgumentException {
+        Vehicle vehicle = new Vehicle();
+        ObservableList<Node> gridPaneChildren = searchGridPane.getChildren();
+
+        for (var node : gridPaneChildren) {
+            NodeProcessorUtil.processNode(node, vehicle);
+        }
+        getRepository().set(List.of(vehicle));
     }
 }

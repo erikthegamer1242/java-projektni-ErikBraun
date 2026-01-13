@@ -45,7 +45,7 @@
     },
     "id": 200001,
     "routeName": "Aaviceva",
-    "stopCost": 25794969.6,
+    "stopCost": 51589939.2,
     "stops": [
       {
         "getId": 100001,
@@ -83,7 +83,7 @@
     },
     "id": 300001,
     "routeName": "Baviceva",
-    "stopCost": 128662344396.9,
+    "stopCost": 385987033190.7,
     "stops": [
       {
         "getId": 100001,
@@ -127,7 +127,7 @@
     },
     "id": -1095521265,
     "routeName": "IdeGas",
-    "stopCost": 1007616,
+    "stopCost": 2015232,
     "stops": [
       {
         "getId": 100001,
@@ -165,7 +165,7 @@
     },
     "id": 67690,
     "routeName": "IdeFas",
-    "stopCost": 504311808,
+    "stopCost": 1008623616,
     "stops": [
       {
         "getId": 100001,
@@ -530,6 +530,44 @@
         "getLocation": "Caviceva",
         "id": 100001,
         "location": "Caviceva"
+      }
+    ],
+    "vehicle": {
+      "licensePlate": "DA-1284-EB",
+      "model": "Corsa",
+      "motorType": "DIESEL",
+      "name": "Opel",
+      "vin": "00FGEVDNWE548",
+      "year": 2001
+    }
+  },
+  {
+    "driver": {
+      "dateOfBirth": "2005-12-12",
+      "email": "pero@perictrans.hr",
+      "name": "Sofer Pero",
+      "oib": "0154254155",
+      "phoneNumber": "0951841758",
+      "surname": "Peric",
+      "licenseNumber": "00125487120",
+      "salary": 8.59,
+      "workingHours": 160
+    },
+    "id": 775818,
+    "routeName": "234324",
+    "stopCost": 48468,
+    "stops": [
+      {
+        "getId": 200001,
+        "getLocation": "Aaviceva",
+        "id": 200001,
+        "location": "Aaviceva"
+      },
+      {
+        "getId": 300001,
+        "getLocation": "Baviceva",
+        "id": 300001,
+        "location": "Baviceva"
       }
     ],
     "vehicle": {

@@ -1,8 +1,16 @@
 package braun.erik.prijevoz.controller;
 
+import braun.erik.prijevoz.controller.util.NodeProcessorUtil;
 import braun.erik.prijevoz.model.subclasses.Driver;
 import braun.erik.prijevoz.repository.JSONDriverRepository;
 import braun.erik.prijevoz.repository.Repository;
+import braun.erik.prijevoz.util.DialogUtil;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.DatePicker;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public class DriverAddViewController extends AddViewController<Driver> {
 
@@ -17,26 +25,22 @@ public class DriverAddViewController extends AddViewController<Driver> {
     }
 
     @Override
-    protected void addToRepository() {
-        System.out.println("DriverAddViewController.addToRepository");
-        return;
-//        ObservableList<Node> gridPaneChildren = searchGridPane.getChildren();
-//        for (var node : gridPaneChildren) {
-//            if (node instanceof NumberTextField numberTextField) {
-//                System.out.println(numberTextField.getText());
-//            } else if (node instanceof TextField textField) {
-//                System.out.println(textField.getText());
-//            } else if (node instanceof VBox vBox) {
-//                for (var child : vBox.getChildren()) {
-//                    if (child instanceof ComboBox<?> comboBox) {
-//                        System.out.println(comboBox.getValue());
-//                    }
-//                }
-//            } else if (node instanceof DatePicker datePicker) {
-//                System.out.println(datePicker.getValue());
-//            }
-//        }
+    protected void addToRepository() throws IllegalArgumentException {
+        Driver driver = new Driver();
+        ObservableList<Node> gridPaneChildren = searchGridPane.getChildren();
+
+        for (var node : gridPaneChildren) {
+            if (node instanceof DatePicker datePicker) {
+                LocalDate date = datePicker.getValue();
+                if (date == null || date.isAfter(LocalDate.now().minusYears(18))) {
+                    DialogUtil.showErrorDialog("Error!", "Driver must be at least 18 years old!");
+                    throw new IllegalArgumentException("Driver must be at least 18 years old!");
+                }
+                driver.setDateOfBirth(date);
+            } else {
+                NodeProcessorUtil.processNode(node, driver);
+            }
+        }
+        getRepository().set(List.of(driver));
     }
-
-
 }

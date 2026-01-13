@@ -1,8 +1,15 @@
 package braun.erik.prijevoz.controller;
 
+import braun.erik.prijevoz.builder.util.ClassUtil;
 import braun.erik.prijevoz.model.Stop;
 import braun.erik.prijevoz.repository.JSONStopRepository;
 import braun.erik.prijevoz.repository.Repository;
+import braun.erik.prijevoz.util.DialogUtil;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.TextField;
+
+import java.util.List;
 
 public class StopAddViewController extends AddViewController<Stop> {
 
@@ -17,7 +24,19 @@ public class StopAddViewController extends AddViewController<Stop> {
     }
 
     @Override
-    protected void addToRepository() {
-        System.out.println("StopAddViewController.addToRepository");
+    protected void addToRepository() throws IllegalArgumentException {
+        Integer id = r.nextInt(BOUND);
+        ObservableList<Node> gridPaneChildren = searchGridPane.getChildren();
+        if (gridPaneChildren.size() != 3) {
+            DialogUtil.showCannotBeEmptyErrorDialog("Location");
+            throw new IllegalArgumentException("Location can't be empty");
+        } else if (gridPaneChildren.get(1) instanceof TextField textField) {
+            if (textField.getText().isEmpty()) {
+                DialogUtil.showCannotBeEmptyErrorDialog(ClassUtil.toDisplayName(textField.getId()));
+                throw new IllegalArgumentException("Location can't be empty");
+            } else {
+                getRepository().set(List.of(new Stop(id, textField.getText())));
+            }
+        }
     }
 }

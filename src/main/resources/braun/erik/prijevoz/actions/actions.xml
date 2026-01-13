@@ -277,4 +277,24 @@
     </action>
     <action>2026-01-13 00:05:53 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
     <action>2026-01-13 00:08:27 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-13 00:20:23 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-13 00:28:05 - User selected: stop_add</action>
+    <action>2026-01-13 00:28:13 - User selected: Adding: class braun.erik.prijevoz.model.Stop</action>
+    <action>2026-01-13 00:28:26 - User selected: stop_add</action>
+    <action>2026-01-13 00:28:32 - User selected: Adding: class braun.erik.prijevoz.model.Stop</action>
+    <action>2026-01-13 00:30:11 - User selected: stop_add</action>
+    <action>2026-01-13 00:30:18 - User selected: Adding: class braun.erik.prijevoz.model.Stop</action>
+    <action>2026-01-13 00:30:27 - User selected: stop_add</action>
+    <action>2026-01-13 00:30:55 - User selected: stop_add</action>
+    <action>2026-01-13 00:30:59 - User selected: Adding: class braun.erik.prijevoz.model.Stop</action>
+    <action>2026-01-13 00:31:04 - User selected: route_add</action>
+    <action>2026-01-13 00:31:12 - User selected: vehicle_add</action>
+    <action>2026-01-13 00:33:20 - User selected: driver_add</action>
+    <action>2026-01-13 00:33:47 - User selected: Adding: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2026-01-13 00:33:57 - User selected: user_add</action>
+    <action>2026-01-13 12:00:59 - User selected: driver_add</action>
+    <action>2026-01-13 12:01:41 - User selected: Adding: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2026-01-13 12:09:05 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-13 12:09:45 - User selected: Clearing sort parameters: class braun.erik.prijevoz.model.Route
+    </action>
 </actions>

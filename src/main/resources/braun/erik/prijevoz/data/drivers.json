@@ -1,1 +1,35 @@
-[{"dateOfBirth":"2005-12-12","email":"pero@perictrans.hr","name":"Sofer Pero","oib":"0154254155","phoneNumber":"0951841758","surname":"Peric","licenseNumber":"00125487120","salary":8.59,"workingHours":160}]
+[
+  {
+    "dateOfBirth": "2005-12-12",
+    "email": "pero@perictrans.hr",
+    "name": "Sofer Pero",
+    "oib": "0154254155",
+    "phoneNumber": "0951841758",
+    "surname": "Peric",
+    "licenseNumber": "00125487120",
+    "salary": 8.59,
+    "workingHours": 160
+  },
+  {
+    "dateOfBirth": "2025-12-12",
+    "email": "123",
+    "name": "123",
+    "oib": "123",
+    "phoneNumber": "123",
+    "surname": "123",
+    "licenseNumber": "123123",
+    "salary": 12312,
+    "workingHours": 123123
+  },
+  {
+    "dateOfBirth": "2026-01-15",
+    "email": "mil.lo@kitic.hr",
+    "name": "Mile",
+    "oib": "0123120516813",
+    "phoneNumber": "516465464",
+    "surname": "Kitic",
+    "licenseNumber": "16186161684",
+    "salary": 123,
+    "workingHours": 123
+  }
+]
