@@ -2,6 +2,7 @@ package braun.erik.prijevoz.controller;
 
 import braun.erik.prijevoz.controller.util.NodeProcessorUtil;
 import braun.erik.prijevoz.model.Vehicle;
+import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
 import braun.erik.prijevoz.repository.JSONVehicleRepository;
 import braun.erik.prijevoz.repository.Repository;
 import javafx.collections.ObservableList;
@@ -35,7 +36,7 @@ public class VehicleAddViewController extends AddViewController<Vehicle> {
     }
 
     @Override
-    protected void addToRepository() throws IllegalArgumentException {
+    protected void addToRepository() throws FieldArgumentException {
         Vehicle vehicle = new Vehicle();
         ObservableList<Node> gridPaneChildren = searchGridPane.getChildren();
 

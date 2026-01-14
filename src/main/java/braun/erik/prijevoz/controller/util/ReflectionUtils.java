@@ -1,7 +1,6 @@
 package braun.erik.prijevoz.controller.util;
 
-import braun.erik.prijevoz.MainApp;
-import braun.erik.prijevoz.util.DialogUtil;
+import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
 
 import java.lang.reflect.Method;
 
@@ -19,7 +18,7 @@ public interface ReflectionUtils {
      * @param fieldName field name
      * @param value value to set
      */
-    public static void setField(Object obj, String fieldName, Object value) {
+    public static void setField(Object obj, String fieldName, Object value) throws FieldArgumentException {
         try {
             String setterName = "set" + Character.toUpperCase(fieldName.charAt(0)) + fieldName.substring(1);
 
@@ -34,11 +33,12 @@ public interface ReflectionUtils {
             if (setter != null) {
                 setter.invoke(obj, value);
             } else {
-                throw new NoSuchMethodException("No setter found for field: " + setterName);
+                throw new FieldArgumentException(new NoSuchMethodException("No setter found for field: " + setterName));
             }
-        } catch (Exception e) {
-            DialogUtil.showErrorDialog("Error setting field: " + fieldName, e.getMessage());
-            MainApp.logger.error("Error setting field: {}", fieldName, e);
+        } catch (IllegalAccessException e) {
+            throw new FieldArgumentException("Error setting field: " + fieldName, e);
+        } catch (java.lang.reflect.InvocationTargetException e) {
+            throw new FieldArgumentException("Error setting field: " + fieldName, e.getTargetException());
         }
     }
 }

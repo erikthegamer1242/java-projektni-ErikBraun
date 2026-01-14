@@ -2,6 +2,7 @@ package braun.erik.prijevoz.controller;
 
 import braun.erik.prijevoz.controller.util.NodeProcessorUtil;
 import braun.erik.prijevoz.model.Route;
+import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
 import braun.erik.prijevoz.repository.JSONRouteRepository;
 import braun.erik.prijevoz.repository.Repository;
 import javafx.collections.ObservableList;
@@ -35,7 +36,7 @@ public class RouteAddViewController extends AddViewController<Route> {
     }
 
     @Override
-    protected void addToRepository() throws IllegalArgumentException {
+    protected void addToRepository() throws FieldArgumentException {
         Route route = new Route();
         route.setId(r.nextInt(BOUND));
         ObservableList<Node> gridPaneChildren = searchGridPane.getChildren();

@@ -3,7 +3,7 @@ package braun.erik.prijevoz.controller.util;
 import braun.erik.prijevoz.builder.util.ClassUtil;
 import braun.erik.prijevoz.components.NumberTextField;
 import braun.erik.prijevoz.model.DisplayOption;
-import braun.erik.prijevoz.util.DialogUtil;
+import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -27,7 +27,7 @@ public interface NodeProcessorUtil {
      * @param node node to check
      * @param entity object to place data into
      */
-    public static void processNode(Node node, Object entity) {
+    public static void processNode(Node node, Object entity) throws FieldArgumentException {
         if (node instanceof NumberTextField numberTextField) {
             processNumberTextField(numberTextField, entity);
         } else if (node instanceof TextField textField) {
@@ -43,15 +43,11 @@ public interface NodeProcessorUtil {
      * Called for a NumberTextField
      * @param numberTextField node with data
      * @param entity object to place data into
-     * @throws IllegalArgumentException when data is invalid
+     * @throws FieldArgumentException when data is invalid
      */
-    public static void processNumberTextField(NumberTextField numberTextField, Object entity) throws IllegalArgumentException {
+    public static void processNumberTextField(NumberTextField numberTextField, Object entity) throws FieldArgumentException {
         if (numberTextField.getText().isEmpty()) {
-            DialogUtil.showErrorDialogWithDescription(
-                    ClassUtil.toDisplayName(numberTextField.getId()) + " must be a positive number!",
-                    "Cannot assign: " + numberTextField.getText() + " to " + ClassUtil.toDisplayName(numberTextField.getId())
-            );
-            throw new IllegalArgumentException("Cannot assign: " + numberTextField.getText() + " to " + ClassUtil.toDisplayName(numberTextField.getId()));
+            throw new FieldArgumentException("Cannot assign: empty/null to " + ClassUtil.toDisplayName(numberTextField.getId()));
         } else {
             ReflectionUtils.setField(entity, numberTextField.getId(), new BigDecimal(numberTextField.getText()));
         }
@@ -61,13 +57,11 @@ public interface NodeProcessorUtil {
      * Called for a TextField
      * @param textField node with data
      * @param entity object to place data into
-     * @throws IllegalArgumentException when data is invalid
+     * @throws FieldArgumentException when data is invalid
      */
-    public static void processTextField(TextField textField, Object entity) throws IllegalArgumentException {
+    public static void processTextField(TextField textField, Object entity) throws FieldArgumentException {
         if (textField.getText().isEmpty()) {
-            DialogUtil.showCannotBeEmptyErrorDialog(
-                    ClassUtil.toDisplayName(textField.getId()));
-            throw new IllegalArgumentException("Cannot assign: " + textField.getText() + " to " + ClassUtil.toDisplayName(textField.getId()));
+            throw new FieldArgumentException("Cannot assign: empty/null to " + ClassUtil.toDisplayName(textField.getId()));
         } else {
             ReflectionUtils.setField(entity, textField.getId(), textField.getText());
         }
@@ -77,13 +71,11 @@ public interface NodeProcessorUtil {
      * Called for a DatePicker
      * @param datePicker node with data
      * @param entity object to place data into
-     * @throws IllegalArgumentException when data is invalid
+     * @throws FieldArgumentException when data is invalid
      */
-    public static void processDatePicker(DatePicker datePicker, Object entity) throws IllegalArgumentException {
+    public static void processDatePicker(DatePicker datePicker, Object entity) throws FieldArgumentException {
         if (datePicker.getValue() == null) {
-            DialogUtil.showCannotBeEmptyErrorDialog(
-                    ClassUtil.toDisplayName(datePicker.getId()));
-            throw new IllegalArgumentException("Cannot assign: " + datePicker.getValue() + " to " + ClassUtil.toDisplayName(datePicker.getId()));
+            throw new FieldArgumentException("Cannot assign: " + datePicker.getValue() + " to " + ClassUtil.toDisplayName(datePicker.getId()));
         } else {
             ReflectionUtils.setField(entity, datePicker.getId(), datePicker.getValue());
         }
@@ -93,12 +85,11 @@ public interface NodeProcessorUtil {
      * Tests to see if a VBox contains only one ComboBox or more
      * @param vBox to check
      * @param entity object to place data into
-     * @throws IllegalArgumentException when data is invalid
+     * @throws FieldArgumentException when data is invalid
      */
-    public static void processVBox(VBox vBox, Object entity) throws IllegalArgumentException {
+    public static void processVBox(VBox vBox, Object entity) throws FieldArgumentException {
         if (vBox.getChildren().isEmpty() || vBox.getChildren() == null) {
-            DialogUtil.showCannotBeEmptyErrorDialog(ClassUtil.toDisplayName(vBox.getId()));
-            throw new IllegalArgumentException("Cannot assign: " + vBox.getId() + " to " + ClassUtil.toDisplayName(vBox.getId()));
+            throw new FieldArgumentException("Cannot assign: empty/null to " + ClassUtil.toDisplayName(vBox.getId()));
         } else if (isSingleComboBox(vBox)) {
             processSingleComboBox(vBox, entity);
         } else {
@@ -121,11 +112,10 @@ public interface NodeProcessorUtil {
      * @param entity object to place data into
      * @throws IllegalArgumentException when data is invalid
      */
-    public static void processSingleComboBox(VBox vBox, Object entity) throws IllegalArgumentException {
+    public static void processSingleComboBox(VBox vBox, Object entity) throws FieldArgumentException {
         ComboBox<?> comboBox = (ComboBox<?>) vBox.getChildren().getFirst();
         if (comboBox.getValue() == null) {
-            DialogUtil.showCannotBeEmptyErrorDialog(ClassUtil.toDisplayName(vBox.getId()));
-            throw new IllegalArgumentException("Cannot assign: " + vBox.getId() + " to " + ClassUtil.toDisplayName(vBox.getId()));
+            throw new FieldArgumentException("Cannot assign: empty/null to " + ClassUtil.toDisplayName(vBox.getId()));
         } else {
             ReflectionUtils.setField(entity, comboBox.getId(), comboBox.getValue());
         }
@@ -135,15 +125,14 @@ public interface NodeProcessorUtil {
      * Called for a multiple ComboBoxes inside a VBox
      * @param vBox node with data
      * @param entity object to place data into
-     * @throws IllegalArgumentException when data is invalid
+     * @throws FieldArgumentException when data is invalid
      */
-    public static void processMultipleComboBoxes(VBox vBox, Object entity) throws IllegalArgumentException {
+    public static void processMultipleComboBoxes(VBox vBox, Object entity) throws FieldArgumentException {
         List<DisplayOption> items = new ArrayList<>();
         for (var child : vBox.getChildren()) {
             if (child instanceof ComboBox<?> comboBox) {
                 if (comboBox.getValue() == null) {
-                    DialogUtil.showCannotBeEmptyErrorDialog(ClassUtil.toDisplayName(vBox.getId()));
-                    throw new IllegalArgumentException("Cannot assign: " + vBox.getId() + " to " + ClassUtil.toDisplayName(vBox.getId()));
+                    throw new FieldArgumentException("Cannot assign: empty/null to " + ClassUtil.toDisplayName(vBox.getId()));
                 }
                 items.add((DisplayOption) comboBox.getValue());
             }

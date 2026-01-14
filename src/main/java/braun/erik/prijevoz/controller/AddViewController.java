@@ -4,6 +4,7 @@ import braun.erik.prijevoz.MainApp;
 import braun.erik.prijevoz.builder.AddParameterBuilder;
 import braun.erik.prijevoz.builder.TableViewBuilder;
 import braun.erik.prijevoz.model.DisplayOption;
+import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
 import braun.erik.prijevoz.repository.util.XMLHelper;
 import braun.erik.prijevoz.util.DialogUtil;
 import jakarta.xml.bind.JAXBException;
@@ -43,9 +44,9 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
 
     /**
      * Adds new data to an entity
-     * @throws IllegalArgumentException when a parameter is invalid
+     * @throws FieldArgumentException when a parameter is invalid
      */
-    protected abstract void addToRepository() throws IllegalArgumentException;
+    protected abstract void addToRepository() throws FieldArgumentException;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -98,7 +99,12 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
     void add(ActionEvent event) {
         try {
             addToRepository();
-        } catch (IllegalArgumentException e) {
+        } catch (FieldArgumentException e) {
+            if (e.getCause() == null) {
+                DialogUtil.showErrorDialogWithDescription("Error adding data", e.getMessage());
+            } else {
+                DialogUtil.showErrorDialogWithDescription(e.getMessage(), e.getCause().getMessage());
+            }
             MainApp.logger.error("Error saving {}: ", getEntityClass(), e);
             return;
         }

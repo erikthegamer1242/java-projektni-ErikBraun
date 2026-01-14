@@ -1,10 +1,10 @@
 package braun.erik.prijevoz.controller;
 
 import braun.erik.prijevoz.controller.util.NodeProcessorUtil;
+import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
 import braun.erik.prijevoz.model.subclasses.User;
 import braun.erik.prijevoz.repository.JSONUserRepository;
 import braun.erik.prijevoz.repository.Repository;
-import braun.erik.prijevoz.util.DialogUtil;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
@@ -38,7 +38,7 @@ public class UserAddViewController extends AddViewController<User> {
     }
 
     @Override
-    protected void addToRepository() throws IllegalArgumentException {
+    protected void addToRepository() throws FieldArgumentException {
         User user = new User();
         ObservableList<Node> gridPaneChildren = searchGridPane.getChildren();
 
@@ -46,8 +46,7 @@ public class UserAddViewController extends AddViewController<User> {
             if (node instanceof DatePicker datePicker) {
                 LocalDate date = datePicker.getValue();
                 if (date == null || !date.isAfter(LocalDate.now().minusYears(18))) {
-                    DialogUtil.showErrorDialog("Error!", "User must be at least 18 years old!");
-                    throw new IllegalArgumentException("User must be at least 18 years old!");
+                    throw new FieldArgumentException("User must be at least 18 years old!");
                 }
                 user.setDateOfBirth(date);
             } else {

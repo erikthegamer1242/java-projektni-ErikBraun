@@ -1,6 +1,7 @@
 package braun.erik.prijevoz.controller;
 
 import braun.erik.prijevoz.controller.util.NodeProcessorUtil;
+import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
 import braun.erik.prijevoz.model.subclasses.Driver;
 import braun.erik.prijevoz.repository.JSONDriverRepository;
 import braun.erik.prijevoz.repository.Repository;
@@ -38,7 +39,7 @@ public class DriverAddViewController extends AddViewController<Driver> {
     }
 
     @Override
-    protected void addToRepository() throws IllegalArgumentException {
+    protected void addToRepository() throws FieldArgumentException {
         Driver driver = new Driver();
         ObservableList<Node> gridPaneChildren = searchGridPane.getChildren();
 
@@ -47,7 +48,7 @@ public class DriverAddViewController extends AddViewController<Driver> {
                 LocalDate date = datePicker.getValue();
                 if (date == null || date.isAfter(LocalDate.now().minusYears(18))) {
                     DialogUtil.showErrorDialog("Error!", "Driver must be at least 18 years old!");
-                    throw new IllegalArgumentException("Driver must be at least 18 years old!");
+                    throw new FieldArgumentException("Driver must be at least 18 years old!");
                 }
                 driver.setDateOfBirth(date);
             } else {
