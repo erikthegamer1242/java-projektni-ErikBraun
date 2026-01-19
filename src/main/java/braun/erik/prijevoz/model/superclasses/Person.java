@@ -214,6 +214,6 @@ public abstract class Person implements Serializable, DisplayOption {
 
     @Override
     public String simpleName() {
-        return name + surname;
+        return name + " " + surname;
     }
 }

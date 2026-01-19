@@ -69,7 +69,7 @@ public interface AddParameterBuilderHelper {
                 public LocalDate fromString(String string) {
                     try {
                         return (string != null && !string.isEmpty()) ? LocalDate.parse(string, formatter) : null;
-                    } catch (DateTimeParseException e) {
+                    } catch (DateTimeParseException _) {
                         DialogUtil.showErrorDialogWithDescription("Invalid date format!", "Required date format is: " + FORMAT);
                     }
                     return null;

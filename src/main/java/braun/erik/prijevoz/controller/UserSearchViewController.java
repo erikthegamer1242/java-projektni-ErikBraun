@@ -1,7 +1,7 @@
 package braun.erik.prijevoz.controller;
 
 import braun.erik.prijevoz.model.subclasses.User;
-import braun.erik.prijevoz.repository.JSONUserRepository;
+import braun.erik.prijevoz.repository.DBUserRepository;
 import braun.erik.prijevoz.repository.Repository;
 
 /**
@@ -21,7 +21,7 @@ public class UserSearchViewController extends SearchViewController<User> {
 
     @Override
     public Repository<User> getRepository() {
-        return new JSONUserRepository();
+        return new DBUserRepository();
     }
 
     @Override

@@ -3,7 +3,7 @@ package braun.erik.prijevoz.controller;
 import braun.erik.prijevoz.controller.util.NodeProcessorUtil;
 import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
 import braun.erik.prijevoz.model.subclasses.User;
-import braun.erik.prijevoz.repository.JSONUserRepository;
+import braun.erik.prijevoz.repository.DBUserRepository;
 import braun.erik.prijevoz.repository.Repository;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -29,7 +29,7 @@ public class UserAddViewController extends AddViewController<User> {
 
     @Override
     public Repository<User> getRepository() {
-        return new JSONUserRepository();
+        return new DBUserRepository();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class UserAddViewController extends AddViewController<User> {
         for (var node : gridPaneChildren) {
             if (node instanceof DatePicker datePicker) {
                 LocalDate date = datePicker.getValue();
-                if (date == null || !date.isAfter(LocalDate.now().minusYears(18))) {
+                if (date == null || date.isAfter(LocalDate.now().minusYears(18))) {
                     throw new FieldArgumentException("User must be at least 18 years old!");
                 }
                 user.setDateOfBirth(date);

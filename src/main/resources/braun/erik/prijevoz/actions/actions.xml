@@ -386,4 +386,15 @@
     <action>2026-01-19 12:21:13 - User selected: Sorting: class braun.erik.prijevoz.model.Vehicle</action>
     <action>2026-01-19 12:21:18 - User selected: user_search</action>
     <action>2026-01-19 12:21:22 - User selected: route_search</action>
+    <action>2026-01-19 20:13:23 - User selected: user_search</action>
+    <action>2026-01-19 20:15:31 - User selected: route_search</action>
+    <action>2026-01-19 20:15:33 - User selected: user_search</action>
+    <action>2026-01-19 20:15:35 - User selected: user_add</action>
+    <action>2026-01-19 20:17:09 - User selected: user_add</action>
+    <action>2026-01-19 20:19:12 - User selected: user_search</action>
+    <action>2026-01-19 20:19:13 - User selected: user_add</action>
+    <action>2026-01-19 20:21:01 - User selected: Adding: class braun.erik.prijevoz.model.subclasses.User</action>
+    <action>2026-01-19 20:21:04 - User selected: user_search</action>
+    <action>2026-01-19 20:21:06 - User selected: user_add</action>
+    <action>2026-01-19 20:21:10 - User selected: route_add</action>
 </actions>

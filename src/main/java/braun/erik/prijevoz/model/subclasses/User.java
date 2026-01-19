@@ -1,5 +1,6 @@
 package braun.erik.prijevoz.model.subclasses;
 
+import braun.erik.prijevoz.components.HideConfig;
 import braun.erik.prijevoz.model.superclasses.Person;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public final class User extends Person implements Serializable {
     /**
      * UUID of the user's card/mobile phone
      */
+    @HideConfig(hide = true)
     private UUID subscriberID;
 
     /**
@@ -31,6 +33,7 @@ public final class User extends Person implements Serializable {
      * @param builder builder pattern containing parameters defined bellow
      */
     private User(UserBuilder builder) {
+        this.id = builder.id;
         this.oib = builder.oib;
         this.surname = builder.surname;
         this.name = builder.name;
@@ -108,6 +111,7 @@ public final class User extends Person implements Serializable {
      * </ul>
      */
     public static class UserBuilder {
+        private final Integer id;
         private final String oib;
         private final String name;
         private final String surname;
@@ -120,12 +124,14 @@ public final class User extends Person implements Serializable {
         /**
          * Constructs a new builder pattern object with only the required parameters
          *
+         * @param id      Integer user's database ID
          * @param oib     String user's OIB
          * @param name    String user's first name
          * @param surname String user's last name
          * @throws NullPointerException when one or more parameters is null
          */
-        public UserBuilder(String oib, String name, String surname) {
+        public UserBuilder(Integer id, String oib, String name, String surname) {
+            this.id = Objects.requireNonNull(id, "id must not be null");
             this.oib = Objects.requireNonNull(oib, "oib must not be null");
             this.name = Objects.requireNonNull(name, "name must not be null");
             this.surname = Objects.requireNonNull(surname, "surname must not be null");

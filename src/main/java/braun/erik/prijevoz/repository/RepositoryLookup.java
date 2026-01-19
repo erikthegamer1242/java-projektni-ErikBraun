@@ -28,7 +28,7 @@ public final class RepositoryLookup {
             Driver.class, new DBDriverRepository(),
             Route.class, new JSONRouteRepository(),
             Stop.class, new JSONStopRepository(),
-            User.class, new JSONUserRepository(),
+            User.class, new DBUserRepository(),
             Vehicle.class, new DBVehicleRepository(),
             Vehicle.MotorType.class, new MotorTypeRepository() {
             }
