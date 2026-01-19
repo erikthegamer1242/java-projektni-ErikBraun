@@ -47,7 +47,7 @@ public class DBDriverRepository implements DriverRepository {
                         rs.getBigDecimal("workinghours"))
                         .email(rs.getString("email"))
                         .phoneNumber(rs.getString("phonenumber"))
-                        .dateOfBirth(rs.getDate("dateofbirth") != null ? rs.getDate("dateofbirth").toLocalDate() : LocalDate.EPOCH)
+                        .dateOfBirth(rs.getDate(DOB_COLUMN) != null ? rs.getDate(DOB_COLUMN).toLocalDate() : LocalDate.EPOCH)
                         .build()
                 );
             }
@@ -101,7 +101,7 @@ public class DBDriverRepository implements DriverRepository {
                         rs.getBigDecimal("workinghours"))
                         .email(rs.getString("email"))
                         .phoneNumber(rs.getString("phonenumber"))
-                        .dateOfBirth(rs.getDate("dateofbirth") != null ? rs.getDate("dateofbirth").toLocalDate() : LocalDate.EPOCH)
+                        .dateOfBirth(rs.getDate(DOB_COLUMN) != null ? rs.getDate(DOB_COLUMN).toLocalDate() : LocalDate.EPOCH)
                         .build();
             } else {
                 throw new SQLException("No selected driver found!");

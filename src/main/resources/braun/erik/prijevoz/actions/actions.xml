@@ -406,4 +406,9 @@
     <action>2026-01-19 21:27:07 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
     <action>2026-01-19 21:27:13 - User selected: route_search</action>
     <action>2026-01-19 21:27:20 - User selected: route_add</action>
+    <action>2026-01-19 21:45:05 - User selected: stop_add</action>
+    <action>2026-01-19 21:45:07 - User selected: vehicle_search</action>
+    <action>2026-01-19 21:45:09 - User selected: user_search</action>
+    <action>2026-01-19 21:45:12 - User selected: user_add</action>
+    <action>2026-01-19 21:45:13 - User selected: user_search</action>
 </actions>

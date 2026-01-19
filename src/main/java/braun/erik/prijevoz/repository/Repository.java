@@ -12,6 +12,17 @@ import java.util.List;
  * @version 1.0
  */
 public abstract interface Repository<T extends DisplayOption> {
+
+    /**
+     * Date of birth DB column name
+     */
+    static final String DOB_COLUMN = "dateofbirth";
+
+    /**
+     * Subscriber ID column name
+     */
+    static final String SID_COLUMN = "subscriberid";
+
     /**
      * Gets data from repository
      * @return list of data

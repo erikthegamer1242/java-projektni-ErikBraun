@@ -43,8 +43,8 @@ public class DBUserRepository implements UserRepository {
                         rs.getString("name"))
                         .email(rs.getString("email"))
                         .phoneNumber(rs.getString("phonenumber"))
-                        .dateOfBirth(rs.getDate("dateofbirth") != null ? rs.getDate("dateofbirth").toLocalDate() : LocalDate.EPOCH)
-                        .subscriberID(rs.getString("subscriberid") != null ? UUID.fromString(rs.getString("subscriberid")) : UUID.randomUUID())
+                        .dateOfBirth(rs.getDate(DOB_COLUMN) != null ? rs.getDate(DOB_COLUMN).toLocalDate() : LocalDate.EPOCH)
+                        .subscriberID(rs.getString(SID_COLUMN) != null ? UUID.fromString(rs.getString(SID_COLUMN)) : UUID.randomUUID())
                         .build()
                 );
             }
@@ -93,8 +93,8 @@ public class DBUserRepository implements UserRepository {
                         rs.getString("name"))
                         .email(rs.getString("email"))
                         .phoneNumber(rs.getString("phonenumber"))
-                        .dateOfBirth(rs.getDate("dateofbirth") != null ? rs.getDate("dateofbirth").toLocalDate() : LocalDate.EPOCH)
-                        .subscriberID(rs.getString("subscriberid") != null ? UUID.fromString(rs.getString("subscriberid")) : UUID.randomUUID())
+                        .dateOfBirth(rs.getDate(DOB_COLUMN) != null ? rs.getDate(DOB_COLUMN).toLocalDate() : LocalDate.EPOCH)
+                        .subscriberID(rs.getString(SID_COLUMN) != null ? UUID.fromString(rs.getString(SID_COLUMN)) : UUID.randomUUID())
                         .build();
             } else {
                 throw new SQLException("No selected user found!");
