@@ -5,6 +5,7 @@ import braun.erik.prijevoz.components.NumberTextField;
 import braun.erik.prijevoz.model.DisplayOption;
 import braun.erik.prijevoz.repository.Repository;
 import braun.erik.prijevoz.repository.RepositoryLookup;
+import braun.erik.prijevoz.util.DialogUtil;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
@@ -23,6 +24,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -54,8 +56,9 @@ public interface AddParameterBuilderHelper {
         } else if (LocalDate.class.isAssignableFrom(type.getType())) {
             DatePicker datePicker = new DatePicker();
             datePicker.setMaxWidth(Double.MAX_VALUE);
-            datePicker.setPromptText("dd.MM.yyyy");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            final String FORMAT = "dd.MM.yyyy";
+            datePicker.setPromptText(FORMAT);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(FORMAT);
             datePicker.setConverter(new StringConverter<>() {
                 @Override
                 public String toString(LocalDate date) {
@@ -64,7 +67,12 @@ public interface AddParameterBuilderHelper {
 
                 @Override
                 public LocalDate fromString(String string) {
-                    return (string != null && !string.isEmpty()) ? LocalDate.parse(string, formatter) : null;
+                    try {
+                        return (string != null && !string.isEmpty()) ? LocalDate.parse(string, formatter) : null;
+                    } catch (DateTimeParseException e) {
+                        DialogUtil.showErrorDialogWithDescription("Invalid date format!", "Required date format is: " + FORMAT);
+                    }
+                    return null;
                 }
             });
             textField = datePicker;

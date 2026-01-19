@@ -1,5 +1,6 @@
 package braun.erik.prijevoz.model;
 
+import braun.erik.prijevoz.components.HideConfig;
 import braun.erik.prijevoz.model.exceptions.YearNegativeException;
 
 import java.io.Serializable;
@@ -26,6 +27,11 @@ import java.util.Objects;
 public final class Vehicle implements Serializable, DisplayOption {
 
     /**
+     * Vehicle DB id
+     */
+    @HideConfig(hide = true)
+    private Integer id;
+    /**
      * Vehicle name
      */
     private String name;
@@ -48,7 +54,7 @@ public final class Vehicle implements Serializable, DisplayOption {
     /**
      * Vehicle production year
      */
-    private Integer year;
+    private Integer prodYear;
 
     /**
      * Vehicle ENUM motor type
@@ -140,25 +146,36 @@ public final class Vehicle implements Serializable, DisplayOption {
     /**
      * Constructs a new vehicle based on these parameters:
      *
+     * @param id           Integer DB id
      * @param name         String vehicle name
      * @param model        String model type
      * @param licensePlate String licence plate number
      * @param vin          Integer VIN Number
-     * @param year         Integer year of manufacturing
+     * @param prodYear         Integer year of manufacturing
      * @param motorType    the type of motor to set, see {@link MotorType}
      * @throws NullPointerException  when one or more arguments are null
      * @throws YearNegativeException if year is negative
      */
-    public Vehicle(String name, String model, String licensePlate, String vin, Integer year, MotorType motorType) throws YearNegativeException {
+    public Vehicle(Integer id, String name, String model, String licensePlate, String vin, Integer prodYear, MotorType motorType) throws NullPointerException, YearNegativeException {
+        this.id = Objects.requireNonNull(id, "id must not be null");
         this.name = Objects.requireNonNull(name, "name must not be null");
         this.model = Objects.requireNonNull(model, "model must not be null");
         this.licensePlate = Objects.requireNonNull(licensePlate, "licensePlate must not be null");
         this.vin = Objects.requireNonNull(vin, "vin must not be null");
-        this.year = Objects.requireNonNull(year, "year must not be null");
-        if (this.year <= 0) {
-            throw new YearNegativeException("Year cannot be negative. \n Entered year: " + this.year);
+        this.prodYear = Objects.requireNonNull(prodYear, "year must not be null");
+        if (this.prodYear <= 0) {
+            throw new YearNegativeException("Year cannot be negative. \n Entered year: " + this.prodYear);
         }
         this.motorType = Objects.requireNonNull(motorType, "motorType must not be null");
+    }
+
+    /**
+     * Get vehicle DB id
+     *
+     * @return Integer DB id
+     */
+    public Integer getId() {
+        return id;
     }
 
     /**
@@ -202,8 +219,8 @@ public final class Vehicle implements Serializable, DisplayOption {
      *
      * @return Integer vehicle year
      */
-    public Integer getYear() {
-        return year;
+    public Integer getProdYear() {
+        return prodYear;
     }
 
     /**
@@ -261,14 +278,15 @@ public final class Vehicle implements Serializable, DisplayOption {
     /**
      * Set year of manufacturing
      *
-     * @param year year
+     * @param prodYear year
+     * @param <T> Type of year
      * @throws NullPointerException  if year is null
      * @throws YearNegativeException if year is negative
      */
-    public void setYear(Integer year) throws YearNegativeException {
-        this.year = Objects.requireNonNull(year, "year must not be null");
-        if (this.year <= 0) {
-            throw new YearNegativeException("Year cannot be negative. \n Entered year: " + this.year);
+    public <T extends Number> void setProdYear(T prodYear) throws YearNegativeException {
+        this.prodYear = Objects.requireNonNull(prodYear, "year must not be null").intValue();
+        if (this.prodYear <= 0) {
+            throw new YearNegativeException("Year cannot be negative. \n Entered year: " + this.prodYear);
         }
     }
 
@@ -283,7 +301,7 @@ public final class Vehicle implements Serializable, DisplayOption {
                 + ("\tVehicle Model: " + this.model)
                 + ("\tVehicle LicensePlate: " + this.licensePlate)
                 + ("\tVehicle Vin: " + this.vin)
-                + ("\tVehicle Year: " + this.year)
+                + ("\tVehicle Year: " + this.prodYear)
                 + ("\tVehicle MotorType: " + this.motorType.toString());
     }
 
@@ -296,7 +314,7 @@ public final class Vehicle implements Serializable, DisplayOption {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Vehicle vehicle)) return false;
-        return Objects.equals(name, vehicle.name) && Objects.equals(model, vehicle.model) && Objects.equals(licensePlate, vehicle.licensePlate) && Objects.equals(vin, vehicle.vin) && Objects.equals(year, vehicle.year) && motorType == vehicle.motorType;
+        return Objects.equals(name, vehicle.name) && Objects.equals(model, vehicle.model) && Objects.equals(licensePlate, vehicle.licensePlate) && Objects.equals(vin, vehicle.vin) && Objects.equals(prodYear, vehicle.prodYear) && motorType == vehicle.motorType;
     }
 
     /**
@@ -306,6 +324,6 @@ public final class Vehicle implements Serializable, DisplayOption {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, model, licensePlate, vin, year, motorType);
+        return Objects.hash(name, model, licensePlate, vin, prodYear, motorType);
     }
 }

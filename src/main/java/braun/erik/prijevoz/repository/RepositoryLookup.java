@@ -25,11 +25,11 @@ public final class RepositoryLookup {
      * Map of repositories where the key is the entity class type
      */
     private static final Map<Class<?>, Repository<?>> repositories = Map.of(
-            Driver.class, new JSONDriverRepository(),
+            Driver.class, new DBDriverRepository(),
             Route.class, new JSONRouteRepository(),
             Stop.class, new JSONStopRepository(),
             User.class, new JSONUserRepository(),
-            Vehicle.class, new JSONVehicleRepository(),
+            Vehicle.class, new DBVehicleRepository(),
             Vehicle.MotorType.class, new MotorTypeRepository() {
             }
     );

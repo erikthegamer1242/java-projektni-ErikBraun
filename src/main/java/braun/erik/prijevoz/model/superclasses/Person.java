@@ -1,5 +1,6 @@
 package braun.erik.prijevoz.model.superclasses;
 
+import braun.erik.prijevoz.components.HideConfig;
 import braun.erik.prijevoz.model.DisplayOption;
 
 import java.io.Serializable;
@@ -34,6 +35,12 @@ public abstract class Person implements Serializable, DisplayOption {
     }
 
     /**
+     * A person's database ID
+     */
+    @HideConfig(hide = true)
+    protected Integer id;
+
+    /**
      * A person's name
      */
     protected String name;
@@ -57,6 +64,15 @@ public abstract class Person implements Serializable, DisplayOption {
      * A person's date of birth
      */
     protected LocalDate dateOfBirth;
+
+    /**
+     * Get a person's database ID
+     *
+     * @return Integer ID
+     */
+    public Integer getId() {
+        return id;
+    }
 
     /**
      * Gets a person's name

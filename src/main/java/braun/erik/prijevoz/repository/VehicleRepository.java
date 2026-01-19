@@ -1,6 +1,7 @@
 package braun.erik.prijevoz.repository;
 
 import braun.erik.prijevoz.model.Vehicle;
+import braun.erik.prijevoz.model.exceptions.DatabaseException;
 
 import java.util.List;
 
@@ -13,8 +14,8 @@ import java.util.List;
 public interface VehicleRepository extends Repository<Vehicle> {
 
     @Override
-    public List<Vehicle> get();
+    public List<Vehicle> get() throws DatabaseException;
 
     @Override
-    public void set(List<Vehicle> list);
+    public void set(List<Vehicle> list) throws DatabaseException;
 }

@@ -1,7 +1,7 @@
 package braun.erik.prijevoz.controller;
 
 import braun.erik.prijevoz.model.Vehicle;
-import braun.erik.prijevoz.repository.JSONVehicleRepository;
+import braun.erik.prijevoz.repository.DBVehicleRepository;
 import braun.erik.prijevoz.repository.Repository;
 
 /**
@@ -21,7 +21,7 @@ public class VehicleSearchViewController extends SearchViewController<Vehicle> {
 
     @Override
     protected Repository<Vehicle> getRepository() {
-        return new JSONVehicleRepository();
+        return new DBVehicleRepository();
     }
 
     @Override

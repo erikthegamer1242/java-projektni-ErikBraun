@@ -82,7 +82,7 @@ public class AddParameterBuilder {
     }
 
     /**
-     * Appends a new ComboBOx to an existing VBox depending on the button(field name) id
+     * Appends a new ComboBox to an existing VBox depending on the button(field name) id
      * @param event JavaFX event
      */
     private static void addDropdown(ActionEvent event) {

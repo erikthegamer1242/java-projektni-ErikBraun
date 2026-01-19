@@ -3,7 +3,7 @@ package braun.erik.prijevoz.controller;
 import braun.erik.prijevoz.controller.util.NodeProcessorUtil;
 import braun.erik.prijevoz.model.Vehicle;
 import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
-import braun.erik.prijevoz.repository.JSONVehicleRepository;
+import braun.erik.prijevoz.repository.DBVehicleRepository;
 import braun.erik.prijevoz.repository.Repository;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -27,7 +27,7 @@ public class VehicleAddViewController extends AddViewController<Vehicle> {
 
     @Override
     protected Repository<Vehicle> getRepository() {
-        return new JSONVehicleRepository();
+        return new DBVehicleRepository();
     }
 
     @Override

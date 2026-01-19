@@ -307,4 +307,83 @@
     <action>2026-01-13 14:06:53 - User selected: route_add</action>
     <action>2026-01-13 14:06:58 - User selected: route_search</action>
     <action>2026-01-14 10:22:07 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-14 12:03:15 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-14 12:03:31 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-14 12:03:35 - User selected: user_add</action>
+    <action>2026-01-14 12:03:38 - User selected: route_search</action>
+    <action>2026-01-14 12:03:53 - User selected: route_add</action>
+    <action>2026-01-15 14:41:12 - User selected: driver_search</action>
+    <action>2026-01-15 14:41:23 - User selected: Sorting: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2026-01-15 14:41:25 - User selected: Clearing sort parameters: class
+        braun.erik.prijevoz.model.subclasses.Driver
+    </action>
+    <action>2026-01-15 14:41:30 - User selected: stop_add</action>
+    <action>2026-01-15 14:41:34 - User selected: Adding: class braun.erik.prijevoz.model.Stop</action>
+    <action>2026-01-15 14:41:39 - User selected: route_add</action>
+    <action>2026-01-15 14:42:06 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-15 14:42:53 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-15 16:55:24 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-15 16:55:29 - User selected: stop_search</action>
+    <action>2026-01-15 16:55:30 - User selected: stop_add</action>
+    <action>2026-01-15 16:56:00 - User selected: Adding: class braun.erik.prijevoz.model.Stop</action>
+    <action>2026-01-18 17:54:39 - User selected: driver_search</action>
+    <action>2026-01-18 17:54:42 - User selected: driver_add</action>
+    <action>2026-01-18 17:54:44 - User selected: driver_search</action>
+    <action>2026-01-18 17:54:46 - User selected: driver_add</action>
+    <action>2026-01-18 18:02:56 - User selected: driver_add</action>
+    <action>2026-01-18 18:02:59 - User selected: driver_add</action>
+    <action>2026-01-18 18:04:18 - User selected: driver_add</action>
+    <action>2026-01-18 18:05:02 - User selected: driver_add</action>
+    <action>2026-01-18 18:21:59 - User selected: driver_search</action>
+    <action>2026-01-18 18:22:00 - User selected: driver_add</action>
+    <action>2026-01-18 18:24:54 - User selected: driver_search</action>
+    <action>2026-01-18 18:24:55 - User selected: driver_add</action>
+    <action>2026-01-18 18:25:20 - User selected: driver_add</action>
+    <action>2026-01-18 18:27:37 - User selected: driver_add</action>
+    <action>2026-01-18 18:28:26 - User selected: Adding: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2026-01-18 18:29:27 - User selected: driver_add</action>
+    <action>2026-01-18 18:29:29 - User selected: driver_search</action>
+    <action>2026-01-18 18:29:30 - User selected: driver_add</action>
+    <action>2026-01-18 18:30:00 - User selected: Adding: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2026-01-18 18:30:04 - User selected: driver_search</action>
+    <action>2026-01-18 18:30:05 - User selected: driver_add</action>
+    <action>2026-01-18 18:30:43 - User selected: Adding: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2026-01-18 18:31:29 - User selected: driver_search</action>
+    <action>2026-01-18 18:31:30 - User selected: user_search</action>
+    <action>2026-01-18 18:31:31 - User selected: driver_search</action>
+    <action>2026-01-18 18:31:33 - User selected: driver_add</action>
+    <action>2026-01-18 18:31:50 - User selected: route_add</action>
+    <action>2026-01-18 18:32:00 - User selected: driver_search</action>
+    <action>2026-01-18 18:32:14 - User selected: driver_add</action>
+    <action>2026-01-18 18:34:28 - User selected: driver_add</action>
+    <action>2026-01-18 18:34:33 - User selected: driver_add</action>
+    <action>2026-01-18 18:34:35 - User selected: driver_search</action>
+    <action>2026-01-18 18:34:37 - User selected: driver_add</action>
+    <action>2026-01-18 18:34:48 - User selected: Adding: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2026-01-19 11:53:09 - User selected: vehicle_search</action>
+    <action>2026-01-19 11:53:11 - User selected: vehicle_add</action>
+    <action>2026-01-19 12:07:17 - User selected: vehicle_search</action>
+    <action>2026-01-19 12:07:18 - User selected: vehicle_add</action>
+    <action>2026-01-19 12:09:01 - User selected: vehicle_add</action>
+    <action>2026-01-19 12:09:03 - User selected: vehicle_search</action>
+    <action>2026-01-19 12:09:04 - User selected: vehicle_add</action>
+    <action>2026-01-19 12:09:06 - User selected: driver_add</action>
+    <action>2026-01-19 12:09:09 - User selected: route_search</action>
+    <action>2026-01-19 12:09:22 - User selected: vehicle_search</action>
+    <action>2026-01-19 12:09:25 - User selected: vehicle_add</action>
+    <action>2026-01-19 12:13:01 - User selected: vehicle_add</action>
+    <action>2026-01-19 12:17:13 - User selected: vehicle_add</action>
+    <action>2026-01-19 12:18:57 - User selected: vehicle_add</action>
+    <action>2026-01-19 12:19:14 - User selected: Adding: class braun.erik.prijevoz.model.Vehicle</action>
+    <action>2026-01-19 12:19:23 - User selected: route_add</action>
+    <action>2026-01-19 12:19:32 - User selected: driver_search</action>
+    <action>2026-01-19 12:20:03 - User selected: driver_search</action>
+    <action>2026-01-19 12:20:04 - User selected: driver_add</action>
+    <action>2026-01-19 12:20:53 - User selected: Adding: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2026-01-19 12:21:02 - User selected: driver_search</action>
+    <action>2026-01-19 12:21:05 - User selected: vehicle_search</action>
+    <action>2026-01-19 12:21:10 - User selected: Sorting: class braun.erik.prijevoz.model.Vehicle</action>
+    <action>2026-01-19 12:21:13 - User selected: Sorting: class braun.erik.prijevoz.model.Vehicle</action>
+    <action>2026-01-19 12:21:18 - User selected: user_search</action>
+    <action>2026-01-19 12:21:22 - User selected: route_search</action>
 </actions>

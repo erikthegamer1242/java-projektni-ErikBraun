@@ -35,7 +35,7 @@ public interface ReflectionUtils {
             } else {
                 throw new FieldArgumentException(new NoSuchMethodException("No setter found for field: " + setterName));
             }
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessException | IllegalArgumentException e) {
             throw new FieldArgumentException("Error setting field: " + fieldName, e);
         } catch (java.lang.reflect.InvocationTargetException e) {
             throw new FieldArgumentException("Error setting field: " + fieldName, e.getTargetException());

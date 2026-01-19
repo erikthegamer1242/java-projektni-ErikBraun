@@ -3,9 +3,8 @@ package braun.erik.prijevoz.controller;
 import braun.erik.prijevoz.controller.util.NodeProcessorUtil;
 import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
 import braun.erik.prijevoz.model.subclasses.Driver;
-import braun.erik.prijevoz.repository.JSONDriverRepository;
+import braun.erik.prijevoz.repository.DBDriverRepository;
 import braun.erik.prijevoz.repository.Repository;
-import braun.erik.prijevoz.util.DialogUtil;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
@@ -30,7 +29,7 @@ public class DriverAddViewController extends AddViewController<Driver> {
 
     @Override
     protected Repository<Driver> getRepository() {
-        return new JSONDriverRepository();
+        return new DBDriverRepository();
     }
 
     @Override
@@ -47,7 +46,6 @@ public class DriverAddViewController extends AddViewController<Driver> {
             if (node instanceof DatePicker datePicker) {
                 LocalDate date = datePicker.getValue();
                 if (date == null || date.isAfter(LocalDate.now().minusYears(18))) {
-                    DialogUtil.showErrorDialog("Error!", "Driver must be at least 18 years old!");
                     throw new FieldArgumentException("Driver must be at least 18 years old!");
                 }
                 driver.setDateOfBirth(date);

@@ -43,6 +43,7 @@ public final class Driver extends Person implements Employed, Serializable {
      * @param builder builder pattern containing parameters defined bellow
      */
     private Driver(DriverBuilder builder) {
+        this.id = builder.id;
         this.oib = builder.oib;
         this.surname = builder.surname;
         this.name = builder.name;
@@ -166,6 +167,7 @@ public final class Driver extends Person implements Employed, Serializable {
      * </ul>
      */
     public static class DriverBuilder {
+        private final Integer id;
         private final String oib;
         private final String name;
         private final String surname;
@@ -180,6 +182,7 @@ public final class Driver extends Person implements Employed, Serializable {
         /**
          * Constructs a new builder pattern object with only the required parameter
          *
+         * @param id            Integer driver's DB ID
          * @param oib           String driver's OIB
          * @param name          String driver's first name
          * @param surname       String driver's last name
@@ -188,7 +191,8 @@ public final class Driver extends Person implements Employed, Serializable {
          * @param workingHours  Decimal driver's working hours
          * @throws NullPointerException when one or more parameter are null
          */
-        public DriverBuilder(String oib, String name, String surname, String licenseNumber, BigDecimal salary, BigDecimal workingHours) {
+        public DriverBuilder(Integer id, String oib, String name, String surname, String licenseNumber, BigDecimal salary, BigDecimal workingHours) {
+            this.id = Objects.requireNonNull(id, "id must not be null");
             this.oib = Objects.requireNonNull(oib, "oib must not be null");
             this.name = Objects.requireNonNull(name, "name must not be null");
             this.surname = Objects.requireNonNull(surname, "surname must not be null");

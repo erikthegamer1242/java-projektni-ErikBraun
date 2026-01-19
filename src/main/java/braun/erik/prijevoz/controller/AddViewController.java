@@ -4,6 +4,7 @@ import braun.erik.prijevoz.MainApp;
 import braun.erik.prijevoz.builder.AddParameterBuilder;
 import braun.erik.prijevoz.builder.TableViewBuilder;
 import braun.erik.prijevoz.model.DisplayOption;
+import braun.erik.prijevoz.model.exceptions.DatabaseException;
 import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
 import braun.erik.prijevoz.repository.util.XMLHelper;
 import braun.erik.prijevoz.util.DialogUtil;
@@ -99,7 +100,7 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
     void add(ActionEvent event) {
         try {
             addToRepository();
-        } catch (FieldArgumentException e) {
+        } catch (FieldArgumentException | DatabaseException e) {
             if (e.getCause() == null) {
                 DialogUtil.showErrorDialogWithDescription("Error adding data", e.getMessage());
             } else {

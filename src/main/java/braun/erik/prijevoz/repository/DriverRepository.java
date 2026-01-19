@@ -1,5 +1,6 @@
 package braun.erik.prijevoz.repository;
 
+import braun.erik.prijevoz.model.exceptions.DatabaseException;
 import braun.erik.prijevoz.model.subclasses.Driver;
 
 import java.util.List;
@@ -13,8 +14,8 @@ import java.util.List;
 public interface DriverRepository extends Repository<Driver> {
 
     @Override
-    List<Driver> get();
+    List<Driver> get() throws DatabaseException;
 
     @Override
-    void set(List<Driver> list);
+    void set(List<Driver> list) throws DatabaseException;
 }
