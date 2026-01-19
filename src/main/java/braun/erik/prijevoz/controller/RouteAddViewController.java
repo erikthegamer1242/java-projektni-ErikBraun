@@ -3,7 +3,7 @@ package braun.erik.prijevoz.controller;
 import braun.erik.prijevoz.controller.util.NodeProcessorUtil;
 import braun.erik.prijevoz.model.Route;
 import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
-import braun.erik.prijevoz.repository.JSONRouteRepository;
+import braun.erik.prijevoz.repository.DBRouteRepository;
 import braun.erik.prijevoz.repository.Repository;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -27,7 +27,7 @@ public class RouteAddViewController extends AddViewController<Route> {
 
     @Override
     protected Repository<Route> getRepository() {
-        return new JSONRouteRepository();
+        return new DBRouteRepository();
     }
 
     @Override

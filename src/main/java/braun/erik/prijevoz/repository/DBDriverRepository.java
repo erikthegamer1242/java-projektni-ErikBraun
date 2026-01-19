@@ -27,6 +27,7 @@ import java.util.List;
 public class DBDriverRepository implements DriverRepository {
 
     private static final String SELECT_ALL_QUERY = "SELECT id, oib, surname, name, email, phonenumber, dateofbirth, licensenumber, salary, workinghours FROM DRIVER";
+    private static final String SELECT_ONE_BY_ID = SELECT_ALL_QUERY + " WHERE id = ?";
     private static final String INSERT_ONE_QUERY = "INSERT INTO driver (oib, surname, name, email, phonenumber, dateofbirth, licensenumber, salary, workinghours) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     @Override
@@ -81,5 +82,34 @@ public class DBDriverRepository implements DriverRepository {
             throw new DatabaseException(e);
         }
         DatabaseConnector.closeConnection(connection);
+    }
+
+    public Driver getById(Integer id) throws DatabaseException {
+        Connection connection = DatabaseConnector.connectToDatabase();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_BY_ID)) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return new Driver.DriverBuilder(
+                        rs.getInt("id"),
+                        rs.getString("oib"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("licensenumber"),
+                        rs.getBigDecimal("salary"),
+                        rs.getBigDecimal("workinghours"))
+                        .email(rs.getString("email"))
+                        .phoneNumber(rs.getString("phonenumber"))
+                        .dateOfBirth(rs.getDate("dateofbirth") != null ? rs.getDate("dateofbirth").toLocalDate() : LocalDate.EPOCH)
+                        .build();
+            } else {
+                throw new SQLException("No selected driver found!");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        } finally {
+            DatabaseConnector.closeConnection(connection);
+        }
     }
 }

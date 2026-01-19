@@ -26,8 +26,8 @@ public final class RepositoryLookup {
      */
     private static final Map<Class<?>, Repository<?>> repositories = Map.of(
             Driver.class, new DBDriverRepository(),
-            Route.class, new JSONRouteRepository(),
-            Stop.class, new JSONStopRepository(),
+            Route.class, new DBRouteRepository(),
+            Stop.class, new DBStopRepository(),
             User.class, new DBUserRepository(),
             Vehicle.class, new DBVehicleRepository(),
             Vehicle.MotorType.class, new MotorTypeRepository() {

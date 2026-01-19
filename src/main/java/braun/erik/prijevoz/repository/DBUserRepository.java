@@ -26,6 +26,7 @@ import java.util.UUID;
 public class DBUserRepository implements UserRepository {
 
     private static final String SELECT_ALL_QUERY = "SELECT id, oib, surname, name, email, phonenumber, dateofbirth, subscriberid  FROM APPUSER";
+    private static final String SELECT_ONE_BY_ID = SELECT_ALL_QUERY + " WHERE id = ?";
     private static final String INSERT_ONE_QUERY = "INSERT INTO APPUSER (oib, surname, name, email, phonenumber, dateofbirth, subscriberid) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     @Override
@@ -76,5 +77,32 @@ public class DBUserRepository implements UserRepository {
             throw new DatabaseException(e);
         }
         DatabaseConnector.closeConnection(connection);
+    }
+
+    public User getById(Integer id) throws DatabaseException {
+        Connection connection = DatabaseConnector.connectToDatabase();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_BY_ID)) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return new User.UserBuilder(
+                        rs.getInt("id"),
+                        rs.getString("oib"),
+                        rs.getString("surname"),
+                        rs.getString("name"))
+                        .email(rs.getString("email"))
+                        .phoneNumber(rs.getString("phonenumber"))
+                        .dateOfBirth(rs.getDate("dateofbirth") != null ? rs.getDate("dateofbirth").toLocalDate() : LocalDate.EPOCH)
+                        .subscriberID(rs.getString("subscriberid") != null ? UUID.fromString(rs.getString("subscriberid")) : UUID.randomUUID())
+                        .build();
+            } else {
+                throw new SQLException("No selected user found!");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        } finally {
+            DatabaseConnector.closeConnection(connection);
+        }
     }
 }

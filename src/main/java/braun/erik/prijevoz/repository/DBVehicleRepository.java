@@ -26,6 +26,7 @@ import java.util.List;
 public class DBVehicleRepository implements VehicleRepository {
 
     private static final String SELECT_ALL_QUERY = "SELECT ID, NAME, MODEL, LICENSEPLATE, VIN, PRODYEAR, MOTORTYPE  FROM VEHICLE";
+    private static final String SELECT_ONE_BY_ID = SELECT_ALL_QUERY + " WHERE ID = ?";
     private static final String INSERT_ONE_QUERY = "INSERT INTO VEHICLE (name, model, licenseplate, vin, prodyear, motortype) VALUES (?, ?, ?, ?, ?, ?)";
 
     private Vehicle.MotorType convertStringToMotorType(String string) {
@@ -78,5 +79,30 @@ public class DBVehicleRepository implements VehicleRepository {
             throw new DatabaseException(e);
         }
         DatabaseConnector.closeConnection(connection);
+    }
+
+    public Vehicle getById(Integer id) throws DatabaseException {
+        Connection connection = DatabaseConnector.connectToDatabase();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_BY_ID)) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return new Vehicle(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("model"),
+                        rs.getString("licenseplate"),
+                        rs.getString("vin"),
+                        rs.getInt("prodyear"),
+                        convertStringToMotorType(rs.getString("motortype")));
+            } else {
+                throw new SQLException("No selected vehicle found!");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        } finally {
+            DatabaseConnector.closeConnection(connection);
+        }
     }
 }

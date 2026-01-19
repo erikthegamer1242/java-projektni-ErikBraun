@@ -2,7 +2,7 @@ package braun.erik.prijevoz.controller;
 
 import braun.erik.prijevoz.model.Stop;
 import braun.erik.prijevoz.model.exceptions.FieldArgumentException;
-import braun.erik.prijevoz.repository.JSONStopRepository;
+import braun.erik.prijevoz.repository.DBStopRepository;
 import braun.erik.prijevoz.repository.Repository;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -27,7 +27,7 @@ public class StopAddViewController extends AddViewController<Stop> {
 
     @Override
     protected Repository<Stop> getRepository() {
-        return new JSONStopRepository();
+        return new DBStopRepository();
     }
 
     @Override

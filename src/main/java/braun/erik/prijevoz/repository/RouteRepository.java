@@ -1,6 +1,7 @@
 package braun.erik.prijevoz.repository;
 
 import braun.erik.prijevoz.model.Route;
+import braun.erik.prijevoz.model.exceptions.DatabaseException;
 
 import java.util.List;
 
@@ -13,8 +14,8 @@ import java.util.List;
 public interface RouteRepository extends Repository<Route> {
 
     @Override
-    public List<Route> get();
+    public List<Route> get() throws DatabaseException;
 
     @Override
-    public void set(List<Route> list);
+    public void set(List<Route> list) throws DatabaseException;
 }

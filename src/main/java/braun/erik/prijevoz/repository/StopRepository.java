@@ -1,6 +1,7 @@
 package braun.erik.prijevoz.repository;
 
 import braun.erik.prijevoz.model.Stop;
+import braun.erik.prijevoz.model.exceptions.DatabaseException;
 
 import java.util.List;
 
@@ -13,8 +14,8 @@ import java.util.List;
 public interface StopRepository extends Repository<Stop> {
 
     @Override
-    public List<Stop> get();
+    public List<Stop> get() throws DatabaseException;
 
     @Override
-    public void set(List<Stop> list);
+    public void set(List<Stop> list) throws DatabaseException;
 }

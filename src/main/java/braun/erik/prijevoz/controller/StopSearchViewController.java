@@ -1,7 +1,7 @@
 package braun.erik.prijevoz.controller;
 
 import braun.erik.prijevoz.model.Stop;
-import braun.erik.prijevoz.repository.JSONStopRepository;
+import braun.erik.prijevoz.repository.DBStopRepository;
 import braun.erik.prijevoz.repository.Repository;
 
 /**
@@ -21,7 +21,7 @@ public class StopSearchViewController extends SearchViewController<Stop> {
 
     @Override
     protected Repository<Stop> getRepository() {
-        return new JSONStopRepository();
+        return new DBStopRepository();
     }
 
     @Override

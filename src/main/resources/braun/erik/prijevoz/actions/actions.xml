@@ -397,4 +397,13 @@
     <action>2026-01-19 20:21:04 - User selected: user_search</action>
     <action>2026-01-19 20:21:06 - User selected: user_add</action>
     <action>2026-01-19 20:21:10 - User selected: route_add</action>
+    <action>2026-01-19 20:27:17 - User selected: stop_add</action>
+    <action>2026-01-19 20:27:18 - User selected: stop_search</action>
+    <action>2026-01-19 20:27:20 - User selected: stop_add</action>
+    <action>2026-01-19 20:27:25 - User selected: Adding: class braun.erik.prijevoz.model.Stop</action>
+    <action>2026-01-19 20:27:27 - User selected: stop_search</action>
+    <action>2026-01-19 20:27:30 - User selected: stop_add</action>
+    <action>2026-01-19 21:27:07 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-19 21:27:13 - User selected: route_search</action>
+    <action>2026-01-19 21:27:20 - User selected: route_add</action>
 </actions>
