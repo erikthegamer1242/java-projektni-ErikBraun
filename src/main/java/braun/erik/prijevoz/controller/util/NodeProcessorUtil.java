@@ -26,6 +26,7 @@ public interface NodeProcessorUtil {
      * Calls methods based on node types
      * @param node node to check
      * @param entity object to place data into
+     * @throws FieldArgumentException when data is invalid
      */
     public static void processNode(Node node, Object entity) throws FieldArgumentException {
         if (node instanceof NumberTextField numberTextField) {
@@ -110,7 +111,7 @@ public interface NodeProcessorUtil {
      * Called for a single ComboBox inside a VBox
      * @param vBox node with data
      * @param entity object to place data into
-     * @throws IllegalArgumentException when data is invalid
+     * @throws FieldArgumentException when data is invalid
      */
     public static void processSingleComboBox(VBox vBox, Object entity) throws FieldArgumentException {
         ComboBox<?> comboBox = (ComboBox<?>) vBox.getChildren().getFirst();

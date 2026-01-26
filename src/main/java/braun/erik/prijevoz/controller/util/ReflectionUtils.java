@@ -17,6 +17,7 @@ public interface ReflectionUtils {
      * @param obj object from which to find a setter
      * @param fieldName field name
      * @param value value to set
+     * @throws FieldArgumentException when there is an error with setting the field
      */
     public static void setField(Object obj, String fieldName, Object value) throws FieldArgumentException {
         try {

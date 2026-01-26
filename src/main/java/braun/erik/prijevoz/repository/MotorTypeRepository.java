@@ -20,4 +20,9 @@ public interface MotorTypeRepository extends Repository<Vehicle.MotorType> {
     default void set(List<Vehicle.MotorType> list) {
         throw new UnsupportedOperationException("This should never be called");
     }
+
+    @Override
+    public default Vehicle.MotorType getLastInserted() {
+        return List.of(Vehicle.MotorType.values()).getLast();
+    }
 }

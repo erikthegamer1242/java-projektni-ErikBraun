@@ -8,6 +8,7 @@ import braun.erik.prijevoz.model.subclasses.Driver;
 import braun.erik.prijevoz.model.subclasses.User;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Simple class used to return a repository based on entity class
@@ -33,6 +34,10 @@ public final class RepositoryLookup {
             Vehicle.MotorType.class, new MotorTypeRepository() {
             }
     );
+
+    public static Set<Class<?>> getRepositoryKeys() {
+        return repositories.keySet();
+    }
 
     /**
      * Get a repository based on the class type

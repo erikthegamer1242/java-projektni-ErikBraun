@@ -17,6 +17,9 @@ public class Launcher {
         // intentionally empty to remove Javadoc warning
     }
 
+    /**
+     * Path to the logback configuration XML
+     */
     public static final String PATH = "src/main/resources/braun/erik/prijevoz/logback.xml";
 
     /**

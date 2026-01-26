@@ -121,6 +121,8 @@ public abstract class AddViewController<T extends DisplayOption> extends ViewCon
                 this::clear
         );
 
+        mainPane.setUserData(getEntityClass());
+
         try {
             XMLHelper.writeOneAction(XMLHelper.getCurrentDateAndTime() + " - User selected: " + "Adding: " + getEntityClass().toString(), "src/main/resources/braun/erik/prijevoz/actions/actions.xml");
         } catch (JAXBException e) {

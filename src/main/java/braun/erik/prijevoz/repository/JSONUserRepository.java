@@ -54,4 +54,9 @@ public class JSONUserRepository implements UserRepository {
             MainApp.logger.error("Cannot write JSON users", e);
         }
     }
+
+    @Override
+    public User getLastInserted() {
+        return DataHolder.USERS.getLast();
+    }
 }

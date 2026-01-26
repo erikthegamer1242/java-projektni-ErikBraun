@@ -54,4 +54,9 @@ public class JSONDriverRepository implements DriverRepository {
             MainApp.logger.error("Cannot write JSON drivers", e);
         }
     }
+
+    @Override
+    public Driver getLastInserted() {
+        return DataHolder.DRIVERS.getLast();
+    }
 }

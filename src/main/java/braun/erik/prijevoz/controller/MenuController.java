@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import java.util.List;
  */
 public class MenuController {
 
+    private static final String NOT_IMPLEMENTED = "Feature not yet implemented!";
+    private static final String NOT_IMPLEMENTED_DESC = "We currently don't support that, you will be reverted back to the first screen!";
     /**
      * Default constructor.
      */
@@ -32,15 +35,17 @@ public class MenuController {
     private ViewController<?> activeController;
     private GridPane searchGridPane;
     private TableView<?> tableView;
+    private VBox mainPane;
 
     /**
      * Sets TableView and GridPane to be used with all controllers
      * @param searchGridPane GridPane to use
      * @param tableView TableView to use
      */
-    public void setContentArea(GridPane searchGridPane, TableView<?> tableView) {
+    public void setContentArea(GridPane searchGridPane, TableView<?> tableView, VBox mainPane) {
         this.searchGridPane = searchGridPane;
         this.tableView = tableView;
+        this.mainPane = mainPane;
     }
 
     /**
@@ -54,6 +59,7 @@ public class MenuController {
 
         activeController = newController;
         activeController.setContentArea(searchGridPane, tableView);
+        activeController.setMainView(mainPane);
         activeController.onActivate();
     }
 
@@ -77,6 +83,8 @@ public class MenuController {
                 switchController(chooseSearchController(location));
             } else if ("add".equals(location.getLast())) {
                 switchController(chooseAddController(location));
+            } else if ("main".equals(location.getLast())) {
+                switchController(chooseMainScreenController(location));
             }
             XMLHelper.writeOneAction(XMLHelper.getCurrentDateAndTime() + " - User selected: " + String.join("", location), "src/main/resources/braun/erik/prijevoz/actions/actions.xml");
         } catch (JAXBException e) {
@@ -87,6 +95,16 @@ public class MenuController {
             MainApp.logger.error("Cannot load actions and save action: " + location, e);
         }
 
+    }
+
+    private static ViewController<?> chooseMainScreenController(List<String> location) {
+        if ("insert".equals(location.getFirst())) {
+            return new ViewLastInsertController<>();
+        } else if ("backup".equals(location.getFirst())) {
+            return new ViewBackupController<>();
+        }
+        DialogUtil.showErrorDialog(NOT_IMPLEMENTED, NOT_IMPLEMENTED_DESC);
+        return new ViewLastInsertController<>();
     }
 
     /**
@@ -111,7 +129,7 @@ public class MenuController {
         if ("vehicle".equals(location.getFirst())) {
             return new VehicleSearchViewController();
         }
-        DialogUtil.showErrorDialog("Feature not yet implemented!", "We currently don't support that, you will be reverted back to the first screen!");
+        DialogUtil.showErrorDialog(NOT_IMPLEMENTED, NOT_IMPLEMENTED_DESC);
         return new DriverSearchViewController();
     }
 
@@ -137,7 +155,7 @@ public class MenuController {
             return new VehicleAddViewController();
         }
 
-        DialogUtil.showErrorDialog("Feature not yet implemented!", "We currently don't support that, you will be reverted back to the first screen!");
+        DialogUtil.showErrorDialog(NOT_IMPLEMENTED, NOT_IMPLEMENTED_DESC);
         return new DriverAddViewController();
     }
 }

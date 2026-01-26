@@ -33,6 +33,7 @@ import java.util.List;
 public class DBRouteRepository implements RouteRepository {
 
     private static final String SELECT_ALL_QUERY = "SELECT id, routename, vehicle_id, driver_id, stopcost FROM ROUTE";
+    private static final String SELECT_LAST = SELECT_ALL_QUERY + " ORDER BY id DESC LIMIT 1";
     private static final String INSERT_ONE_QUERY = "INSERT INTO route (routename, vehicle_id, driver_id, stopcost) VALUES (?, ?, ?, ?)";
     private static final String ADD_STOP_ROUTE = "INSERT INTO Route_Stop (route_id, stop_id, stop_order) VALUES (?, ?, ?)";
     private static final String SELECT_ALL_STOPS =
@@ -42,8 +43,6 @@ public class DBRouteRepository implements RouteRepository {
                     "WHERE rs.route_id = ? " +
                     "ORDER BY rs.stop_order ";
 
-
-    DBStopRepository stopRepository = new DBStopRepository();
     DBDriverRepository driverRepository = new DBDriverRepository();
     DBVehicleRepository vehicleRepository = new DBVehicleRepository();
 
@@ -136,5 +135,29 @@ public class DBRouteRepository implements RouteRepository {
             throw new DatabaseException(e);
         }
         DatabaseConnector.closeConnection(connection);
+    }
+
+    @Override
+    public Route getLastInserted() throws DatabaseException {
+        Connection connection = DatabaseConnector.connectToDatabase();
+
+        try (ResultSet rs = connection.prepareStatement(SELECT_LAST).executeQuery()) {
+            if (rs.next()) {
+                return new Route(
+                        rs.getInt("id"),
+                        rs.getString("routename"),
+                        vehicleRepository.getById(rs.getInt("vehicle_id")),
+                        driverRepository.getById(rs.getInt("driver_id")),
+                        getStopsFromJunctionTableById(rs.getInt("id")),
+                        rs.getBigDecimal("stopcost")
+                );
+            } else {
+                throw new SQLException("No route found!");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        } finally {
+            DatabaseConnector.closeConnection(connection);
+        }
     }
 }

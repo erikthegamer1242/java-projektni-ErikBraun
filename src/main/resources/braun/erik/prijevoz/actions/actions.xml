@@ -411,4 +411,91 @@
     <action>2026-01-19 21:45:09 - User selected: user_search</action>
     <action>2026-01-19 21:45:12 - User selected: user_add</action>
     <action>2026-01-19 21:45:13 - User selected: user_search</action>
+    <action>2026-01-20 16:44:27 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-20 16:48:10 - User selected: driver_search</action>
+    <action>2026-01-20 16:48:12 - User selected: driver_add</action>
+    <action>2026-01-20 16:48:45 - User selected: Clearing sort parameters: class
+        braun.erik.prijevoz.model.subclasses.Driver
+    </action>
+    <action>2026-01-25 17:08:49 - User selected: insert_main</action>
+    <action>2026-01-25 17:08:51 - User selected: backup_main</action>
+    <action>2026-01-25 17:19:06 - User selected: insert_main</action>
+    <action>2026-01-25 17:19:11 - User selected: backup_main</action>
+    <action>2026-01-25 17:19:14 - User selected: insert_main</action>
+    <action>2026-01-25 17:19:36 - User selected: insert_main</action>
+    <action>2026-01-25 17:19:38 - User selected: backup_main</action>
+    <action>2026-01-25 17:20:35 - User selected: insert_main</action>
+    <action>2026-01-25 17:22:45 - User selected: insert_main</action>
+    <action>2026-01-25 17:22:47 - User selected: driver_search</action>
+    <action>2026-01-25 17:22:48 - User selected: backup_main</action>
+    <action>2026-01-25 17:22:49 - User selected: insert_main</action>
+    <action>2026-01-25 17:23:10 - User selected: insert_main</action>
+    <action>2026-01-25 17:23:37 - User selected: backup_main</action>
+    <action>2026-01-25 17:24:47 - User selected: insert_main</action>
+    <action>2026-01-25 17:24:54 - User selected: backup_main</action>
+    <action>2026-01-25 17:24:59 - User selected: driver_search</action>
+    <action>2026-01-25 17:25:01 - User selected: insert_main</action>
+    <action>2026-01-25 17:30:20 - User selected: driver_search</action>
+    <action>2026-01-25 17:30:21 - User selected: driver_add</action>
+    <action>2026-01-25 17:30:27 - User selected: route_add</action>
+    <action>2026-01-25 17:40:25 - User selected: insert_main</action>
+    <action>2026-01-25 17:40:59 - User selected: insert_main</action>
+    <action>2026-01-25 17:54:18 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-25 17:54:20 - User selected: insert_main</action>
+    <action>2026-01-25 18:00:36 - User selected: driver_add</action>
+    <action>2026-01-25 18:00:38 - User selected: route_add</action>
+    <action>2026-01-25 18:00:44 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-25 18:00:56 - User selected: insert_main</action>
+    <action>2026-01-25 18:42:28 - User selected: route_add</action>
+    <action>2026-01-25 18:42:35 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-25 18:42:37 - User selected: insert_main</action>
+    <action>2026-01-25 18:42:45 - User selected: driver_add</action>
+    <action>2026-01-25 18:43:07 - User selected: Adding: class braun.erik.prijevoz.model.subclasses.Driver</action>
+    <action>2026-01-25 18:43:09 - User selected: insert_main</action>
+    <action>2026-01-25 18:45:55 - User selected: insert_main</action>
+    <action>2026-01-25 18:45:58 - User selected: route_add</action>
+    <action>2026-01-25 18:46:05 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-25 18:46:07 - User selected: insert_main</action>
+    <action>2026-01-25 18:47:06 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-25 18:47:09 - User selected: insert_main</action>
+    <action>2026-01-25 18:48:03 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-25 18:48:05 - User selected: insert_main</action>
+    <action>2026-01-25 18:51:15 - User selected: Adding: class braun.erik.prijevoz.model.Route</action>
+    <action>2026-01-25 18:51:17 - User selected: insert_main</action>
+    <action>2026-01-25 18:53:00 - User selected: insert_main</action>
+    <action>2026-01-25 18:53:20 - User selected: insert_main</action>
+    <action>2026-01-25 18:54:22 - User selected: insert_main</action>
+    <action>2026-01-25 18:55:04 - User selected: insert_main</action>
+    <action>2026-01-25 18:55:32 - User selected: insert_main</action>
+    <action>2026-01-25 18:56:07 - User selected: insert_main</action>
+    <action>2026-01-25 18:57:09 - User selected: insert_main</action>
+    <action>2026-01-25 18:57:51 - User selected: insert_main</action>
+    <action>2026-01-25 18:57:54 - User selected: route_add</action>
+    <action>2026-01-25 18:58:01 - User selected: insert_main</action>
+    <action>2026-01-25 18:58:25 - User selected: insert_main</action>
+    <action>2026-01-25 18:59:59 - User selected: insert_main</action>
+    <action>2026-01-26 17:00:44 - User selected: insert_main</action>
+    <action>2026-01-26 17:32:02 - User selected: backup_main</action>
+    <action>2026-01-26 17:34:00 - User selected: backup_main</action>
+    <action>2026-01-26 17:47:53 - User selected: backup_main</action>
+    <action>2026-01-26 17:48:16 - User selected: backup_main</action>
+    <action>2026-01-26 17:48:43 - User selected: backup_main</action>
+    <action>2026-01-26 17:48:56 - User selected: backup_main</action>
+    <action>2026-01-26 17:51:03 - User selected: backup_main</action>
+    <action>2026-01-26 17:51:44 - User selected: backup_main</action>
+    <action>2026-01-26 17:52:04 - User selected: backup_main</action>
+    <action>2026-01-26 18:09:30 - User selected: backup_main</action>
+    <action>2026-01-26 18:10:15 - User selected: backup_main</action>
+    <action>2026-01-26 18:10:34 - User selected: backup_main</action>
+    <action>2026-01-26 18:12:21 - User selected: backup_main</action>
+    <action>2026-01-26 18:12:45 - User selected: backup_main</action>
+    <action>2026-01-26 18:13:09 - User selected: backup_main</action>
+    <action>2026-01-26 18:13:24 - User selected: backup_main</action>
+    <action>2026-01-26 18:13:43 - User selected: backup_main</action>
+    <action>2026-01-26 18:14:04 - User selected: backup_main</action>
+    <action>2026-01-26 18:14:37 - User selected: backup_main</action>
+    <action>2026-01-26 18:15:23 - User selected: backup_main</action>
+    <action>2026-01-26 18:18:22 - User selected: backup_main</action>
+    <action>2026-01-26 18:18:47 - User selected: backup_main</action>
+    <action>2026-01-26 18:18:56 - User selected: insert_main</action>
 </actions>

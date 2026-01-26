@@ -21,6 +21,7 @@ import java.util.List;
 public class DBStopRepository implements StopRepository {
 
     private static final String SELECT_ALL_QUERY = "SELECT id, name FROM STOP";
+    private static final String SELECT_LAST = SELECT_ALL_QUERY + " ORDER BY id DESC LIMIT 1";
     private static final String SELECT_ONE_BY_ID = SELECT_ALL_QUERY + " WHERE id = ?";
     private static final String INSERT_ONE_QUERY = "INSERT INTO STOP (name) VALUES (?)";
 
@@ -58,13 +59,31 @@ public class DBStopRepository implements StopRepository {
         DatabaseConnector.closeConnection(connection);
     }
 
+    @Override
+    public Stop getLastInserted() throws DatabaseException {
+        Connection connection = DatabaseConnector.connectToDatabase();
+
+        try (ResultSet rs = connection.prepareStatement(SELECT_LAST).executeQuery()) {
+            if (rs.next()) {
+                return new Stop(rs.getInt("id"), rs.getString("name"));
+
+            } else {
+                throw new SQLException("No stop found!");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        } finally {
+            DatabaseConnector.closeConnection(connection);
+        }
+    }
+
     public Stop getById(Integer id) throws DatabaseException {
         Connection connection = DatabaseConnector.connectToDatabase();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
-            if (!rs.next()) {
+            if (rs.next()) {
                 return new Stop(rs.getInt("id"), rs.getString("name"));
             } else {
                 throw new SQLException("No selected stop found!");

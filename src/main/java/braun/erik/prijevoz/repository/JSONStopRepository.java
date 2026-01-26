@@ -54,4 +54,9 @@ public class JSONStopRepository implements StopRepository {
             MainApp.logger.error("Cannot write JSON stops", e);
         }
     }
+
+    @Override
+    public Stop getLastInserted() {
+        return DataHolder.STOPS.getLast();
+    }
 }

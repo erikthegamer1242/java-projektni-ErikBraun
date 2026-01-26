@@ -54,4 +54,9 @@ public class JSONVehicleRepository implements VehicleRepository {
             MainApp.logger.error("Cannot write JSON vehicles", e);
         }
     }
+
+    @Override
+    public Vehicle getLastInserted() {
+        return DataHolder.VEHICLES.getLast();
+    }
 }

@@ -24,9 +24,17 @@ import java.util.List;
  * );
  */
 
+/**
+ * Concrete implementation of driver repository using H2 as backend
+ *
+ * @author erik
+ * @version 1.0
+ */
+
 public class DBDriverRepository implements DriverRepository {
 
     private static final String SELECT_ALL_QUERY = "SELECT id, oib, surname, name, email, phonenumber, dateofbirth, licensenumber, salary, workinghours FROM DRIVER";
+    private static final String SELECT_LAST = SELECT_ALL_QUERY + " ORDER BY id DESC LIMIT 1";
     private static final String SELECT_ONE_BY_ID = SELECT_ALL_QUERY + " WHERE id = ?";
     private static final String INSERT_ONE_QUERY = "INSERT INTO driver (oib, surname, name, email, phonenumber, dateofbirth, licensenumber, salary, workinghours) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -37,19 +45,7 @@ public class DBDriverRepository implements DriverRepository {
 
         try (ResultSet rs = connection.prepareStatement(SELECT_ALL_QUERY).executeQuery()) {
             while (rs.next()) {
-                drivers.add(new Driver.DriverBuilder(
-                        rs.getInt("id"),
-                        rs.getString("oib"),
-                        rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getString("licensenumber"),
-                        rs.getBigDecimal("salary"),
-                        rs.getBigDecimal("workinghours"))
-                        .email(rs.getString("email"))
-                        .phoneNumber(rs.getString("phonenumber"))
-                        .dateOfBirth(rs.getDate(DOB_COLUMN) != null ? rs.getDate(DOB_COLUMN).toLocalDate() : LocalDate.EPOCH)
-                        .build()
-                );
+                drivers.add(buildDriver(rs));
             }
         } catch (SQLException e) {
             throw new DatabaseException(e);
@@ -91,20 +87,41 @@ public class DBDriverRepository implements DriverRepository {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                return new Driver.DriverBuilder(
-                        rs.getInt("id"),
-                        rs.getString("oib"),
-                        rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getString("licensenumber"),
-                        rs.getBigDecimal("salary"),
-                        rs.getBigDecimal("workinghours"))
-                        .email(rs.getString("email"))
-                        .phoneNumber(rs.getString("phonenumber"))
-                        .dateOfBirth(rs.getDate(DOB_COLUMN) != null ? rs.getDate(DOB_COLUMN).toLocalDate() : LocalDate.EPOCH)
-                        .build();
+                return buildDriver(rs);
             } else {
                 throw new SQLException("No selected driver found!");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        } finally {
+            DatabaseConnector.closeConnection(connection);
+        }
+    }
+
+    private Driver buildDriver(ResultSet rs) throws SQLException {
+        return new Driver.DriverBuilder(
+                rs.getInt("id"),
+                rs.getString("oib"),
+                rs.getString("name"),
+                rs.getString("surname"),
+                rs.getString("licensenumber"),
+                rs.getBigDecimal("salary"),
+                rs.getBigDecimal("workinghours"))
+                .email(rs.getString("email"))
+                .phoneNumber(rs.getString("phonenumber"))
+                .dateOfBirth(rs.getDate(DOB_COLUMN) != null ? rs.getDate(DOB_COLUMN).toLocalDate() : LocalDate.EPOCH)
+                .build();
+    }
+
+    @Override
+    public Driver getLastInserted() throws DatabaseException {
+        Connection connection = DatabaseConnector.connectToDatabase();
+
+        try (ResultSet rs = connection.prepareStatement(SELECT_LAST).executeQuery()) {
+            if (rs.next()) {
+                return buildDriver(rs);
+            } else {
+                throw new SQLException("No driver found!");
             }
         } catch (SQLException e) {
             throw new DatabaseException(e);

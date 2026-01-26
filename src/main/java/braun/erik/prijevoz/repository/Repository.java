@@ -1,6 +1,7 @@
 package braun.erik.prijevoz.repository;
 
 import braun.erik.prijevoz.model.DisplayOption;
+import braun.erik.prijevoz.model.exceptions.DatabaseException;
 
 import java.util.List;
 
@@ -34,4 +35,6 @@ public abstract interface Repository<T extends DisplayOption> {
      * @param list list of data to be added
      */
     public abstract void set(List<T> list);
+
+    public abstract T getLastInserted() throws DatabaseException;
 }

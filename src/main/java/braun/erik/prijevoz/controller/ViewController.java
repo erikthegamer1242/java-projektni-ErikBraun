@@ -4,6 +4,7 @@ import braun.erik.prijevoz.model.DisplayOption;
 import braun.erik.prijevoz.repository.Repository;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 /**
  * Main abstract class used for every controller, stores global components
@@ -30,12 +31,18 @@ public abstract class ViewController<T extends DisplayOption> implements Activat
      */
     protected GridPane searchGridPane;
 
+    protected VBox mainPane;
+
     /**
      * Abstract method to set the content for each controller
      * @param searchGridPane Pane used to store all buttons, inputs, etc.
      * @param tableView Table view used to show data
      */
     public abstract void setContentArea(GridPane searchGridPane, TableView<?> tableView);
+
+    public void setMainView(VBox mainPane) {
+        this.mainPane = mainPane;
+    }
 
     /**
      * Method to get repository

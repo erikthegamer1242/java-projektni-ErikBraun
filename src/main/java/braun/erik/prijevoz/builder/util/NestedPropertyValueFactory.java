@@ -37,6 +37,7 @@ public class NestedPropertyValueFactory<S, T> implements Callback<TableColumn.Ce
      * @param var1 cell data
      * @return value
      */
+    @SuppressWarnings("unchecked")
     @Override
     public ObservableValue<T> call(TableColumn.CellDataFeatures<S, T> var1) {
         if (fieldName.contains(".")) {

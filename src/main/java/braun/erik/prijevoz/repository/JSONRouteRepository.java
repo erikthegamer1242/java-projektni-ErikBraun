@@ -54,4 +54,9 @@ public class JSONRouteRepository implements RouteRepository {
             MainApp.logger.error("Cannot write JSON routes", e);
         }
     }
+
+    @Override
+    public Route getLastInserted() {
+        return DataHolder.ROUTES.getLast();
+    }
 }
