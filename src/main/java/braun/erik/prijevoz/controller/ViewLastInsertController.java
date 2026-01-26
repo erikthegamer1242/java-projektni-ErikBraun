@@ -9,7 +9,6 @@ import braun.erik.prijevoz.util.DialogUtil;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -18,8 +17,6 @@ import javafx.scene.text.Text;
 import java.util.List;
 
 public class ViewLastInsertController<T extends DisplayOption> extends ViewController<T> {
-
-    private List<Node> mainPaneChildren;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -53,8 +50,6 @@ public class ViewLastInsertController<T extends DisplayOption> extends ViewContr
         tableView.getColumns().clear();
         tableView.getItems().clear();
         Class<T> whichData = (Class<T>) mainPane.getUserData();
-//        mainPaneChildren = mainPane.getChildren().stream().toList();
-//        mainPane.getChildren().clear();
         if (whichData == null) {
             DialogUtil.showErrorDialog("No data added yet!", "For this view to be functional you have to add at least one entity");
             return;
@@ -86,8 +81,6 @@ public class ViewLastInsertController<T extends DisplayOption> extends ViewContr
 
     @Override
     public void onDeactivate() {
-//        mainPane.getChildren().clear();
-//        mainPane.getChildren().addAll(mainPaneChildren);
-
+        // Not used
     }
 }
